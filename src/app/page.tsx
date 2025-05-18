@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import styles from './page.module.css';
 import Cursor from '@/components/Cursor';
 import HiddenText from '@/components/HiddenText';
+import P5Background from '@/components/P5Background';
 
 // Art piece names
 const artNames = [
@@ -51,6 +52,7 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
+      <P5Background />
       <Cursor />
       <div id="text-container">
         {Array.from({ length: 20 }).map((_, index) => (
