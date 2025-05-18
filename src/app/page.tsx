@@ -4,7 +4,8 @@ import { useEffect, useRef, useState } from 'react';
 import styles from './page.module.css';
 import Cursor from '@/components/Cursor';
 import HiddenText from '@/components/HiddenText';
-import P5Background from '@/components/P5Background';
+import dynamic from 'next/dynamic';
+const P5Background = dynamic(() => import('@/components/P5Background'), { ssr: false });
 
 // Art piece names
 const artNames = [
@@ -12,6 +13,12 @@ const artNames = [
   "Porous",
   "T.A.E.L.",
   "In Vivo / In Vitro - Trial 1.4"
+];
+const artSlugs = [
+  "gradi-vox",
+  "porous",
+  "tael",
+  "in-vivo"
 ];
 
 export default function Home() {
@@ -53,6 +60,9 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <P5Background />
+      <div className={highlighted ? `${styles.topTitle} ${styles.highlighted}` : styles.topTitle}>
+        Koi Ren & Joey Verbeke
+      </div>
       <Cursor />
       <div id="text-container">
         {Array.from({ length: 20 }).map((_, index) => (
@@ -61,6 +71,7 @@ export default function Home() {
             highlighted={highlighted}
             shortcutText={shortcutText}
             artName={artNames[index % artNames.length]}
+            artSlug={artSlugs[index % artSlugs.length]}
           />
         ))}
       </div>

@@ -1,12 +1,13 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const NUM_LINES = 8;
 const LINE_COLOR = '#8B0000';
 const SPEED = 2;
 const MAX_BOUNCES = 5;
 const MARGIN = 1;
+const MOVE_GRACE_MS = 100; // How long after last move to keep growing
 
 function randomBetween(p: any, minDeg: number, maxDeg: number) {
   // Returns a random angle in radians between minDeg and maxDeg
@@ -16,6 +17,26 @@ function randomBetween(p: any, minDeg: number, maxDeg: number) {
 export default function P5Background() {
   const sketchRef = useRef<HTMLDivElement>(null);
   const p5Instance = useRef<any>(null);
+  const [cursorMoving, setCursorMoving] = useState(false);
+  const moveTimeout = useRef<NodeJS.Timeout | null>(null);
+  const cursorMovingRef = useRef(false);
+
+  useEffect(() => {
+    cursorMovingRef.current = cursorMoving;
+  }, [cursorMoving]);
+
+  useEffect(() => {
+    const handleMouseMove = () => {
+      setCursorMoving(true);
+      if (moveTimeout.current) clearTimeout(moveTimeout.current);
+      moveTimeout.current = setTimeout(() => setCursorMoving(false), MOVE_GRACE_MS);
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      if (moveTimeout.current) clearTimeout(moveTimeout.current);
+    };
+  }, []);
 
   useEffect(() => {
     let p5: any;
@@ -43,6 +64,7 @@ export default function P5Background() {
 
       p.draw = () => {
         p.stroke(LINE_COLOR);
+        if (!cursorMovingRef.current) return; // Only grow lines while cursor is moving
         for (let line of lines) {
           let lastX = line.x[line.x.length - 1];
           let lastY = line.y[line.y.length - 1];

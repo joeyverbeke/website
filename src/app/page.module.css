@@ -7,4 +7,41 @@
   background-color: black;
   overflow: hidden;
   cursor: none;
+}
+
+.topTitle {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 3rem;
+  font-weight: bold;
+  color: #000000;
+  letter-spacing: 0.05em;
+  z-index: 30;
+  pointer-events: none;
+  user-select: none;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.centeredTitle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3rem;
+  font-weight: bold;
+  color: #000000;
+  letter-spacing: 0.05em;
+  z-index: 30;
+  pointer-events: none;
+  user-select: none;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.highlighted {
+  background-color: #8B0000;
+  animation: pulseRed 2s infinite;
 } 

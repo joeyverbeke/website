@@ -8,6 +8,7 @@ interface HiddenTextProps {
   highlighted: boolean;
   shortcutText: string;
   artName: string;
+  artSlug: string;
 }
 
 function getRandomPosition() {
@@ -17,7 +18,7 @@ function getRandomPosition() {
   };
 }
 
-export default function HiddenText({ highlighted, shortcutText, artName }: HiddenTextProps) {
+export default function HiddenText({ highlighted, shortcutText, artName, artSlug }: HiddenTextProps) {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [hasMounted, setHasMounted] = useState(false);
   const [displayed, setDisplayed] = useState<'shortcut' | 'art'>('shortcut');
@@ -71,7 +72,7 @@ export default function HiddenText({ highlighted, shortcutText, artName }: Hidde
       }}
     >
       {displayed === 'art' ? (
-        <Link href={`/pieces/${encodeURIComponent(artName.toLowerCase().replace(/\s+/g, '-'))}`}>
+        <Link href={`/pieces/${artSlug}`}>
           {artName}
         </Link>
       ) : shortcutText}
