@@ -96,7 +96,16 @@ export default function InVivoPage() {
   }, [updateBlinkState]);
 
   return (
-    <div style={{ minHeight: '100vh', background: 'black', color: 'white', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
+    <div style={{ 
+      minHeight: '100vh', 
+      background: 'black', 
+      color: 'white', 
+      display: 'flex', 
+      flexDirection: 'column', 
+      alignItems: 'center', 
+      padding: '2rem',
+      fontFamily: 'system-ui, -apple-system, sans-serif'
+    }}>
       {/* Hidden video element for face detection */}
       <video
         ref={videoRef}
@@ -109,11 +118,44 @@ export default function InVivoPage() {
       <div style={{ 
         opacity: isBlinking ? 0 : 1,
         transition: 'opacity 0.1s ease-in-out',
-        textAlign: 'center'
+        maxWidth: '800px',
+        width: '100%'
       }}>
-        <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>
+        <h1 style={{ 
+          fontSize: '2.5rem', 
+          marginBottom: '2rem',
+          fontWeight: '500'
+        }}>
           In Vivo / In Vitro - Trial 1.4
         </h1>
+
+        <div style={{ marginBottom: '2rem' }}>
+          <p style={{ 
+            fontSize: '1.1rem', 
+            lineHeight: '1.6',
+            marginBottom: '1rem'
+          }}>
+            In Vivo // In Vitro - Trial 1.4 (2024) is an interactive new media installation. It leverages machine learning to understand the moment a viewer blinks, manipulating the media on the monitor during this brief moment of unconsciousness.
+          </p>
+          
+          <p style={{ 
+            fontSize: '1.1rem', 
+            lineHeight: '1.6',
+            marginBottom: '1rem'
+          }}>
+            "Trial 1.4" navigates the delicate balance between agency and absence, as even in moments of unconscious inaction, our essence is woven into unfolding realms. It muses on the unseen forces that sway us between control and compliance, inviting reflection on our ephemeral entanglement with these vast, intangible domains.
+          </p>
+        </div>
+
+        <div style={{ 
+          borderTop: '1px solid rgba(255,255,255,0.2)',
+          paddingTop: '2rem',
+          fontSize: '0.9rem',
+          color: 'rgba(255,255,255,0.7)'
+        }}>
+          <p style={{ marginBottom: '0.5rem' }}>Collaborator: Koi Ren</p>
+          <p style={{ marginBottom: '0.5rem' }}>Exhibition: Pebblebed, San Francisco, CA</p>
+        </div>
       </div>
     </div>
   );
