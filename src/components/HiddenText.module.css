@@ -1,0 +1,21 @@
+.text {
+  position: absolute;
+  color: black;
+  font-size: 20px;
+  user-select: none;
+  transition: background-color 0.3s ease;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.highlighted {
+  background-color: #8B0000;
+  animation: pulseRed 2s infinite;
+  pointer-events: auto;
+}
+
+.text a {
+  color: inherit;
+  text-decoration: none;
+  pointer-events: auto;
+} 

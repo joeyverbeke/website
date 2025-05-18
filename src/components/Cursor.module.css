@@ -1,0 +1,10 @@
+.cursor {
+  width: 100px;
+  height: 30px;
+  background-color: #8B0000;
+  position: absolute;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  animation: pulseRed 2s infinite;
+  z-index: 10;
+} 
