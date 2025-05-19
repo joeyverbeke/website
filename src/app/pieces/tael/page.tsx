@@ -18,10 +18,11 @@ const DEGRADED_VERSIONS = [
 const ORIGINAL_TEXT = "T.A.E.L. (Tail Assisted Environmental Learning) is an ongoing new media art research project exploring the intersection of ghosts and artifacts of ancient folklore, modern memetic urban legends, genetic evolutionary remnants and Artificial Intelligence with the poignant echo of the cyclical decay in the evolution of these generative systems.\n\nAt the current inflection point of this paradigm shift, we now see a proliferation of this generated synthetic data polluting the training data of the internet. Additionally, the corpus of data leveraged to train these models instills a biased and reductionist version of the \"totality of collective consciousness\", into the models.\n\nInspired by the cybernetic information theory around negative feedback loop and noise, we are trying to explore the echo unique to our time: the recursive spell of humanity empowered agents. By generating sounds and visuals from the imaginative world, we create this monster which symbolizes AI's self-consumption and the resultant artifacts of recursion. It asks: Who becomes the noise within this system? And what role do we play as both contributors to and consumers of this endless loop, where even the darkest corners of human expression are subject to the distorting influence of generative AI?\n\nThe AI system within T.A.E.L. uses machine perception to view semantic content of oral tales obstructed by tail sculptures. The system then attempts to use generative visual understanding to interpret the semantic content of what it saw. Its mutated transcription is then displayed, interpreted, displayed, interpreted ... recursively degrading into a flattened artifact.";
 
 export default function TaelPage() {
-  const [displayedText, setDisplayedText] = useState('');
+  const [displayedText, setDisplayedText] = useState(ORIGINAL_TEXT);
   const [currentVersion, setCurrentVersion] = useState(-1);
   const [isTyping, setIsTyping] = useState(false);
   const [hasScrolledToBottom, setHasScrolledToBottom] = useState(false);
+  const [isReturningToOriginal, setIsReturningToOriginal] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
 
@@ -38,6 +39,7 @@ export default function TaelPage() {
         
         setTimeout(() => {
           if (isLastVersion) {
+            setIsReturningToOriginal(true);
             setCurrentVersion(-1); // Go back to original text
           } else {
             setCurrentVersion(prev => prev + 1);
@@ -76,7 +78,12 @@ export default function TaelPage() {
 
   useEffect(() => {
     if (currentVersion === -1) {
-      setDisplayedText(ORIGINAL_TEXT);
+      if (isReturningToOriginal) {
+        setIsTyping(true);
+        typeWriter(ORIGINAL_TEXT);
+      } else {
+        setDisplayedText(ORIGINAL_TEXT);
+      }
       return;
     }
 
@@ -87,7 +94,7 @@ export default function TaelPage() {
 
     setIsTyping(true);
     typeWriter(DEGRADED_VERSIONS[currentVersion]);
-  }, [currentVersion]);
+  }, [currentVersion, isReturningToOriginal]);
 
   return (
     <div 
