@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Mic, MicOff } from 'lucide-react';
 import * as vad from '@ricky0123/vad-web';
+import HomeButton from '@/components/HomeButton';
 
 export default function GradiVoxPage() {
   const [isListening, setIsListening] = useState(false);
@@ -105,6 +106,7 @@ export default function GradiVoxPage() {
       padding: '2rem',
       fontFamily: 'system-ui, -apple-system, sans-serif'
     }}>
+      <HomeButton />
       <audio
         ref={audioRef}
         src="/audio/gradi-vox.mp3"

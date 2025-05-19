@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import HomeButton from '@/components/HomeButton';
 
 const DEGRADED_VERSIONS = [
   "T.A.E.L. (Tail Assisted Environmental Learning) is a research-based new media project probing the spectral intersections of ancient folklore, urban legends, evolutionary biology, and artificial intelligence. Through recursive sounds and visuals, the work invokes echoes of cyclical decay as AI consumes its own synthetic outputs. Drawing on cybernetic theory, T.A.E.L. explores how synthetic data loops pollute and distort collective knowledge. Machine perception attempts to interpret obstructed oral tales, recursively degrading meaning until only artifacts of noise remain. It questions our dual roles as both authors and subjects in this endless feedback loop.",
@@ -108,6 +109,7 @@ export default function TaelPage() {
         fontFamily: 'system-ui, -apple-system, sans-serif'
       }}
     >
+      <HomeButton />
       <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
         <h1 style={{ 
           fontSize: '2.5rem', 
