@@ -109,6 +109,7 @@ export default function InVivoPage() {
       faceLandmarkerRef.current.close();
       faceLandmarkerRef.current = null;
     }
+    setIsBlinking(false);
   }, []);
 
   const handleEyeClick = async () => {
@@ -148,7 +149,7 @@ export default function InVivoPage() {
         playsInline
         autoPlay
       />
-      <HomeButton />
+      <HomeButton onClick={stopFaceDetection} />
       {/* Main content that disappears during blinking */}
       <div style={{ 
         opacity: isBlinking ? 0 : 1,
