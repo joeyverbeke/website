@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 const NUM_LINES = 8;
-const LINE_COLOR = '#8B0000';
+const LINE_COLOR = '#d4ff7f';
 const SPEED = 2;
 const MAX_BOUNCES = 5;
 const MARGIN = 1;
@@ -51,10 +51,10 @@ export default function P5Background() {
         p.createCanvas(w, h);
         p.background(0);
         lines = Array.from({ length: NUM_LINES }).map((_, i) => ({
-          x: [0],
-          y: [h],
+          x: [w/2], // Start from center x position
+          y: [h],   // Start from bottom
           t: p.random(1000, 10000) + i * 1000,
-          angle: randomBetween(p, 20, 160), // initial angle upward/rightward
+          angle: randomBetween(p, 45, 135), // initial angle upward, spread between 45° and 135°
           bounces: 0,
         }));
         p.stroke(LINE_COLOR);

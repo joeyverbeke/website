@@ -2,6 +2,12 @@
 import styles from './mockup.module.css';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import Cursor from '@/components/Cursor';
+import CmdAHint from '@/components/CmdAHint';
+import dynamic from 'next/dynamic';
+
+// Import P5Background with dynamic import to avoid SSR issues
+const P5Background = dynamic(() => import('@/components/P5Background'), { ssr: false });
 
 export default function MockupPage() {
   const [revealed, setRevealed] = useState(false);
@@ -11,6 +17,7 @@ export default function MockupPage() {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'a') {
+        e.preventDefault(); // Prevent actual selection
         setRevealed(true);
       }
     };
@@ -37,11 +44,43 @@ export default function MockupPage() {
     setHoveredItem(null);
   };
 
+  // Generate an array of random positions for CmdAHint components
+  const cmdAPositions = [
+    { top: '30%', left: '50%' },
+    { top: '40%', left: '45%' },
+    { top: '50%', left: '55%' },
+    { top: '60%', left: '48%' },
+    { top: '35%', left: '52%' },
+    { top: '45%', left: '47%' },
+    { top: '55%', left: '53%' },
+    { top: '25%', left: '48%' },
+    { top: '65%', left: '46%' },
+    { top: '70%', left: '52%' },
+    { top: '20%', left: '25%' },
+    { top: '80%', left: '75%' },
+    { top: '15%', left: '60%' },
+    { top: '75%', left: '35%' },
+    { top: '85%', left: '60%' },
+  ];
+
   return (
     <main
       className={revealed ? `${styles.mockupMain} ${styles.revealed}` : styles.mockupMain}
       ref={mainRef}
     >
+      {/* P5 Background - lowest z-index */}
+      <P5Background />
+
+      {/* Custom cursor */}
+      <Cursor revealed={revealed} />
+      
+      {/* Scattered cmd+a hints */}
+      {cmdAPositions.map((pos, index) => (
+        <div key={index} style={{ position: 'absolute', top: pos.top, left: pos.left }}>
+          <CmdAHint revealed={revealed} />
+        </div>
+      ))}
+
       {/* Full-screen background that only appears when hovering an item */}
       {revealed && hoveredItem && (
         <div 

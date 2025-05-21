@@ -1,0 +1,16 @@
+.cmdAHint {
+  position: absolute;
+  color: #000;
+  font-family: 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', monospace;
+  font-size: 1.1vw;
+  letter-spacing: 0.06em;
+  z-index: 5;
+  user-select: none;
+  pointer-events: none;
+}
+
+@media (max-width: 600px) {
+  .cmdAHint {
+    font-size: 0.9rem;
+  }
+} 

@@ -1,41 +1,21 @@
+/* 
+ * Basic selection styles 
+ */
 .mockupMain ::selection {
   background: #B413FF;
   color: #000;
 }
 
+/*
+ * LAYOUT - These properties NEVER change between states
+ */
 .mockupMain {
   min-height: 100vh;
   background: #000;
-  color: #d4ff7f;
   font-family: 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', monospace;
-  padding: 0 0 0 0;
+  padding: 0;
   position: relative;
   z-index: 1;
-}
-
-.visible-green {
-  color: #d4ff7f;
-}
-
-.visible-white {
-  color: #fff;
-}
-
-.invisible {
-  color: #000;
-}
-
-.mockupMain.revealed {
-  background: #000;
-}
-
-/* Higher specificity to ensure it persists */
-.mockupMain.revealed .visible-green,
-.mockupMain.revealed .visible-white,
-.mockupMain.revealed .invisible,
-.mockupMain.revealed span {
-  color: #000 !important;
-  background: #B413FF !important;
 }
 
 .headerRow {
@@ -44,6 +24,8 @@
   align-items: flex-start;
   width: 100%;
   padding: 2.2vw 0 0 2.2vw;
+  position: relative;
+  z-index: 20;
 }
 
 .title {
@@ -66,6 +48,8 @@
   margin-top: 3vw;
   width: 100vw;
   min-height: 70vh;
+  position: relative;
+  z-index: 20;
 }
 
 .leftCol {
@@ -77,8 +61,6 @@
   gap: 1.6vw;
   max-width: 44vw;
   min-width: 20vw;
-  position: relative;
-  z-index: 5;
 }
 
 .sectionTitle {
@@ -92,31 +74,18 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 8px;
-  position: relative;
-  z-index: 5;
 }
 
-/* Ensure consistent font size */
-.workTitle,
-.workDesc,
-.rightText,
-.faded,
-.highlight,
-.venueText,
-.visible-green,
-.visible-white,
+.workTitle, 
+.workDesc, 
+.visible-green, 
+.visible-white, 
 .invisible {
   font-size: 1.15vw;
-}
-
-.workTitle {
-  font-weight: 400;
   letter-spacing: 0.08em;
 }
 
 .workDesc {
-  font-weight: 400;
-  letter-spacing: 0.08em;
   margin-left: 0.15vw;
   margin-top: 0.15vw;
 }
@@ -128,12 +97,9 @@
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
-  position: relative;
-  z-index: 5;
 }
 
 .rightText {
-  font-weight: 400;
   max-width: 44vw;
   margin-top: 0;
   line-height: 1.6;
@@ -141,133 +107,43 @@
   width: 100%;
   margin-right: 0;
   padding-right: 3vw;
-  position: relative;
-  z-index: 5;
-}
-
-.faded {
-  font-weight: 400;
+  font-size: 1.15vw;
 }
 
 .venueText {
-  font-weight: 400;
   margin-top: 0.5vw;
   display: inline-block;
+  font-size: 1.15vw;
 }
 
-@media (max-width: 1000px) {
-  .section {
-    flex-direction: column;
-    align-items: stretch;
-    width: 100%;
-    margin-top: 32px;
-  }
-  .leftCol, .rightCol {
-    max-width: 100%;
-    min-width: 0;
-    padding-left: 24px;
-    padding-right: 24px;
-  }
-  .rightCol {
-    padding-left: 0;
-    padding-right: 0;
-    margin-top: 32px;
-    justify-content: flex-end;
-    align-items: flex-end;
-  }
-  .rightText,
-  .workTitle,
-  .workDesc,
-  .faded,
-  .highlight,
-  .venueText,
-  .visible-green,
-  .visible-white,
-  .invisible {
-    font-size: 1.05rem;
-  }
-  .sectionTitle, .hello {
-    font-size: 1.1rem;
-  }
-  .title {
-    font-size: 1.2rem;
-  }
+/* 
+ * APPEARANCE - Only these properties change between normal and revealed states
+ */
+.visible-green {
+  color: #d4ff7f;
 }
 
-@media (max-width: 600px) {
-  .headerRow {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 20px 0 0 12px;
-  }
-  .hello {
-    margin-right: 0;
-    margin-top: 8px;
-    font-size: 1rem;
-  }
-  .title {
-    font-size: 1rem;
-  }
-  .section {
-    margin-top: 16px;
-  }
-  .leftCol, .rightCol {
-    padding-left: 8px;
-    padding-right: 8px;
-  }
-  .rightCol {
-    padding-left: 0;
-    padding-right: 0;
-    margin-top: 24px;
-    justify-content: flex-end;
-    align-items: flex-end;
-  }
-  .rightText,
-  .workTitle,
-  .workDesc,
-  .faded,
-  .highlight,
-  .venueText,
-  .visible-green,
-  .visible-white,
-  .invisible {
-    font-size: 0.98rem;
-  }
-  .sectionTitle, .hello {
-    font-size: 0.98rem;
-  }
+.visible-white {
+  color: #fff;
 }
 
-/* Previous hover styles removed in favor of React-based approach */
-
-/* Ensure spans maintain visibility during hover */
-.mockupMain span {
-  position: relative;
-  z-index: 5;
+.invisible {
+  color: #000;
 }
 
-/* Make sure all spans in the document remain visible during any hover state */
+/* 
+ * REVEALED STATE - Only change colors, never dimensions or layout
+ */
 .mockupMain.revealed .visible-green,
 .mockupMain.revealed .visible-white,
 .mockupMain.revealed .invisible {
-  position: relative;
-  z-index: 10;
+  color: #000 !important;
+  background: #B413FF !important;
 }
 
-.fullscreenBackground {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 1;
-  z-index: -1;
-  pointer-events: none;
-}
-
+/* 
+ * INTERACTIVE ELEMENTS 
+ */
 .workLink {
   text-decoration: none;
   cursor: pointer;
@@ -278,4 +154,104 @@
   color: #d4ff7f !important;
   text-decoration: underline;
   background: transparent !important;
+}
+
+/* 
+ * BACKGROUNDS
+ */
+.fullscreenBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 1;
+  z-index: 5; /* Above P5 canvas but below content */
+  pointer-events: none;
+}
+
+/* 
+ * RESPONSIVE STYLES - Consistent across states
+ */
+@media (max-width: 1000px) {
+  .section {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    margin-top: 32px;
+  }
+  
+  .leftCol, .rightCol {
+    max-width: 100%;
+    min-width: 0;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  
+  .rightCol {
+    padding-left: 0;
+    padding-right: 0;
+    margin-top: 32px;
+    justify-content: flex-end;
+    align-items: flex-end;
+  }
+  
+  .title {
+    font-size: 1.2rem;
+  }
+  
+  .sectionTitle, .hello {
+    font-size: 1.1rem;
+  }
+  
+  .workTitle, .workDesc, .rightText, .venueText,
+  .visible-green, .visible-white, .invisible {
+    font-size: 1.05rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .headerRow {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px 0 0 12px;
+  }
+  
+  .hello {
+    margin-right: 0;
+    margin-top: 8px;
+  }
+  
+  .section {
+    margin-top: 16px;
+  }
+  
+  .leftCol, .rightCol {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  
+  .rightCol {
+    padding-left: 0;
+    padding-right: 0;
+    margin-top: 24px;
+    justify-content: flex-end;
+    align-items: flex-end;
+  }
+  
+  .title {
+    font-size: 1rem;
+  }
+  
+  .sectionTitle, .hello {
+    font-size: 0.98rem;
+  }
+  
+  .workTitle, .workDesc, .rightText, .venueText,
+  .visible-green, .visible-white, .invisible {
+    font-size: 0.98rem;
+  }
 } 

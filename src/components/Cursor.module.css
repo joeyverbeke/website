@@ -1,10 +1,22 @@
 .cursor {
   width: 100px;
   height: 30px;
-  background-color: #8B0000;
+  background-color: #d4ff7f;
   position: absolute;
   pointer-events: none;
   transform: translate(-50%, -50%);
-  animation: pulseRed 2s infinite;
-  z-index: 10;
+  animation: pulseGreen 2s infinite;
+  z-index: 4;
+}
+
+@keyframes pulseGreen {
+  0% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.8;
+  }
 } 
