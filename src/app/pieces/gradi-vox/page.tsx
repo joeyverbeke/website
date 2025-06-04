@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Mic, MicOff } from 'lucide-react';
 import * as vad from '@ricky0123/vad-web';
 import HomeButton from '@/components/HomeButton';
+import styles from './page.module.css';
 
 export default function GradiVoxPage() {
   const [isListening, setIsListening] = useState(false);
@@ -76,70 +77,28 @@ export default function GradiVoxPage() {
   }, []);
 
   const getButtonStyle = () => {
-    if (!isListening) {
-      return {
-        background: 'rgba(255,255,255,0.05)',
-        border: '1px solid rgba(255,255,255,0.1)'
-      };
-    }
-    if (isSpeaking) {
-      return {
-        background: 'rgba(255,0,0,0.2)',
-        border: '1px solid rgba(255,0,0,0.3)'
-      };
-    }
-    return {
-      background: 'rgba(255,255,255,0.1)',
-      border: '1px solid rgba(255,255,255,0.2)'
-    };
+    if (!isListening) return styles.micButtonInactive;
+    if (isSpeaking) return styles.micButtonSpeaking;
+    return styles.micButtonActive;
   };
 
   return (
-    <div style={{ 
-      minHeight: '100vh', 
-      background: 'black', 
-      color: 'white', 
-      display: 'flex', 
-      flexDirection: 'column', 
-      alignItems: 'center', 
-      justifyContent: 'center',
-      padding: '2rem',
-      fontFamily: 'system-ui, -apple-system, sans-serif'
-    }}>
+    <div className={styles.container}>
       <HomeButton />
       <audio
         ref={audioRef}
         src="/audio/gradi-vox.mp3"
-        style={{ display: 'none' }}
+        className={styles.hidden}
       />
       
-      <div style={{ 
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: '1rem'
-      }}>
-        <h1 style={{ 
-          fontSize: '2.5rem', 
-          marginBottom: '2rem',
-          fontWeight: '500'
-        }}>
+      <div className={styles.content}>
+        <h1 className={styles.title}>
           Gradi Vox
         </h1>
 
         <div 
           onClick={handleMicClick}
-          style={{
-            width: '64px',
-            height: '64px',
-            borderRadius: '50%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            cursor: 'pointer',
-            transition: 'all 0.2s ease-in-out',
-            ...getButtonStyle()
-          }}
+          className={`${styles.micButton} ${getButtonStyle()}`}
         >
           {isListening ? (
             <Mic size={32} color={isSpeaking ? "rgba(255,0,0,0.8)" : "white"} />
@@ -148,11 +107,7 @@ export default function GradiVoxPage() {
           )}
         </div>
 
-        <p style={{ 
-          color: 'rgba(255,255,255,0.7)',
-          fontSize: '0.9rem',
-          textAlign: 'center'
-        }}>
+        <p className={styles.status}>
           {isListening ? (isSpeaking ? 'Symbiotic thought active...' : 'Listening for symbiosis...') : 'Click me <3'}
         </p>
       </div>

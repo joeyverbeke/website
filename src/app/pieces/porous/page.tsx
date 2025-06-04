@@ -1,6 +1,7 @@
 'use client';
 
 import HomeButton from '@/components/HomeButton';
+import styles from './page.module.css';
 
 const ORIGINAL_TEXT = `Quietly inhabiting spaces we barely notice, Porous is part of a broader guerrilla ecology: viral anomalies discreetly embedded into objects across the urban landscape, murmuring beneath perception. Activated only when the surrounding environment swells into noise, the object softly emits hallucinatory fragments—absurd, surreal earworms that slip imperceptibly beneath conscious attention, embedding themselves in the listener's subconscious.
 
@@ -14,42 +15,18 @@ Materials: Outlet, Thermoplastic, Spray Paint, Microelectronics, AI Sound`;
 
 export default function PorousPage() {
   return (
-    <div style={{ 
-      minHeight: '100vh',
-      background: 'black',
-      color: 'white',
-      padding: '2rem',
-      fontFamily: 'system-ui, -apple-system, sans-serif'
-    }}>
+    <div className={styles.container}>
       <HomeButton />
-      <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
-        <h1 style={{ 
-          fontSize: '2.5rem', 
-          marginBottom: '2rem',
-          fontWeight: '500'
-        }}>
+      <div className={styles.content}>
+        <h1 className={styles.title}>
           Porous
         </h1>
 
-        <div style={{ 
-          width: '100%',
-          height: '600px',
-          background: 'rgba(255,255,255,0.1)',
-          marginBottom: '2rem',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: 'rgba(255,255,255,0.5)'
-        }}>
+        <div className={styles.imagePlaceholder}>
           [Placeholder Image]
         </div>
 
-        <div style={{ 
-          fontSize: '1.1rem',
-          lineHeight: '1.6',
-          marginBottom: '2rem',
-          whiteSpace: 'pre-wrap'
-        }}>
+        <div className={styles.text}>
           {ORIGINAL_TEXT}
         </div>
       </div>

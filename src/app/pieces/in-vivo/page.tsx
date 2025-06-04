@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import { FaceLandmarker, FilesetResolver } from '@mediapipe/tasks-vision';
 import HomeButton from '@/components/HomeButton';
 import { Eye, EyeClosed } from 'lucide-react';
+import styles from './page.module.css';
 
 export default function InVivoPage() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -130,114 +131,54 @@ export default function InVivoPage() {
   }, [stopFaceDetection]);
 
   return (
-    <div style={{ 
-      minHeight: '100vh', 
-      background: 'black', 
-      color: 'white', 
-      display: 'flex', 
-      flexDirection: 'column', 
-      alignItems: 'center', 
-      padding: '2rem',
-      fontFamily: 'system-ui, -apple-system, sans-serif'
-    }}>
-      {/* Hidden video element for face detection */}
+    <div className={styles.container}>
       <video
         ref={videoRef}
-        style={{ display: 'none' }}
+        className={styles.hidden}
         width="640"
         height="480"
         playsInline
         autoPlay
       />
       <HomeButton onClick={stopFaceDetection} />
-      {/* Main content that disappears during blinking */}
-      <div style={{ 
-        opacity: isBlinking ? 0 : 1,
-        transition: 'opacity 0.1s ease-in-out',
-        maxWidth: '800px',
-        width: '100%'
-      }}>
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '1rem',
-          marginBottom: '2rem',
-          justifyContent: 'center',
-          position: 'relative'
-        }}>
-          <h1 style={{ 
-            fontSize: '2.5rem', 
-            fontWeight: '500',
-            margin: 0,
-            display: 'flex',
-            alignItems: 'center',
-            gap: '1rem'
-          }}>
+      <div className={`${styles.content} ${isBlinking ? styles.contentBlinking : ''}`}>
+        <div className={styles.header}>
+          <h1 className={styles.title}>
             In Vivo / In Vitro - Trial 1.4
-            <div style={{ position: 'relative', display: 'inline-flex', alignItems: 'center' }}>
-              <div 
-                onClick={handleEyeClick}
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  cursor: 'pointer',
-                  gap: '0.5rem'
-                }}
-              >
-                {isActive ? (
-                  <EyeClosed size={32} color="rgba(255,255,255,0.8)" />
-                ) : (
-                  <Eye size={32} color="rgba(255,255,255,0.8)" />
-                )}
-              </div>
-              {!hasBeenClicked && (
-                <span style={{
-                  fontSize: '0.8rem',
-                  color: '#ff0000',
-                  position: 'absolute',
-                  left: '36px', // just to the right of the 32px icon
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  whiteSpace: 'nowrap',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '2px',
-                  pointerEvents: 'none'
-                }}>
-                  ← click me
-                </span>
-              )}
-            </div>
           </h1>
         </div>
 
-        <div style={{ marginBottom: '2rem' }}>
-          <p style={{ 
-            fontSize: '1.1rem', 
-            lineHeight: '1.6',
-            marginBottom: '1rem'
-          }}>
+        <div className={styles.eyeContainer}>
+          <div 
+            onClick={handleEyeClick}
+            className={styles.eyeButton}
+          >
+            {isActive ? (
+              <EyeClosed size={32} color="rgba(255,255,255,0.8)" />
+            ) : (
+              <Eye size={32} color="rgba(255,255,255,0.8)" />
+            )}
+          </div>
+          {!hasBeenClicked && (
+            <span className={styles.clickPrompt}>
+              ← click me
+            </span>
+          )}
+        </div>
+
+        <div className={styles.description}>
+          <p className={styles.paragraph}>
             In Vivo // In Vitro - Trial 1.4 (2024) is an interactive new media installation. It leverages machine learning to understand the moment a viewer blinks, manipulating the media on the monitor during this brief moment of unconsciousness.
           </p>
           
-          <p style={{ 
-            fontSize: '1.1rem', 
-            lineHeight: '1.6',
-            marginBottom: '1rem'
-          }}>
+          <p className={styles.paragraph}>
             "Trial 1.4" navigates the delicate balance between agency and absence, as even in moments of unconscious inaction, our essence is woven into unfolding realms. It muses on the unseen forces that sway us between control and compliance, inviting reflection on our ephemeral entanglement with these vast, intangible domains.
           </p>
         </div>
 
-        <div style={{ 
-          borderTop: '1px solid rgba(255,255,255,0.2)',
-          paddingTop: '2rem',
-          fontSize: '0.9rem',
-          color: 'rgba(255,255,255,0.7)'
-        }}>
-          <p style={{ marginBottom: '0.5rem' }}>Collaborator: Koi Ren</p>
-          <p style={{ marginBottom: '0.5rem' }}>Exhibition: Pebblebed, San Francisco, CA</p>
+        <div className={styles.footer}>
+          <p className={styles.footerText}>Collaborator: Koi Ren</p>
+          <p className={styles.footerText}>Exhibition: Pebblebed, San Francisco, CA</p>
         </div>
       </div>
     </div>

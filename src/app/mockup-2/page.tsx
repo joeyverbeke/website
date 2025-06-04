@@ -1,6 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import styles from './mockup-2.module.css';
+import Cursor from '@/components/Cursor';
 
 const text = {
   left: [
@@ -11,7 +12,7 @@ const text = {
     { type: 'work', title: 'Gradi Vox (2025)', subtitle: 'Symbiotic//parasitic wearable', slug: 'gradi-vox', hero: 'GradiVox-Hero.png' },
     { type: 'work', title: 'Porous (2025)', subtitle: 'Subliminal hallucinatory earworms', slug: 'porous', hero: 'Porous-Hero.jpeg' },
     { type: 'section', text: 'writings' },
-    { type: 'writing', title: 'Friction as Medium Epistemic Rupture through Imperceptible Interaction (2025)' },
+    { type: 'writing', title: 'Friction as Medium: Epistemic Rupture through Imperceptible Interaction (2025)' },
     { type: 'section', text: 'presentations' },
     { type: 'presentation', title: 'Anomalistic Interactions, SIGGRAPH Asia (2024)' },
   ],
@@ -36,7 +37,8 @@ export default function Mockup2() {
   const [showShortcut, setShowShortcut] = useState(true);
   const [shortcut, setShortcut] = useState('⌘+A');
   const [bgImage, setBgImage] = useState<string | null>(null);
-
+  const [cursorVisible, setCursorVisible] = useState(true);
+  
   useEffect(() => {
     setShortcut(getShortcutText());
     function handleKeyDown(e: KeyboardEvent) {
@@ -54,6 +56,11 @@ export default function Mockup2() {
     };
   }, []);
 
+  // Ensure cursor is visible on page load
+  useEffect(() => {
+    setCursorVisible(true);
+  }, []);
+
   // Compute background style
   const backgroundStyle = bgImage
     ? {
@@ -67,6 +74,7 @@ export default function Mockup2() {
 
   return (
     <div className={styles.mockupRoot} style={backgroundStyle}>
+      <Cursor revealed={!cursorVisible} />
       {/* Left column */}
       <div className={styles.leftCol}>
         <div className={styles.header}>{text.left[0].text}</div>

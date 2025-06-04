@@ -6,7 +6,8 @@
   pointer-events: none;
   transform: translate(-50%, -50%);
   animation: pulseGreen 2s infinite;
-  z-index: 4;
+  z-index: 0;
+  mix-blend-mode: hard-light;
 }
 
 @keyframes pulseGreen {
