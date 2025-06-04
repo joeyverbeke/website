@@ -1,35 +1,49 @@
 .container {
   min-height: 100vh;
   width: 100%;
-  background: #000000;
-  color: #ffffff;
-  font-family: Menlo, Monaco, monospace;
-  padding: 20px;
+  background: #000000 url('/images/mobile/mobile-background.png') center center / cover no-repeat;
+  color: #000000;
+  font-family: 'DM Mono', Menlo, Monaco, monospace;
   box-sizing: border-box;
   font-size: 16px;
   line-height: 1.4;
   letter-spacing: 0.04em;
+  text-align: center;
+  padding-top: 50px;
 }
 
 .container ::selection {
-  background: #B413FF;
-  color: #ffffff;
+  background: #FFFFFF;
+  color: #000000;
 }
 
 .header {
   margin-bottom: 30px;
+  background: #000000;
+  color: #FFFFFF;
+  width: 100%;
+  mix-blend-mode: exclusion;
 }
 
 .header h1 {
-  font-weight: 400;
-  font-size: 1.2em;
+  font-weight: 600;
+  font-size: 1.6em;
   margin: 0;
+  letter-spacing: 0.15em;
+  width: 100%;
+  box-sizing: border-box;
+  background: #FFFFFF;
+  color: #000000;
+  mix-blend-mode: exclusion;
 }
 
 .tagline {
-  font-size: 1.1em;
+  font-size: 1em;
+  margin-top: 50px;
   margin-bottom: 40px;
-  color: #ffffff;
+  color: #000000;
+  background: #FFFFFF;
+  mix-blend-mode: exclusion;
 }
 
 .section {
@@ -42,25 +56,33 @@
   margin-bottom: 20px;
   letter-spacing: 0.06em;
   text-transform: lowercase;
+  color: #000000;
+  background: #FFFFFF;
+  mix-blend-mode: exclusion;
+  display: inline-block;
 }
 
 .items {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  align-items: center;
 }
 
 .workItem {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .workLink {
-  color: #d4ff7f;
+  color: #000000;
   text-decoration: none;
   font-weight: 400;
   display: block;
-  padding: 5px 0;
+  text-align: center;
+  background: #FFFFFF;
+  mix-blend-mode: exclusion;
 }
 
 .workLink:hover {
@@ -68,15 +90,19 @@
 }
 
 .workSubtitle {
-  color: #cecece;
+  color: #000000;
   font-weight: 400;
   font-size: 0.9em;
-  mix-blend-mode: hard-light;
+  mix-blend-mode: exclusion;
+  text-align: center;
+  background: #FFFFFF;
 }
 
 .writingTitle,
 .presentationTitle {
-  color: #d4ff7f;
+  color: #000000;
   font-weight: 400;
-  padding: 5px 0;
+  text-align: center;
+  background: #FFFFFF;
+  mix-blend-mode: exclusion;
 }
