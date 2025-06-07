@@ -5,7 +5,7 @@
   color: #000000;
   font-family: 'DM Mono', Menlo, Monaco, monospace;
   box-sizing: border-box;
-  font-size: 16px;
+  font-size: clamp(14px, 3vw, 18px);
   line-height: 1.4;
   letter-spacing: 0.04em;
   text-align: center;
@@ -27,7 +27,7 @@
 
 .header h1 {
   font-weight: 600;
-  font-size: 1.6em;
+  font-size: clamp(1.2em, 6vw, 2.5em);
   margin: 0;
   letter-spacing: 0.15em;
   width: 100%;
@@ -35,10 +35,11 @@
   background: #FFFFFF;
   color: #000000;
   mix-blend-mode: exclusion;
+  white-space: nowrap;
 }
 
 .tagline {
-  font-size: 1em;
+  font-size: clamp(0.9em, 4vw, 1.2em);
   margin-top: 50px;
   margin-bottom: 40px;
   color: #000000;
@@ -52,7 +53,7 @@
 
 .sectionTitle {
   font-weight: 700;
-  font-size: 1.1em;
+  font-size: clamp(1em, 3.5vw, 1.2em);
   margin-bottom: 20px;
   letter-spacing: 0.06em;
   text-transform: lowercase;
@@ -83,6 +84,7 @@
   text-align: center;
   background: #FFFFFF;
   mix-blend-mode: exclusion;
+  font-size: clamp(1em, 3.5vw, 1.2em);
 }
 
 .workLink:hover {
@@ -92,7 +94,7 @@
 .workSubtitle {
   color: #000000;
   font-weight: 400;
-  font-size: 0.9em;
+  font-size: clamp(0.8em, 3vw, 1em);
   mix-blend-mode: exclusion;
   text-align: center;
   background: #FFFFFF;
@@ -105,4 +107,15 @@
   text-align: center;
   background: #FFFFFF;
   mix-blend-mode: exclusion;
+  font-size: clamp(1em, 3.5vw, 1.2em);
+}
+
+.aboutText {
+  font-size: clamp(0.9em, 4vw, 1.2em);
+  margin-top: 40px;
+  margin-bottom: 40px;
+  color: #000000;
+  background: #FFFFFF;
+  mix-blend-mode: exclusion;
+  display: inline-block;
 }

@@ -83,6 +83,15 @@ export default function MockupMobile() {
           ))}
         </div>
       </section>
+      <section className={styles.section}>
+        <h2 className={styles.sectionTitle}>
+        <Link 
+        href={`/about`}
+        >
+            about
+        </Link>   
+        </h2>
+      </section>
     </div>
   );
 }

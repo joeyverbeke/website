@@ -1,0 +1,121 @@
+.container {
+    min-height: 100vh;
+    width: 100%;
+    background: #000000 url('/images/mobile/mobile-background.png') center center / cover no-repeat;
+    color: #000000;
+    font-family: 'DM Mono', Menlo, Monaco, monospace;
+    box-sizing: border-box;
+    font-size: clamp(14px, 3vw, 18px);
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+    text-align: center;
+    padding-top: 50px;
+  }
+  
+  .container ::selection {
+    background: #FFFFFF;
+    color: #000000;
+  }
+  
+  .header {
+    margin-bottom: 30px;
+    background: #000000;
+    color: #FFFFFF;
+    width: 100%;
+    mix-blend-mode: exclusion;
+  }
+  
+  .header h1 {
+    font-weight: 600;
+    font-size: clamp(1.2em, 6vw, 2.5em);
+    margin: 0;
+    letter-spacing: 0.15em;
+    width: 100%;
+    box-sizing: border-box;
+    background: #FFFFFF;
+    color: #000000;
+    mix-blend-mode: exclusion;
+    white-space: nowrap;
+  }
+  
+  .tagline {
+    font-size: clamp(0.9em, 4vw, 1.2em);
+    margin-top: 50px;
+    margin-bottom: 40px;
+    color: #000000;
+    background: #FFFFFF;
+    mix-blend-mode: exclusion;
+  }
+  
+  .section {
+    margin-bottom: 40px;
+  }
+  
+  .sectionTitle {
+    font-weight: 700;
+    font-size: clamp(1em, 3.5vw, 1.2em);
+    margin-bottom: 20px;
+    letter-spacing: 0.06em;
+    text-transform: lowercase;
+    color: #000000;
+    background: #FFFFFF;
+    mix-blend-mode: exclusion;
+    display: inline-block;
+  }
+  
+  .items {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+  
+  .workItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .workLink {
+    color: #000000;
+    text-decoration: none;
+    font-weight: 400;
+    display: block;
+    text-align: center;
+    background: #FFFFFF;
+    mix-blend-mode: exclusion;
+    font-size: clamp(1em, 3.5vw, 1.2em);
+  }
+  
+  .workLink:hover {
+    text-decoration: underline;
+  }
+  
+  .workSubtitle {
+    color: #000000;
+    font-weight: 400;
+    font-size: clamp(0.8em, 3vw, 1em);
+    mix-blend-mode: exclusion;
+    text-align: center;
+    background: #FFFFFF;
+  }
+  
+  .writingTitle,
+  .presentationTitle {
+    color: #000000;
+    font-weight: 400;
+    text-align: center;
+    background: #FFFFFF;
+    mix-blend-mode: exclusion;
+    font-size: clamp(1em, 3.5vw, 1.2em);
+  }
+  
+  .aboutText {
+    font-size: clamp(0.9em, 4vw, 1.2em);
+    margin-bottom: 40px;
+    color: #000000;
+    background: #FFFFFF;
+    mix-blend-mode: exclusion;
+    display: inline-block;
+  }
+  
