@@ -25,13 +25,22 @@
 .leftCol {
   width: 52vw;
   padding: 3vw 0 0 2.5vw;
-  mix-blend-mode: exclusion;
+  mix-blend-mode: hard-light;
 }
 
 .rightCol {
   width: 48vw;
   padding: 3vw 2.5vw 0 0;
   text-align: right;
+  mix-blend-mode: hard-light;
+}
+
+/* Selection state classes */
+.leftCol.textSelected {
+  mix-blend-mode: exclusion;
+}
+
+.rightCol.textSelected {
   mix-blend-mode: exclusion;
 }
 

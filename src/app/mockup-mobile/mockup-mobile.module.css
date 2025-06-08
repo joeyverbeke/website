@@ -1,7 +1,7 @@
 .container {
   min-height: 100vh;
   width: 100%;
-  background: #000000 url('/images/mobile/mobile-background.png') center center / cover no-repeat;
+  background: #000000 url('/videos/mobile/mobile-background.png') center center / cover no-repeat;
   background-attachment: fixed;
   color: #000000;
   font-family: 'DM Mono', Menlo, Monaco, monospace;

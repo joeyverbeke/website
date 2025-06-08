@@ -39,6 +39,7 @@ export default function Mockup2() {
   // const [bgImage, setBgImage] = useState<string | null>(null);
   const [bgVideo, setBgVideo] = useState<string | null>(null);
   const [cursorVisible, setCursorVisible] = useState(true);
+  const [hasTextSelection, setHasTextSelection] = useState(false);
   
   useEffect(() => {
     setShortcut(getShortcutText());
@@ -62,10 +63,24 @@ export default function Mockup2() {
     setCursorVisible(true);
   }, []);
 
+  // Handle text selection detection
+  useEffect(() => {
+    const handleSelectionChange = () => {
+      const selection = window.getSelection();
+      const hasSelection = Boolean(selection && selection.toString().length > 0);
+      setHasTextSelection(hasSelection);
+    };
 
+    document.addEventListener('selectionchange', handleSelectionChange);
+    
+    return () => {
+      document.removeEventListener('selectionchange', handleSelectionChange);
+    };
+  }, []);
 
   return (
     <div className={styles.mockupRoot}>
+      <Cursor revealed={!cursorVisible} />
       {/* Background video layer */}
       {bgVideo && (
         <video
@@ -78,9 +93,8 @@ export default function Mockup2() {
           playsInline
         />
       )}
-      <Cursor revealed={!cursorVisible} />
       {/* Left column */}
-      <div className={styles.leftCol}>
+      <div className={`${styles.leftCol} ${hasTextSelection ? styles.textSelected : ''}`}>
         <div className={styles.header}>{text.left[0].text}</div>
         <div className={styles.workTitle}>&nbsp;</div>
 
@@ -132,7 +146,7 @@ export default function Mockup2() {
         <div className={styles.centeredShortcut}>{shortcut}</div>
       )}
       {/* Right column */}
-      <div className={styles.rightCol}>
+      <div className={`${styles.rightCol} ${hasTextSelection ? styles.textSelected : ''}`}>
         <div className={styles.hello}>{text.right[0].text}</div>
         <div className={styles.workTitle}>&nbsp;</div>
         <div className={styles.workTitle}>&nbsp;</div>
