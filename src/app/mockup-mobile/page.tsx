@@ -39,14 +39,22 @@ export default function MockupMobile() {
     <div className={styles.container}>
       <header className={styles.header}>
         <h1>Koi Ren & Joey Verbeke</h1>
+        <br /><div className={styles.workSubtitle}> </div>
+        <br /><div className={styles.workSubtitle}> </div>
+        <br /><div className={styles.workSubtitle}> </div>
       </header>
 
       <div className={styles.tagline}>
         We tell phantasmagoric stories about unconscious friction.
+        <br /><div className={styles.workSubtitle}> </div>
+        <br /><div className={styles.workSubtitle}> </div>
+        <br /><div className={styles.workSubtitle}> </div>
       </div>
 
       <section className={styles.section}>
         <h2 className={styles.sectionTitle}>works</h2>
+        <br />
+              <div className={styles.workSubtitle}> </div>
         <div className={styles.items}>
           {works.map((work) => (
             <div key={work.slug} className={styles.workItem}>
@@ -56,25 +64,42 @@ export default function MockupMobile() {
               >
                 {work.title}
               </Link>
+              <br />
               <div className={styles.workSubtitle}>{work.subtitle}</div>
+              <br />
+              <div className={styles.workSubtitle}> </div>
             </div>
           ))}
         </div>
+        <br />
+              <div className={styles.workSubtitle}> </div>
+        <br />
+              <div className={styles.workSubtitle}> </div>
       </section>
 
       <section className={styles.section}>
         <h2 className={styles.sectionTitle}>writings</h2>
+        <br />
+              <div className={styles.workSubtitle}> </div>
         <div className={styles.items}>
           {writings.map((writing, index) => (
-            <div key={index} className={styles.writingTitle}>
+            <span key={index} className={styles.writingTitle}>
               {writing.title}
-            </div>
+            </span>
           ))}
         </div>
+        <br />
+              <div className={styles.workSubtitle}> </div>
+        <br />
+              <div className={styles.workSubtitle}> </div>
+        <br />
+              <div className={styles.workSubtitle}> </div>
       </section>
 
       <section className={styles.section}>
         <h2 className={styles.sectionTitle}>presentations</h2>
+        <br />
+              <div className={styles.workSubtitle}> </div>
         <div className={styles.items}>
           {presentations.map((presentation, index) => (
             <div key={index} className={styles.presentationTitle}>
@@ -83,15 +108,7 @@ export default function MockupMobile() {
           ))}
         </div>
       </section>
-      <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>
-        <Link 
-        href={`/about`}
-        >
-            about
-        </Link>   
-        </h2>
-      </section>
+
     </div>
   );
 }

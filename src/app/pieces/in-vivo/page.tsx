@@ -57,7 +57,10 @@ export default function InVivoPage() {
   }, [updateBlinkState]);
 
   const initializeFaceDetection = useCallback(async () => {
-    if (!videoRef.current) return;
+    if (!videoRef.current) {
+      console.error('Video element not found');
+      return;
+    }
 
     try {
       // Initialize video stream
@@ -166,19 +169,29 @@ export default function InVivoPage() {
           )}
         </div>
 
+        <div className={styles.videoWrapper}>
+  <iframe
+    src="https://player.vimeo.com/video/970453993?autoplay=1&loop=1&muted=1&background=1"
+    allow="autoplay; fullscreen; picture-in-picture"
+    allowFullScreen
+    title="In Vivo Vimeo Video"
+  />
+</div>
+
         <div className={styles.description}>
           <p className={styles.paragraph}>
-            In Vivo // In Vitro - Trial 1.4 (2024) is an interactive new media installation. It leverages machine learning to understand the moment a viewer blinks, manipulating the media on the monitor during this brief moment of unconsciousness.
+          Year: 2024
           </p>
-          
           <p className={styles.paragraph}>
-            "Trial 1.4" navigates the delicate balance between agency and absence, as even in moments of unconscious inaction, our essence is woven into unfolding realms. It muses on the unseen forces that sway us between control and compliance, inviting reflection on our ephemeral entanglement with these vast, intangible domains.
+          Material: Four channel screens, Artificial Intelligence, camera, facial detection.
+          </p>
+          <p className={styles.paragraph}>
+          In Vivo / In Vitro - Trial 1.4 (2024) is an interactive new media installation that leverages AI to understand the moment of unconsciousness when a viewer blinks to ephemerally display generative and evolving embryonic imagery. The piece delves into the intricate interplay between human presence and machine perception, challenging the boundaries of control and autonomy, agency and absence, in our ephemeral entanglement with these vast evolving systems. By highlighting these fleeting moments of vulnerability, our work underscores the pervasive influence of AI on our everyday experiences, inviting a deeper reflection on our relationship with technology in this pivotal era of digital transformation.          
           </p>
         </div>
 
         <div className={styles.footer}>
-          <p className={styles.footerText}>Collaborator: Koi Ren</p>
-          <p className={styles.footerText}>Exhibition: Pebblebed, San Francisco, CA</p>
+          <p className={styles.footerText}>Exhibition: Dethrone, Gray Area, San Francisco, CA; Activation, Pebblebed, San Francisco, CA; NotYetArt, New York, NY; Scalable HCI, Shenzhen, CN; Siggraph Asia Art Gallery, Tokyo, Japan; BCNM Conference, Platform Art Space, Berkeley, CA; Convivium, Bombay Beach, CA</p>
         </div>
       </div>
     </div>

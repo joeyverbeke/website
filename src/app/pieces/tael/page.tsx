@@ -106,15 +106,36 @@ export default function TaelPage() {
           T.A.E.L. (Tail Assisted Environmental Learning)
         </h1>
 
-        <div className={styles.imagePlaceholder}>
-          [Placeholder Image]
+        
+        <div className={styles.videoWrapper}><iframe
+        src="https://player.vimeo.com/video/1012261817?autoplay=1&loop=1&muted=1&background=1"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowFullScreen
+        title="In Vivo Vimeo Video"
+        />
         </div>
 
-        <div ref={textRef} className={styles.text}>
+        <div className={styles.description}>
+          <p className={styles.paragraph}>
+          Year: 2024
+          </p>
+          <p className={styles.paragraph}>
+          Material: Artificial Intelligence, projection mapping, camera, Resin.
+          </p>
+          <div ref={textRef} className={styles.paragraph}>
           {displayedText}
           {isTyping && <span className={styles.cursor}>|</span>}
         </div>
+        </div>
+
+        <div className={styles.footer}>
+          <p className={styles.footerText}>Exhibition: METHOD, Angels Gate Cultural Center, San Pedro, CA; BCNM Conference, Platform Art Space, Berkeley, CA; Convivium, Bombay Beach, CA; Surreality, HKUST, Guangzhou, CN; FutureTense Awards Finalist, Hong Kong, HK</p>
+        </div>
+
+        
+
       </div>
     </div>
   );
 } 
+

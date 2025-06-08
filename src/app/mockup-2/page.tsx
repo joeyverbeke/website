@@ -7,10 +7,10 @@ const text = {
   left: [
     { type: 'header', text: 'Koi Ren & Joey Verbeke' },
     { type: 'section', text: 'works' },
-    { type: 'work', title: 'In Vivo / In Vitro, Trial 1.4 (2024)', subtitle: 'Blink triggered imperceptibility', slug: 'in-vivo', hero: 'InVivo-Hero.jpg' },
-    { type: 'work', title: 'T.A.E.L. (Tail Assisted Environmental Learning) (2024)', subtitle: 'Cannibalistic folklore machine', slug: 'tael', hero: 'TAEL-Hero.png' },
-    { type: 'work', title: 'Gradi Vox (2025)', subtitle: 'Symbiotic//parasitic wearable', slug: 'gradi-vox', hero: 'GradiVox-Hero.png' },
-    { type: 'work', title: 'Porous (2025)', subtitle: 'Subliminal hallucinatory earworms', slug: 'porous', hero: 'Porous-Hero.jpeg' },
+    { type: 'work', title: 'In Vivo / In Vitro, Trial 1.4 (2024)', subtitle: 'Blink triggered imperceptibility', slug: 'in-vivo', hero: 'inVivo_loop.mp4' },
+    { type: 'work', title: 'T.A.E.L. (Tail Assisted Environmental Learning) (2024)', subtitle: 'Cannibalistic folklore machine', slug: 'tael', hero: 'tael_loop.mp4' },
+    { type: 'work', title: 'Gradi Vox (2025)', subtitle: 'Symbiotic//parasitic wearable', slug: 'gradi-vox', hero: 'gradi_loop.mp4' },
+    { type: 'work', title: 'Porous (2025)', subtitle: 'Subliminal hallucinatory earworms', slug: 'porous', hero: 'porous_loop.mp4' },
     { type: 'section', text: 'writings' },
     { type: 'writing', title: 'Friction as Medium: Epistemic Rupture through Imperceptible Interaction (2025)' },
     { type: 'section', text: 'presentations' },
@@ -36,7 +36,8 @@ function getShortcutText() {
 export default function Mockup2() {
   const [showShortcut, setShowShortcut] = useState(true);
   const [shortcut, setShortcut] = useState('⌘+A');
-  const [bgImage, setBgImage] = useState<string | null>(null);
+  // const [bgImage, setBgImage] = useState<string | null>(null);
+  const [bgVideo, setBgVideo] = useState<string | null>(null);
   const [cursorVisible, setCursorVisible] = useState(true);
   
   useEffect(() => {
@@ -61,24 +62,32 @@ export default function Mockup2() {
     setCursorVisible(true);
   }, []);
 
-  // Compute background style
-  const backgroundStyle = bgImage
-    ? {
-        backgroundImage: `url(/images/${bgImage})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        transition: 'background-image 0.3s',
-      }
-    : {};
+
 
   return (
-    <div className={styles.mockupRoot} style={backgroundStyle}>
+    <div className={styles.mockupRoot}>
+      {/* Background video layer */}
+      {bgVideo && (
+        <video
+          key={bgVideo}
+          className={styles.backgroundVideo}
+          src={`/videos/${bgVideo}`} // Video in public/videos folder
+          autoPlay
+          muted
+          loop
+          playsInline
+        />
+      )}
       <Cursor revealed={!cursorVisible} />
       {/* Left column */}
       <div className={styles.leftCol}>
         <div className={styles.header}>{text.left[0].text}</div>
+        <div className={styles.workTitle}>&nbsp;</div>
+
+        <div className={styles.workTitle}>&nbsp;</div>
         <div className={styles.section}>{text.left[1].text}</div>
+        <div className={styles.workTitle}>&nbsp;</div>
+
         {/* Works */}
         {text.left.slice(2, 6).map((work) => (
           <div key={work.title} className={styles.work}>
@@ -88,20 +97,36 @@ export default function Mockup2() {
               <a
                 className={styles.workLink}
                 href={`/pieces/${work.slug}`}
-                onMouseEnter={() => setBgImage(`${work.slug}/${work.hero}`)}
-                onMouseLeave={() => setBgImage(null)}
+                onMouseEnter={() => setBgVideo(`${work.slug}/${work.hero}`)} // Ensure work.heroVideo points to the correct video file
+                onMouseLeave={() => setBgVideo(null)}
+
               >
                 {work.title}
               </a>
             )}
             <br />
             <span className={styles.workSubtitle}>{work.subtitle}</span>
+            <div className={styles.workTitle}>&nbsp;</div>
+            
+
+
           </div>
         ))}
+        <div className={styles.workTitle}>&nbsp;</div>
         <div className={`${styles.section} ${styles.sectionSpacing}`}>{text.left[6].text}</div>
-        <div className={styles.writingTitle} style={{ marginBottom: '2vw' }}>{text.left[7].title}</div>
+        <div className={styles.workTitle}>&nbsp;</div>
+
+        <div className={styles.writingTitle} style={{ marginBottom: '0vw' }}>{text.left[7].title}</div>
+        <div className={styles.workTitle}>&nbsp;</div>
+        <div className={styles.workTitle}>&nbsp;</div>
+
+
         <div className={`${styles.section} ${styles.sectionSpacing}`}>{text.left[8].text}</div>
+        <div className={styles.workTitle}>&nbsp;</div>
+
         <div className={styles.presentationTitle}>{text.left[9].title}</div>
+
+
       </div>
       {showShortcut && (
         <div className={styles.centeredShortcut}>{shortcut}</div>
@@ -109,7 +134,16 @@ export default function Mockup2() {
       {/* Right column */}
       <div className={styles.rightCol}>
         <div className={styles.hello}>{text.right[0].text}</div>
+        <div className={styles.workTitle}>&nbsp;</div>
+        <div className={styles.workTitle}>&nbsp;</div>
+        <div className={styles.workTitle}>&nbsp;</div>
+        <div className={styles.workTitle}>&nbsp;</div>
+
+
+
         <div className={`${styles.faded} ${styles.rightDesc}`}>{text.right[1].text}</div>
+        <div className={styles.workTitle}>&nbsp;</div>
+
         <div className={`${styles.rightDescTight}`} style={{ textAlign: 'right' }}>
           <span className={styles.highlight}>Koi Ren and Joey Verbeke</span> <span className={styles.faded}>are a </span>
           <span className={styles.highlight}>New Media Art duo</span>
@@ -125,7 +159,11 @@ export default function Mockup2() {
             {' '}and critical writing.
           </span>
         </div>
+        <div className={styles.workTitle}>&nbsp;</div>
+
         <div className={`${styles.faded} ${styles.rightDescBottom}`}>{text.right[3].text}</div>
+        <div className={styles.workTitle}>&nbsp;</div>
+
         <div className={`${styles.highlight} ${styles.rightDescTop}`}>{text.right[4].text}</div>
       </div>
     </div>

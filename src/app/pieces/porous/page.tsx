@@ -7,11 +7,7 @@ const ORIGINAL_TEXT = `Quietly inhabiting spaces we barely notice, Porous is par
 
 According to Cary Wolfe, posthumanism names "a historical moment in which the decentering of the human by its imbrication in technical, medical, informatics, and economic networks is increasingly impossible to ignore". Porous examines AI hallucination as a possibility of posthuman dissidence to decolonize the subconscious.
 
-In this interplay of subliminal whispers, hallucination becomes a method of infiltration—porous, unpredictable, subversively subjective. Each anomaly fractures the boundaries we trust between the conscious and unconscious, digital and physical, order and randomness. Refusing definition as either emancipatory or oppressive, Porous is a quiet provocation, inviting reflection on how subtle forms of influence, carried within the mundane, shape collective experience and distort the edges of our reality.
-
-Collaborator: Koi Ren
-Year: 2025
-Materials: Outlet, Thermoplastic, Spray Paint, Microelectronics, AI Sound`;
+In this interplay of subliminal whispers, hallucination becomes a method of infiltration—porous, unpredictable, subversively subjective. Each anomaly fractures the boundaries we trust between the conscious and unconscious, digital and physical, order and randomness. Refusing definition as either emancipatory or oppressive, Porous is a quiet provocation, inviting reflection on how subtle forms of influence, carried within the mundane, shape collective experience and distort the edges of our reality.`;
 
 export default function PorousPage() {
   return (
@@ -22,13 +18,34 @@ export default function PorousPage() {
           Porous
         </h1>
 
-        <div className={styles.imagePlaceholder}>
+        {/* <div className={styles.imagePlaceholder}>
           [Placeholder Image]
+        </div> */}
+
+        <div className={styles.videoWrapper}><iframe
+        src="https://player.vimeo.com/video/1012261817?autoplay=1&loop=1&muted=1&background=1"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowFullScreen
+        title="In Vivo Vimeo Video"
+        />
         </div>
 
-        <div className={styles.text}>
+        <div className={styles.description}>
+          <p className={styles.paragraph}>
+          Year: 2025
+          </p>
+          <p className={styles.paragraph}>
+          Material: Outlet, Thermoplastic, Spray Paint, Microelectronics, Artificial Intelligence Sound
+          </p>
+          <div className={styles.paragraph}>
           {ORIGINAL_TEXT}
         </div>
+        </div>
+
+        <div className={styles.footer}>
+          <p className={styles.footerText}>Exhibition: Mars Electronica, Mars, CA; Convivium, Bombay Beach, CA</p>
+        </div>
+
       </div>
     </div>
   );

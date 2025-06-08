@@ -110,6 +110,32 @@ export default function GradiVoxPage() {
         <p className={styles.status}>
           {isListening ? (isSpeaking ? 'Symbiotic thought active...' : 'Listening for symbiosis...') : 'Click me <3'}
         </p>
+
+        <div className={styles.videoWrapper}><iframe
+        src="https://player.vimeo.com/video/1074451782?autoplay=1&loop=1&muted=1&background=1"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowFullScreen
+        title="In Vivo Vimeo Video"
+        />
+        </div>
+
+        <div className={styles.description}>
+          <p className={styles.paragraph}>
+          Year: 2025
+          </p>
+          <p className={styles.paragraph}>
+          Material: Artificial Intelligence, Microcontroller, Microphone, Speaker, Thermoplastic, AI Film
+          </p>
+          <div className={styles.paragraph}>
+          Gradi Vox is a wearable AI earpiece that listens to the user while they speak and delivers real-time suggestions to refine and enhance their articulation. The device uses an advanced language model to analyze speech patterns and provide contextual prompts, aligning seamlessly with the user's natural cadence. However, because these suggestions occur simultaneously as the user speaks, Gradi Vox creates a continuous feedback loop where the boundary between original thought and AI augmentation becomes blurred. While the device promises improved clarity and confidence in communication, it gradually reshapes the user's linguistic choices in subtle, often imperceptible ways. Gradi Vox is the first in a series of speculative wearables by ParaCorp’s Advanced Innovation & Design (PAID) lab, each exploring the nuanced tension between cognitive augmentation and the quiet erosion of agency
+        </div>
+        </div>
+
+        <div className={styles.footer}>
+          <p className={styles.footerText}>Exhibition: Mars Electronica, Mars, CA; Convivium, Bombay Beach, CA</p>
+        </div>
+
+
       </div>
     </div>
   );

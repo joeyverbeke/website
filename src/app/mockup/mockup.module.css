@@ -81,8 +81,14 @@
 .visible-green, 
 .visible-white, 
 .invisible {
-  font-size: 1.15vw;
+  border: 1px dashed red; /* Remove after testing */
+  font-size: 1vw;
   letter-spacing: 0.08em;
+  background: transparent;
+  line-height: 1.4; /* ensure consistent line height */
+  display: inline-block; /* prevent inline shifting */
+  padding: 0 0.1em; /* optional: softens visual shift if background is added */
+  box-sizing: border-box; /* consistent box model */
 }
 
 .workDesc {
@@ -107,13 +113,13 @@
   width: 100%;
   margin-right: 0;
   padding-right: 3vw;
-  font-size: 1.15vw;
+  font-size: 1vw;
 }
 
 .venueText {
   margin-top: 0.5vw;
   display: inline-block;
-  font-size: 1.15vw;
+  font-size: 1vw;
 }
 
 /* 

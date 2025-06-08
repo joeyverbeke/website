@@ -170,9 +170,12 @@ export default function MockupPage() {
               </>
             )}
           </div>
-          <div className={styles.sectionTitle}><span className={styles['visible-white']}>writings</span></div>
+          <div className={styles.sectionTitle}><span className={styles['visible-white']}>writings and publications</span></div>
           <div className={styles.workItem}>
             <span className={styles['visible-green']}>Friction as Medium: Epistemic Rupture through Imperceptible Interaction (2025)</span>
+          </div>
+          <div className={styles.workItem}>
+            <span className={styles['visible-green']}>In Vivo / In Vitro - Trial 1.4 SIGGRAPH Asia 2024 Art Gallery https://doi.org/10.1145/3680529.3688960</span>
           </div>
           <div className={styles.sectionTitle}><span className={styles['visible-white']}>presentations</span></div>
           <div className={styles.workItem}>
