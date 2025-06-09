@@ -1,0 +1,4 @@
+{
+  "buildCommand": "npm install --ignore-scripts && npm install onnxruntime-web && next build",
+  "framework": "nextjs"
+} 
