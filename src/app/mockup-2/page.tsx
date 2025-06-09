@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styles from './mockup-2.module.css';
 import Cursor from '@/components/Cursor';
 
@@ -36,13 +36,30 @@ function getShortcutText() {
 export default function Mockup2() {
   const [showShortcut, setShowShortcut] = useState(true);
   const [shortcut, setShortcut] = useState('⌘+A');
-  // const [bgImage, setBgImage] = useState<string | null>(null);
   const [bgVideo, setBgVideo] = useState<string | null>(null);
   const [cursorVisible, setCursorVisible] = useState(true);
   const [hasTextSelection, setHasTextSelection] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
     setShortcut(getShortcutText());
+    // Check if user has already discovered the interaction
+    const discovered = localStorage.getItem('mockup2_discovered');
+    if (discovered === 'true') {
+      setShowShortcut(false);
+      // Auto-select all text in .mockupRoot
+      setTimeout(() => {
+        if (rootRef.current) {
+          const range = document.createRange();
+          range.selectNodeContents(rootRef.current);
+          const sel = window.getSelection();
+          if (sel) {
+            sel.removeAllRanges();
+            sel.addRange(range);
+          }
+        }
+      }, 0);
+    }
     function handleKeyDown(e: KeyboardEvent) {
       const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
       if (
@@ -50,6 +67,7 @@ export default function Mockup2() {
         (!isMac && e.ctrlKey && e.key.toLowerCase() === 'a')
       ) {
         setShowShortcut(false);
+        localStorage.setItem('mockup2_discovered', 'true');
       }
     }
     window.addEventListener('keydown', handleKeyDown);
@@ -79,7 +97,7 @@ export default function Mockup2() {
   }, []);
 
   return (
-    <div className={styles.mockupRoot}>
+    <div className={styles.mockupRoot} ref={rootRef}>
       <Cursor revealed={!cursorVisible} />
       {/* Background video layer */}
       {bgVideo && (
@@ -157,8 +175,9 @@ export default function Mockup2() {
 
         <div className={`${styles.faded} ${styles.rightDesc}`}>{text.right[1].text}</div>
         <div className={styles.workTitle}>&nbsp;</div>
+        <div className={styles.workTitle}>&nbsp;</div>
 
-        <div className={`${styles.rightDescTight}`} style={{ textAlign: 'right' }}>
+        <div className={`${styles.rightDesc}`}>
           <span className={styles.highlight}>Koi Ren and Joey Verbeke</span> <span className={styles.faded}>are a </span>
           <span className={styles.highlight}>New Media Art duo</span>
           <span className={styles.faded}>
@@ -174,11 +193,13 @@ export default function Mockup2() {
           </span>
         </div>
         <div className={styles.workTitle}>&nbsp;</div>
+        <div className={styles.workTitle}>&nbsp;</div>
 
         <div className={`${styles.faded} ${styles.rightDescBottom}`}>{text.right[3].text}</div>
         <div className={styles.workTitle}>&nbsp;</div>
+        <div className={styles.workTitle}>&nbsp;</div>
 
-        <div className={`${styles.highlight} ${styles.rightDescTop}`}>{text.right[4].text}</div>
+        <div className={`${styles.highlight} ${styles.rightDescBottom}`}>{text.right[4].text}</div>
       </div>
     </div>
   );

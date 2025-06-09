@@ -46,27 +46,22 @@
 
 .header {
   font-weight: 700;
-  font-size: 26px;
+  font-size: 1.1em;
   letter-spacing: 0.15em;
   color: #000000;
 }
 
 .section {
   font-weight: 700;
-  font-size: 22px;
+  font-size: 1em;
   letter-spacing: 0.15em;
-}
-
-.work {
-
 }
 
 .workTitle {
   color: #ffffff;
   font-weight: 400;
   letter-spacing: 0.15em;
-  font-size: 20px;
-
+  font-size: 0.9em;
 }
 
 .workLink {
@@ -74,7 +69,7 @@
   text-decoration: none;
   cursor: pointer;
   letter-spacing: 0.15em;
-  font-size: 20px;
+  font-size: 0.9em;
 
 }
 
@@ -88,7 +83,7 @@
   font-size: 0.8em;
   letter-spacing: 0.15em;
   font-style: italic;
-  font-size: 18px;
+  font-size: 0.8em;
 
 }
 
@@ -96,14 +91,12 @@
 .presentationTitle {
   color: #ffffff;
   letter-spacing: 0.15em;
-}
-
-.sectionSpacing {
+  font-size: 0.9em;
 }
 
 .hello {
   font-weight: 700;
-  font-size: 22px;
+  font-size: 0.9em;
   color: #ffffff;
   letter-spacing: 0.15em;
 }
@@ -120,21 +113,12 @@
 
 .rightDesc {
   letter-spacing: 0.15em;
-  font-size: 20px;
-}
-
-.rightDescTight {
-  letter-spacing: 0.15em;
-  font-size: 20px;
-
+  font-size: 0.9em;
 }
 
 .rightDescBottom {
   letter-spacing: 0.15em;
-}
-
-.rightDescTop {
-  letter-spacing: 0.15em;
+  font-size: 0.9em;
 }
 
 .centeredShortcut {
@@ -146,7 +130,7 @@
   font-family: Menlo, Monaco, monospace;
   font-weight: 700;
   letter-spacing: 0.1em;
-  color: #000000;
+  color: #43008a;
   user-select: none;
   pointer-events: none;
   z-index: 10;

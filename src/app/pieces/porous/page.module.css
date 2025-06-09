@@ -30,6 +30,7 @@
   font-size: 14px;
   line-height: 1.6;
   margin-bottom: 1rem;
+  white-space: pre-line;
 }
 
 .footer {
