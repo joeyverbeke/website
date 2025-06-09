@@ -1,7 +1,14 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  webpack: (config, { isServer }) => {
+    // Add fallback for onnxruntime-node
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      'onnxruntime-node': false,
+    };
+    return config;
+  },
 };
 
 export default nextConfig;
