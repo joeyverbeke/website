@@ -36,20 +36,28 @@ const presentations = [
 
 export default function MockupMobile() {
   return (
+    <>
+    <video
+    autoPlay
+    muted
+    loop
+    playsInline
+    className={styles.backgroundVideo}
+    src="/videos/mobile/phone_loop.mp4"
+  />
     <div className={styles.container}>
-      <header className={styles.header}>
-        <h1>Koi Ren & Joey Verbeke</h1>
-        <br /><div className={styles.workSubtitle}> </div>
-        <br /><div className={styles.workSubtitle}> </div>
-        <br /><div className={styles.workSubtitle}> </div>
-      </header>
-
-      <div className={styles.tagline}>
-        We tell phantasmagoric stories about unconscious friction.
-        <br /><div className={styles.workSubtitle}> </div>
-        <br /><div className={styles.workSubtitle}> </div>
-        <br /><div className={styles.workSubtitle}> </div>
+      <div className={styles.header}>
+        <div>Koi Ren & Joey Verbeke</div>
       </div>
+      
+      <section>
+      <div className={styles.workSubtitle}> </div>
+      <br /><div className={styles.workSubtitle}> </div>
+      <br /><div className={styles.tagline}>
+        We tell phantasmagoric stories about unconscious friction.
+      </div>
+      <br /><div className={styles.workSubtitle}> </div>
+      </section>
 
       <section className={styles.section}>
         <h2 className={styles.sectionTitle}>works</h2>
@@ -73,8 +81,6 @@ export default function MockupMobile() {
         </div>
         <br />
               <div className={styles.workSubtitle}> </div>
-        <br />
-              <div className={styles.workSubtitle}> </div>
       </section>
 
       <section className={styles.section}>
@@ -88,8 +94,6 @@ export default function MockupMobile() {
             </span>
           ))}
         </div>
-        <br />
-              <div className={styles.workSubtitle}> </div>
         <br />
               <div className={styles.workSubtitle}> </div>
         <br />
@@ -110,5 +114,6 @@ export default function MockupMobile() {
       </section>
 
     </div>
+    </>
   );
 }
