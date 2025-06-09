@@ -20,6 +20,8 @@
   text-align: center;
   padding-top: 50px;
   padding-bottom: 100px;
+  display: inline-block;
+  line-height: 1;
 }
 
 .container ::selection {
@@ -28,7 +30,6 @@
 }
 
 .header {
-  margin: 0;
   padding: 0;
   background: #ffffff;
   color: #000000;
@@ -36,6 +37,7 @@
   font-weight: 600;
   font-size: 1.1em;
   letter-spacing: 0.15em;
+  margin-bottom: 0em;
 }
 
 
@@ -47,9 +49,13 @@
   mix-blend-mode: exclusion;
   display: inline;
   padding: 0.2em 0.2em;
-  line-height: 1;
+
 }
 
+.section{
+margin-bottom: 0.4em;
+margin-top:0.35em;
+}
 
 .sectionTitle {
   font-weight: 600;
@@ -60,6 +66,8 @@
   background: #FFFFFF;
   mix-blend-mode: exclusion;
   display: inline-block;
+  padding: 0.2em 0.2em;
+  margin-top: 0.2em;
 }
 
 .items {
@@ -100,7 +108,7 @@
   text-align: center;
   background: #FFFFFF;
   display: inline;
-  padding: 0.45em 0.2em;
+  padding: 0.3em 0.2em;
   font-style: italic;
 }
 
@@ -112,9 +120,8 @@
   font-weight: 400;
   font-size: 0.7em;
   letter-spacing: 0.15em;
-  padding: 0.1em 0.2em;
+  padding: 0.15em 0.2em;
   mix-blend-mode: exclusion; 
-  
 } 
 
 
@@ -138,19 +145,17 @@
   text-align: center;
   background: #FFFFFF;
   display: inline;
-  padding: 0.45em 0.2em;
-  font-style: italic;
+  padding: 0.2em 0.2em;
 }
 
 .spacebig {
   color: #000000;
   font-weight: 100;
-  font-size: 0.6em;
-  letter-spacing: 0.15em;
-  mix-blend-mode: exclusion;
+  font-size: 2.4em;
+  /* mix-blend-mode: exclusion; */
   text-align: center;
   background: #FFFFFF;
   display: inline;
-  padding: 0.45em 0.2em;
-  font-style: italic;
+  padding: 0em 0.05em;
+  z-index: 1;
 }

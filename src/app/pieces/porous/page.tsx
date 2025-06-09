@@ -10,15 +10,12 @@ In this interplay of subliminal whispers, hallucination becomes a method of infi
 export default function PorousPage() {
   return (
     <div className={styles.container}>
-      <HomeButton />
-      <div className={styles.content}>
-        <h1 className={styles.title}>
-          Porous
-        </h1>
 
-        {/* <div className={styles.imagePlaceholder}>
-          [Placeholder Image]
-        </div> */}
+      <div className={styles.content}>
+        <div className={styles.headerRow}>
+        <HomeButton />
+        <h1 className={styles.title}>Porous</h1>
+        </div>
 
         <div className={styles.videoWrapper}><iframe
         src="https://player.vimeo.com/video/1012261817?autoplay=1&loop=1&muted=1&background=1"

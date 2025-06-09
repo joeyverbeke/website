@@ -8,6 +8,7 @@
   padding: 2rem;
   font-family:'DM Mono', Menlo, Monaco, monospace;
   letter-spacing: 0.15em;
+  font-size: calc(0.85vw + 0.85vh);
 }
 
 .hidden {
@@ -38,10 +39,9 @@
 }
 
 .title {
-  background: #ffffff;
-  color: #000000;
-  font-size: 22px;
-  font-weight: 500;
+  color: #ffffff;
+  font-size: 1.5em;
+  font-weight: 800;
   margin: 0;
   text-align: center;
 }
@@ -80,15 +80,16 @@
 }
 
 .paragraph {
-  font-size: 14px;
+  font-size: 0.7em;
   line-height: 1.6;
   margin-bottom: 1rem;
+  white-space: pre-line;
 }
 
 .footer {
   border-top: 1px solid rgba(255,255,255,0.2);
   padding-top: 2rem;
-  font-size: 12px;
+  font-size: 0.6em;
   color: rgba(255,255,255,0.7);
   width: 100%;
 }
@@ -100,16 +101,19 @@
 .videoWrapper {
   position: relative;
   width: 100%;
-  height: auto; /* allow height to grow */
+  padding-top: 56.25%; /* allow height to grow */
   overflow: hidden;
-  margin-top: 0rem;
-  margin-bottom: 4rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .videoWrapper iframe {
+  position: absolute;
   width: 100%; /* full viewport width */
-  height: 600px; /* 2x the original 54vh */
+  height: 100%; /* 2x the original 54vh */
   display: block;
-  margin: 0 auto;
+  top: 0;
+  left: 0;
+  border: none;
 }
 

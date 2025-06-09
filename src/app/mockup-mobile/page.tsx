@@ -51,22 +51,20 @@ export default function MockupMobile() {
       </div>
       
       <section>
-      <div className={styles.workSubtitle}> </div>
-      <br /><div className={styles.workSubtitle}> </div>
+      <div className={styles.spacesmall}> </div>
       <br /><div className={styles.tagline}>
         We tell phantasmagoric stories about unconscious friction.
       </div>
-      <br /><div className={styles.workSubtitle}> </div>
       </section>
 
       <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>works</h2>
-        <br />
-              <div className={styles.workSubtitle}> </div>
+        <div className={styles.spacebig}> </div>
+        <br /><h2 className={styles.sectionTitle}>works</h2>
         <div className={styles.items}>
           {works.map((work) => (
             <div key={work.slug} className={styles.workItem}>
-              <Link 
+              <div className={styles.spacesmall}> </div>
+              <br /><Link 
                 href={`/pieces/${work.slug}`}
                 className={styles.workLink}
               >
@@ -74,19 +72,16 @@ export default function MockupMobile() {
               </Link>
               <br />
               <div className={styles.workSubtitle}>{work.subtitle}</div>
-              <br />
-              <div className={styles.workSubtitle}> </div>
             </div>
           ))}
         </div>
-        <br />
-              <div className={styles.workSubtitle}> </div>
       </section>
 
       <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>writings</h2>
+        <div className={styles.spacebig}> </div>
+        <br /><h2 className={styles.sectionTitle}>writings</h2>
         <br />
-              <div className={styles.workSubtitle}> </div>
+              <div className={styles.spacesmall}> </div>
         <div className={styles.items}>
           {writings.map((writing, index) => (
             <span key={index} className={styles.writingTitle}>
@@ -94,16 +89,13 @@ export default function MockupMobile() {
             </span>
           ))}
         </div>
-        <br />
-              <div className={styles.workSubtitle}> </div>
-        <br />
-              <div className={styles.workSubtitle}> </div>
       </section>
 
       <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>presentations</h2>
+        <div className={styles.spacebig}> </div>
+        <br /><h2 className={styles.sectionTitle}>presentations</h2>
         <br />
-              <div className={styles.workSubtitle}> </div>
+              <div className={styles.spacesmall}> </div>
         <div className={styles.items}>
           {presentations.map((presentation, index) => (
             <div key={index} className={styles.presentationTitle}>

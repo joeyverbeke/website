@@ -103,11 +103,12 @@ export default function TaelPage() {
 
   return (
     <div ref={containerRef} className={styles.container}>
-      <HomeButton />
-      <div className={styles.content}>
-        <h1 className={styles.title}>
-          T.A.E.L. (Tail Assisted Environmental Learning)
-        </h1>
+      
+        <div className={styles.content}>
+        <div className={styles.headerRow}>
+        <HomeButton />
+        <h1 className={styles.title}>T.A.E.L. (Tail Assisted Environmental Learning)</h1>
+        </div>
 
         
         <div className={styles.videoWrapper}><iframe

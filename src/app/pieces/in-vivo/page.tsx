@@ -169,14 +169,6 @@ export default function InVivoPage() {
 
   return (
     <div className={styles.container}>
-      <video
-        ref={videoRef}
-        className={styles.hidden}
-        width="640"
-        height="480"
-        playsInline
-        autoPlay
-      />
       <HomeButton onClick={stopFaceDetection} />
       <div className={`${styles.content} ${isBlinking ? styles.contentBlinking : ''}`}>
         <div className={styles.header}>
@@ -208,28 +200,30 @@ export default function InVivoPage() {
           )}
         </div>
 
-        <div className={styles.videoWrapper}>
-          <iframe
-            src="https://player.vimeo.com/video/970453993?autoplay=1&loop=1&muted=1&background=1"
-            allow="autoplay; fullscreen; picture-in-picture"
-            allowFullScreen
-            title="In Vivo Vimeo Video"
-          />
+        <div className={styles.videoWrapper}><iframe
+        src="https://player.vimeo.com/video/970453993?autoplay=1&loop=1&muted=1&background=1"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowFullScreen
+        title="In Vivo Vimeo Video"
+        />
         </div>
 
         <div className={styles.description}>
-          <p>
-            <strong>In Vivo / In Vitro - Trial 1.4 (2024)</strong><br />
-            Blink-triggered imperceptibility<br /><br />
-            In Vivo / In Vitro refers to the foundational scientific distinction between observations and experiments conducted within a living organism (in vivo) versus those performed in a controlled, artificial environment (in vitro).<br /><br />
-            This installation presents a speculative user study where the act of blinking—typically an unconscious, involuntary behavior—becomes a conscious trigger for experiencing alternative temporal realities. Using real-time facial recognition technology, the system detects when viewers blink and momentarily shifts the content they see, creating a feedback loop between physiological reflex and digital manipulation. Trial 1.4 explores the liminal space between voluntary and involuntary action, questioning our agency over even the most basic bodily functions when mediated through technological interfaces.<br /><br />
-            As viewers engage with the installation, they must navigate the tension between their natural blink patterns and their desire to control what they see. The work raises questions about the increasing entanglement of biological processes with digital systems, and how technologies designed to enhance human capabilities might paradoxically make us more aware of—and potentially alienated from—our own embodied experience.
+          <p className={styles.paragraph}>
+          Year: 2024
           </p>
+          <p className={styles.paragraph}>
+          Material: Four channel screens, Artificial Intelligence, Camera, Computer vision           </p>
+          <div className={styles.paragraph}>
+          In Vivo / In Vitro - Trial 1.4 is an interactive new media installation that leverages AI to understand the moment of unconsciousness when a viewer blinks to ephemerally display generative and evolving embryonic imagery. The piece delves into the intricate interplay between human presence and machine perception, challenging the boundaries of control and autonomy, agency and absence, in our ephemeral entanglement with these vast evolving systems. By highlighting these fleeting moments of vulnerability, our work underscores the pervasive influence of AI on our everyday experiences, inviting a deeper reflection on our relationship with technology in this pivotal era of digital transformation.
+        </div>
         </div>
 
         <div className={styles.footer}>
-          <p className={styles.footerText}>Exhibition: Sundance New Frontier, Park City, UT; SIGGRAPH Electronic Theater & XR Theatre, Denver, CO</p>
+          <p className={styles.footerText}>Exhibition: Dethrone, Gray Area, San Francisco, CA; Activation, Pebblebed, San Francisco, CA; NotYetArt, New York, NY; Scalable HCI, Shenzhen, CN; Siggraph Asia Art Gallery, Tokyo, Japan; BCNM Conference, Platform Art Space, Berkeley, CA; Convivium, Bombay Beach, CA</p>
         </div>
+
+
       </div>
     </div>
   );
