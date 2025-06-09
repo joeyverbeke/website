@@ -1,16 +1,21 @@
 'use client';
 
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { FaceLandmarker, FilesetResolver } from '@mediapipe/tasks-vision';
 import HomeButton from '@/components/HomeButton';
 import { Eye, EyeClosed } from 'lucide-react';
 import styles from './page.module.css';
+
+// Type definitions for MediaPipe (to avoid import errors during build)
+type FaceLandmarker = any;
+type FilesetResolver = any;
 
 export default function InVivoPage() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isBlinking, setIsBlinking] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [hasBeenClicked, setHasBeenClicked] = useState(false);
+  const [mediapioreLoading, setMediapipeLoading] = useState(false);
+  const [mediapipeError, setMediapipeError] = useState<string | null>(null);
   const faceLandmarkerRef = useRef<FaceLandmarker | null>(null);
   const lastBlinkState = useRef(false);
   const processingRef = useRef(false);
@@ -56,22 +61,15 @@ export default function InVivoPage() {
     processFrame();
   }, [updateBlinkState]);
 
-  const initializeFaceDetection = useCallback(async () => {
-    if (!videoRef.current) {
-      console.error('Video element not found');
-      return;
-    }
-
+  const loadMediaPipe = useCallback(async () => {
     try {
-      // Initialize video stream
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-      if (!videoRef.current) {
-        stream.getTracks().forEach(track => track.stop());
-        return;
-      }
+      setMediapipeLoading(true);
+      setMediapipeError(null);
       
-      videoRef.current.srcObject = stream;
-
+      // Dynamic import of MediaPipe only on client side
+      const mediapipe = await import('@mediapipe/tasks-vision');
+      const { FaceLandmarker, FilesetResolver } = mediapipe;
+      
       // Initialize Face Landmarker
       const filesetResolver = await FilesetResolver.forVisionTasks(
         "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3/wasm"
@@ -88,9 +86,43 @@ export default function InVivoPage() {
       });
 
       faceLandmarkerRef.current = faceLandmarker;
+      setMediapipeLoading(false);
+      return true;
+    } catch (error) {
+      console.error('Error loading MediaPipe:', error);
+      setMediapipeError('Failed to load face detection. Please try again.');
+      setMediapipeLoading(false);
+      return false;
+    }
+  }, []);
+
+  const initializeFaceDetection = useCallback(async () => {
+    if (!videoRef.current) {
+      console.error('Video element not found');
+      return;
+    }
+
+    try {
+      // Initialize video stream first
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      if (!videoRef.current) {
+        stream.getTracks().forEach(track => track.stop());
+        return;
+      }
+      
+      videoRef.current.srcObject = stream;
+
+      // Load MediaPipe dynamically
+      const mediapipeLoaded = await loadMediaPipe();
+      if (!mediapipeLoaded) {
+        // Clean up video stream if MediaPipe failed to load
+        stream.getTracks().forEach(track => track.stop());
+        videoRef.current.srcObject = null;
+        return;
+      }
 
       // Ensure video is playing and start processing
-      if (videoRef.current) {
+      if (videoRef.current && faceLandmarkerRef.current) {
         videoRef.current.play().then(() => {
           startProcessing();
         }).catch(error => {
@@ -99,8 +131,9 @@ export default function InVivoPage() {
       }
     } catch (error) {
       console.error('Error setting up face detection:', error);
+      setMediapipeError('Failed to access camera or initialize face detection.');
     }
-  }, [startProcessing]);
+  }, [loadMediaPipe, startProcessing]);
 
   const stopFaceDetection = useCallback(() => {
     processingRef.current = false;
@@ -114,6 +147,7 @@ export default function InVivoPage() {
       faceLandmarkerRef.current = null;
     }
     setIsBlinking(false);
+    setMediapipeError(null);
   }, []);
 
   const handleEyeClick = async () => {
@@ -167,31 +201,34 @@ export default function InVivoPage() {
               ← click me
             </span>
           )}
+          {mediapipeError && (
+            <div style={{ color: 'red', fontSize: '12px', marginTop: '10px' }}>
+              {mediapipeError}
+            </div>
+          )}
         </div>
 
         <div className={styles.videoWrapper}>
-  <iframe
-    src="https://player.vimeo.com/video/970453993?autoplay=1&loop=1&muted=1&background=1"
-    allow="autoplay; fullscreen; picture-in-picture"
-    allowFullScreen
-    title="In Vivo Vimeo Video"
-  />
-</div>
+          <iframe
+            src="https://player.vimeo.com/video/970453993?autoplay=1&loop=1&muted=1&background=1"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowFullScreen
+            title="In Vivo Vimeo Video"
+          />
+        </div>
 
         <div className={styles.description}>
-          <p className={styles.paragraph}>
-          Year: 2024
-          </p>
-          <p className={styles.paragraph}>
-          Material: Four channel screens, Artificial Intelligence, camera, facial detection.
-          </p>
-          <p className={styles.paragraph}>
-          In Vivo / In Vitro - Trial 1.4 (2024) is an interactive new media installation that leverages AI to understand the moment of unconsciousness when a viewer blinks to ephemerally display generative and evolving embryonic imagery. The piece delves into the intricate interplay between human presence and machine perception, challenging the boundaries of control and autonomy, agency and absence, in our ephemeral entanglement with these vast evolving systems. By highlighting these fleeting moments of vulnerability, our work underscores the pervasive influence of AI on our everyday experiences, inviting a deeper reflection on our relationship with technology in this pivotal era of digital transformation.          
+          <p>
+            <strong>In Vivo / In Vitro - Trial 1.4 (2024)</strong><br />
+            Blink-triggered imperceptibility<br /><br />
+            In Vivo / In Vitro refers to the foundational scientific distinction between observations and experiments conducted within a living organism (in vivo) versus those performed in a controlled, artificial environment (in vitro).<br /><br />
+            This installation presents a speculative user study where the act of blinking—typically an unconscious, involuntary behavior—becomes a conscious trigger for experiencing alternative temporal realities. Using real-time facial recognition technology, the system detects when viewers blink and momentarily shifts the content they see, creating a feedback loop between physiological reflex and digital manipulation. Trial 1.4 explores the liminal space between voluntary and involuntary action, questioning our agency over even the most basic bodily functions when mediated through technological interfaces.<br /><br />
+            As viewers engage with the installation, they must navigate the tension between their natural blink patterns and their desire to control what they see. The work raises questions about the increasing entanglement of biological processes with digital systems, and how technologies designed to enhance human capabilities might paradoxically make us more aware of—and potentially alienated from—our own embodied experience.
           </p>
         </div>
 
         <div className={styles.footer}>
-          <p className={styles.footerText}>Exhibition: Dethrone, Gray Area, San Francisco, CA; Activation, Pebblebed, San Francisco, CA; NotYetArt, New York, NY; Scalable HCI, Shenzhen, CN; Siggraph Asia Art Gallery, Tokyo, Japan; BCNM Conference, Platform Art Space, Berkeley, CA; Convivium, Bombay Beach, CA</p>
+          <p className={styles.footerText}>Exhibition: Sundance New Frontier, Park City, UT; SIGGRAPH Electronic Theater & XR Theatre, Denver, CO</p>
         </div>
       </div>
     </div>

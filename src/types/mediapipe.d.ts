@@ -1,3 +1,6 @@
+// MediaPipe types are now handled dynamically to avoid build-time dependency issues
+// The actual MediaPipe library is loaded client-side only
+
 declare module '@mediapipe/tasks-vision' {
   export class FaceLandmarker {
     static createFromOptions(filesetResolver: FilesetResolver, options: {
@@ -10,24 +13,6 @@ declare module '@mediapipe/tasks-vision' {
       numFaces: number;
     }): Promise<FaceLandmarker>;
 
-    constructor(config: {
-      baseOptions: {
-        modelAssetPath: string;
-        delegate: string;
-      };
-      outputFaceBlendshapes: boolean;
-      outputFacialTransformationMatrixes: boolean;
-      numFaces: number;
-    });
-    setOptions(options: {
-      baseOptions: {
-        modelAssetPath: string;
-        delegate: string;
-      };
-      outputFaceBlendshapes: boolean;
-      outputFacialTransformationMatrixes: boolean;
-      numFaces: number;
-    }): void;
     detect(image: HTMLVideoElement): Promise<{
       faceBlendshapes: Array<{
         categories: Array<{
