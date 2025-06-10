@@ -5,18 +5,25 @@ import HomeButton from '@/components/HomeButton';
 import { Eye, EyeClosed } from 'lucide-react';
 import styles from './page.module.css';
 
-// Type definitions for MediaPipe (to avoid import errors during build)
+// Type definitions for MediaPipe, which will be loaded from a global var
 type FaceLandmarker = any;
 type FilesetResolver = any;
+type Vision = {
+  FaceLandmarker: FaceLandmarker;
+  FilesetResolver: FilesetResolver;
+};
+
+// This function tricks the Next.js bundler into not trying to resolve the import at build time.
+const importMediaPipe = () => new Function('return import("https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3/vision_bundle.mjs")')();
 
 export default function InVivoPage() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isBlinking, setIsBlinking] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [hasBeenClicked, setHasBeenClicked] = useState(false);
-  const [mediapioreLoading, setMediapipeLoading] = useState(false);
-  const [mediapipeError, setMediapipeError] = useState<string | null>(null);
+  const [isMediaPipeLoading, setIsMediaPipeLoading] = useState(false);
   const faceLandmarkerRef = useRef<FaceLandmarker | null>(null);
+  const visionRef = useRef<Vision | null>(null);
   const lastBlinkState = useRef(false);
   const processingRef = useRef(false);
 
@@ -61,16 +68,15 @@ export default function InVivoPage() {
     processFrame();
   }, [updateBlinkState]);
 
-  const loadMediaPipe = useCallback(async () => {
+  const initializeFaceDetection = useCallback(async () => {
+    if (!visionRef.current) {
+      console.error('Face detection library not ready');
+      return;
+    }
+
     try {
-      setMediapipeLoading(true);
-      setMediapipeError(null);
-      
-      // Dynamic import of MediaPipe only on client side
-      const mediapipe = await import('@mediapipe/tasks-vision');
-      const { FaceLandmarker, FilesetResolver } = mediapipe;
-      
-      // Initialize Face Landmarker
+      const { FaceLandmarker, FilesetResolver } = visionRef.current;
+
       const filesetResolver = await FilesetResolver.forVisionTasks(
         "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3/wasm"
       );
@@ -84,56 +90,30 @@ export default function InVivoPage() {
         outputFacialTransformationMatrixes: true,
         numFaces: 1
       });
-
       faceLandmarkerRef.current = faceLandmarker;
-      setMediapipeLoading(false);
-      return true;
-    } catch (error) {
-      console.error('Error loading MediaPipe:', error);
-      setMediapipeError('Failed to load face detection. Please try again.');
-      setMediapipeLoading(false);
-      return false;
-    }
-  }, []);
 
-  const initializeFaceDetection = useCallback(async () => {
-    if (!videoRef.current) {
-      console.error('Video element not found');
-      return;
-    }
-
-    try {
-      // Initialize video stream first
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      // Initialize video stream
       if (!videoRef.current) {
-        stream.getTracks().forEach(track => track.stop());
+        console.error('Video element not found');
         return;
       }
-      
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
       videoRef.current.srcObject = stream;
 
-      // Load MediaPipe dynamically
-      const mediapipeLoaded = await loadMediaPipe();
-      if (!mediapipeLoaded) {
-        // Clean up video stream if MediaPipe failed to load
-        stream.getTracks().forEach(track => track.stop());
-        videoRef.current.srcObject = null;
-        return;
-      }
-
       // Ensure video is playing and start processing
-      if (videoRef.current && faceLandmarkerRef.current) {
-        videoRef.current.play().then(() => {
-          startProcessing();
-        }).catch(error => {
-          console.error('Error playing video:', error);
-        });
-      }
+      videoRef.current.play().then(() => {
+        startProcessing();
+      }).catch(error => {
+        console.error('Error playing video:', error);
+      });
+
     } catch (error) {
       console.error('Error setting up face detection:', error);
-      setMediapipeError('Failed to access camera or initialize face detection.');
+      if (error instanceof Error && error.name === 'NotAllowedError') {
+        console.error('Camera access was denied');
+      }
     }
-  }, [loadMediaPipe, startProcessing]);
+  }, [startProcessing]);
 
   const stopFaceDetection = useCallback(() => {
     processingRef.current = false;
@@ -147,18 +127,37 @@ export default function InVivoPage() {
       faceLandmarkerRef.current = null;
     }
     setIsBlinking(false);
-    setMediapipeError(null);
   }, []);
 
   const handleEyeClick = async () => {
+    setHasBeenClicked(true);
     if (isActive) {
       stopFaceDetection();
       setIsActive(false);
-    } else {
+      return;
+    }
+
+    // If already loaded, just activate
+    if (visionRef.current) {
       await initializeFaceDetection();
       setIsActive(true);
+      return;
     }
-    setHasBeenClicked(true);
+    
+    // If not loaded, load and then activate
+    if (!isMediaPipeLoading) {
+        setIsMediaPipeLoading(true);
+        try {
+            const vision = await importMediaPipe();
+            visionRef.current = vision;
+            await initializeFaceDetection();
+            setIsActive(true);
+        } catch (error) {
+            console.error('Failed to load face detection library:', error);
+        } finally {
+            setIsMediaPipeLoading(false);
+        }
+    }
   };
 
   useEffect(() => {
@@ -169,6 +168,14 @@ export default function InVivoPage() {
 
   return (
     <div className={styles.container}>
+      <video
+        ref={videoRef}
+        className={styles.hidden}
+        width="640"
+        height="480"
+        playsInline
+        autoPlay
+      />
       <HomeButton onClick={stopFaceDetection} />
       <div className={`${styles.content} ${isBlinking ? styles.contentBlinking : ''}`}>
         <div className={styles.header}>
@@ -181,6 +188,7 @@ export default function InVivoPage() {
           <div 
             onClick={handleEyeClick}
             className={styles.eyeButton}
+            style={{ cursor: isMediaPipeLoading ? 'wait' : 'pointer' }}
           >
             {isActive ? (
               <EyeClosed size={32} color="rgba(255,255,255,0.8)" />
@@ -193,19 +201,15 @@ export default function InVivoPage() {
               ← click me
             </span>
           )}
-          {mediapipeError && (
-            <div style={{ color: 'red', fontSize: '12px', marginTop: '10px' }}>
-              {mediapipeError}
-            </div>
-          )}
         </div>
 
-        <div className={styles.videoWrapper}><iframe
-        src="https://player.vimeo.com/video/970453993?autoplay=1&loop=1&muted=1&background=1"
-        allow="autoplay; fullscreen; picture-in-picture"
-        allowFullScreen
-        title="In Vivo Vimeo Video"
-        />
+        <div className={styles.videoWrapper}>
+          <iframe
+            src="https://player.vimeo.com/video/970453993?autoplay=1&loop=1&muted=1&background=1"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowFullScreen
+            title="In Vivo Vimeo Video"
+          />
         </div>
 
         <div className={styles.description}>
@@ -222,8 +226,6 @@ export default function InVivoPage() {
         <div className={styles.footer}>
           <p className={styles.footerText}>Exhibition: Dethrone, Gray Area, San Francisco, CA; Activation, Pebblebed, San Francisco, CA; NotYetArt, New York, NY; Scalable HCI, Shenzhen, CN; Siggraph Asia Art Gallery, Tokyo, Japan; BCNM Conference, Platform Art Space, Berkeley, CA; Convivium, Bombay Beach, CA</p>
         </div>
-
-
       </div>
     </div>
   );
