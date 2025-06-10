@@ -107,9 +107,7 @@ export default function GradiVoxPage() {
           )}
         </div>
 
-        <p className={styles.status}>
-          {isListening ? (isSpeaking ? 'Symbiotic thought active...' : 'Listening for symbiosis...') : 'Click me <3'}
-        </p>
+
 
         <div className={styles.videoWrapper}><iframe
         src="https://player.vimeo.com/video/1074451782?autoplay=1&loop=1&muted=1&background=1"
