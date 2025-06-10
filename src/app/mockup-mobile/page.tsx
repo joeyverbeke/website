@@ -87,7 +87,7 @@ export default function MockupMobile() {
         <br /><h2 className={styles.sectionTitle}>writings</h2>
         <br />
               <div className={styles.spacesmall}> </div>
-        <div className={styles.items}>
+        <br /><div className={styles.items}>
           {writings.map((writing, index) => (
             <span key={index} className={styles.writingTitle}>
               {writing.title}
@@ -101,7 +101,7 @@ export default function MockupMobile() {
         <br /><h2 className={styles.sectionTitle}>presentations</h2>
         <br />
               <div className={styles.spacesmall}> </div>
-        <div className={styles.items}>
+        <br /><div className={styles.items}>
           {presentations.map((presentation, index) => (
             <div key={index} className={styles.presentationTitle}>
               {presentation.title}
@@ -115,7 +115,7 @@ export default function MockupMobile() {
         <br /><h2 className={styles.sectionTitle}>about</h2>
         <br />
               <div className={styles.spacesmall}> </div>
-        <div className={styles.items}>
+        <br /><div className={styles.items}>
           {about.map((about, index) => (
             <div key={index} className={styles.aboutTitle}>
               {about.first}
@@ -124,7 +124,7 @@ export default function MockupMobile() {
         </div>
         <br />
               <div className={styles.spacesmall}> </div>
-        <div className={styles.items}>
+        <br /><div className={styles.items}>
           {about.map((about, index) => (
             <div key={index} className={styles.aboutTitle}>
               {about.second}
