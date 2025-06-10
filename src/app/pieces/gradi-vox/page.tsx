@@ -9,14 +9,13 @@ import styles from './page.module.css';
 export default function GradiVoxPage() {
   const [isListening, setIsListening] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const vadRef = useRef<any>(null);
+  const vadRef = useRef<vad.MicVAD | null>(null);
 
   const startVAD = async () => {
     try {
       if (vadRef.current) {
-        vadRef.current.stop();
+        vadRef.current.pause();
       }
 
       const myvad = await vad.MicVAD.new({
@@ -27,14 +26,12 @@ export default function GradiVoxPage() {
           setIsSpeaking(true);
           if (audioRef.current) {
             audioRef.current.play();
-            setIsPlaying(true);
           }
         },
         onSpeechEnd: () => {
           setIsSpeaking(false);
           if (audioRef.current) {
             audioRef.current.pause();
-            setIsPlaying(false);
           }
         }
       });
@@ -48,13 +45,12 @@ export default function GradiVoxPage() {
 
   const stopVAD = () => {
     if (vadRef.current) {
-      vadRef.current.stop();
+      vadRef.current.pause();
       vadRef.current = null;
     }
     setIsSpeaking(false);
     if (audioRef.current) {
       audioRef.current.pause();
-      setIsPlaying(false);
     }
   };
 
@@ -71,7 +67,7 @@ export default function GradiVoxPage() {
   useEffect(() => {
     return () => {
       if (vadRef.current) {
-        vadRef.current.stop();
+        vadRef.current.pause();
       }
     };
   }, []);
@@ -107,8 +103,6 @@ export default function GradiVoxPage() {
           )}
         </div>
 
-
-
         <div className={styles.videoWrapper}><iframe
         src="https://player.vimeo.com/video/1074451782?autoplay=1&loop=1&muted=1&background=1"
         allow="autoplay; fullscreen; picture-in-picture"
@@ -125,15 +119,13 @@ export default function GradiVoxPage() {
           Material: Artificial Intelligence, Microcontroller, Microphone, Speaker, Thermoplastic, AI Film
           </p>
           <div className={styles.paragraph}>
-          Gradi Vox is a wearable AI earpiece that listens to the user while they speak and delivers real-time suggestions to refine and enhance their articulation. The device uses an advanced language model to analyze speech patterns and provide contextual prompts, aligning seamlessly with the user's natural cadence. However, because these suggestions occur simultaneously as the user speaks, Gradi Vox creates a continuous feedback loop where the boundary between original thought and AI augmentation becomes blurred.<br /><br /> While the device promises improved clarity and confidence in communication, it gradually reshapes the user's linguistic choices in subtle, often imperceptible ways. Gradi Vox is the first in a series of speculative wearables by ParaCorp’s Advanced Innovation & Design (PAID) lab, each exploring the nuanced tension between cognitive augmentation and the quiet erosion of agency.
+          Gradi Vox is a wearable AI earpiece that listens to the user while they speak and delivers real-time suggestions to refine and enhance their articulation. The device uses an advanced language model to analyze speech patterns and provide contextual prompts, aligning seamlessly with the user&apos;s natural cadence. However, because these suggestions occur simultaneously as the user speaks, Gradi Vox creates a continuous feedback loop where the boundary between original thought and AI augmentation becomes blurred.<br /><br /> While the device promises improved clarity and confidence in communication, it gradually reshapes the user&apos;s linguistic choices in subtle, often imperceptible ways. Gradi Vox is the first in a series of speculative wearables by ParaCorp&apos;s Advanced Innovation & Design (PAID) lab, each exploring the nuanced tension between cognitive augmentation and the quiet erosion of agency.
         </div>
         </div>
 
         <div className={styles.footer}>
           <p className={styles.footerText}>Exhibition: Mars Electronica, Mars, CA; Convivium, Bombay Beach, CA</p>
         </div>
-
-
       </div>
     </div>
   );

@@ -6,10 +6,36 @@ import { Eye, EyeClosed } from 'lucide-react';
 import styles from './page.module.css';
 
 // Type definitions for MediaPipe, which will be loaded from a global var
-type FaceLandmarker = any;
-type FilesetResolver = any;
+type FaceLandmarker = {
+  detect: (input: HTMLVideoElement) => Promise<{
+    faceBlendshapes?: Array<{
+      categories: Array<{
+        score: number;
+      }>;
+    }>;
+  }>;
+  close: () => void;
+};
+
+type FilesetResolver = {
+  forVisionTasks: (path: string) => Promise<FilesetResolver>;
+};
+
 type Vision = {
-  FaceLandmarker: FaceLandmarker;
+  FaceLandmarker: {
+    createFromOptions: (
+      filesetResolver: FilesetResolver,
+      options: {
+        baseOptions: {
+          modelAssetPath: string;
+          delegate: string;
+        };
+        outputFaceBlendshapes: boolean;
+        outputFacialTransformationMatrixes: boolean;
+        numFaces: number;
+      }
+    ) => Promise<FaceLandmarker>;
+  };
   FilesetResolver: FilesetResolver;
 };
 

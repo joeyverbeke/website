@@ -59,7 +59,6 @@ export default function TaelPage() {
       if (!containerRef.current || !textRef.current) return;
       
       const container = containerRef.current;
-      const text = textRef.current;
       
       const isAtBottom = container.scrollHeight - container.scrollTop <= container.clientHeight + 100;
       

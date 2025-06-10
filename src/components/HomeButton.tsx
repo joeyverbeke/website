@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import styles from './HomeButton.module.css';
@@ -20,12 +19,11 @@ export default function HomeButton({ onClick }: { onClick?: () => void }) {
   };
 
   return (
-    <a
-      href="/"
-      onClick={onClick ? handleClick : undefined}
+    <button
+      onClick={onClick ? handleClick : () => router.push('/')}
       className={styles.button}
     >
       &lt;
-    </a>
+    </button>
   );
 } 
