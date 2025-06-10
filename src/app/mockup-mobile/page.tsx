@@ -34,6 +34,11 @@ const presentations = [
   { title: 'Anomalistic Interactions, SIGGRAPH Asia (2024)' },
 ];
 
+const about = [
+  { first: 'Koi Ren and Joey Verbeke are a New Media Art duo that employ a research-based methodology using a palette composed of emerging technologies, artificial intelligence, and speculation to create intentionally subversive and frictional interactive artifacts and critical writing. Their intention is to provoke critical curiosity through unexpected moments of retrospective defamiliarization, affording viewers alternative narratives of non-binary futures which foreground otherness. ' },
+  { second: 'Their work has been shown at venues and events such as, Sundance Film Festival, ACM SIGGRAPH, TEDAI, MUTEK, Gray Area, Heckscher Museum, Ming Contemporary Art Museum, Diego Rivera Gallery, and Denver International Airport.  the intersection of technology, art, and culture, with a focus on creating immersive experiences that challenge perceptions of reality. ' },
+];
+
 export default function MockupMobile() {
   return (
     <>
@@ -100,6 +105,29 @@ export default function MockupMobile() {
           {presentations.map((presentation, index) => (
             <div key={index} className={styles.presentationTitle}>
               {presentation.title}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className={styles.section}>
+        <div className={styles.spacebig}> </div>
+        <br /><h2 className={styles.sectionTitle}>about</h2>
+        <br />
+              <div className={styles.spacesmall}> </div>
+        <div className={styles.items}>
+          {about.map((about, index) => (
+            <div key={index} className={styles.aboutTitle}>
+              {about.first}
+            </div>
+          ))}
+        </div>
+        <br />
+              <div className={styles.spacesmall}> </div>
+        <div className={styles.items}>
+          {about.map((about, index) => (
+            <div key={index} className={styles.aboutTitle}>
+              {about.second}
             </div>
           ))}
         </div>
