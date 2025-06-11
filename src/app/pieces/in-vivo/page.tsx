@@ -196,6 +196,7 @@ export default function InVivoPage() {
 
   return (
     <div className={styles.container}>
+      <HomeButton />
       <video
         ref={videoRef}
         className={styles.hidden}
@@ -204,7 +205,7 @@ export default function InVivoPage() {
         playsInline
         autoPlay
       />
-      <HomeButton onClick={stopFaceDetection} />
+
       <div className={`${styles.content} ${isBlinking ? styles.contentBlinking : ''}`}>
         <div className={styles.header}>
           <h1 className={styles.title}>

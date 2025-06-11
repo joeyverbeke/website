@@ -77,7 +77,7 @@
   justify-content: center;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-  transform: translateX(730%);
+  margin: 0.5rem auto;
 }
 
 .micButtonInactive {
@@ -103,4 +103,18 @@
 
 .hidden {
   display: none;
+}
+
+@media (max-width: 1000px) {
+  .micButton {
+    right: 1.5rem;
+    top: 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .micButton {
+    right: 1rem;
+    top: 1rem;
+  }
 } 
