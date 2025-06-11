@@ -117,3 +117,15 @@
   border: none;
 }
 
+@media (max-width: 768px) {
+  .title {
+    font-size: 1.5em; /* or 1.3em, adjust as needed */
+  }
+  .paragraph {
+    font-size: 1.1em; /* or 1.1em, adjust as needed */
+  }
+
+  .footer {
+    font-size: 1.0em; /* or 0.9em, adjust as needed */
+  }
+}
