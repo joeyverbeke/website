@@ -14,8 +14,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "KoJo",
+  title: "k0j0",
   description: "Koi Ren and Joey Verbeke",
+  icons: {
+    icon: '/favicon.svg',
+  },
 };
 
 export default function RootLayout({
