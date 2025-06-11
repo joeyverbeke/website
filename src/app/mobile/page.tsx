@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import styles from './mockup-mobile.module.css';
+import styles from './mobile.module.css';
 import Link from 'next/link';
 
 const works = [

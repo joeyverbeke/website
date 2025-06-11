@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useState, useRef } from 'react';
-import styles from './mockup-2.module.css';
+import styles from './desktop.module.css';
 import Cursor from '@/components/Cursor';
 
 const text = {
