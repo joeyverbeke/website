@@ -8,16 +8,14 @@ According to Cary Wolfe, posthumanism names "a historical moment in which the de
 In this interplay of subliminal whispers, hallucination becomes a method of infiltration—porous, unpredictable, subversively subjective. Each anomaly fractures the boundaries we trust between the conscious and unconscious, digital and physical, order and randomness. Refusing definition as either emancipatory or oppressive, Porous is a quiet provocation, inviting reflection on how subtle forms of influence, carried within the mundane, shape collective experience and distort the edges of our reality.`;
 
 export default function PorousPage() {
-
+  
   return (
     <div className={styles.container}>
-
+      <HomeButton/>
       <div className={styles.content}>
-        <div className={styles.headerRow}>
-        <HomeButton />
+        
         <h1 className={styles.title}>Porous</h1>
-        </div>
-
+        
         <div>
         <img
           src="/videos/porous/Porous-Hero.jpeg"
