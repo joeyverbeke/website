@@ -7,9 +7,11 @@ export function useDeviceType() {
 
   useEffect(() => {
     const userAgent = navigator.userAgent;
-    const isMobile = /Mobi|Android|iPhone/i.test(userAgent);
-    setHomePath(isMobile ? '/mobile' : '/desktop');
+
+    const isMobileOrTablet = /Mobi|Android|iPhone|iPad|Tablet/i.test(userAgent);
+    
+    setHomePath(isMobileOrTablet ? '/mobile' : '/desktop');
   }, []);
 
   return homePath;
-} 
+}

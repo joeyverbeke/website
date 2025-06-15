@@ -234,7 +234,7 @@ export default function InVivoPage() {
 
         <div className={styles.videoWrapper}>
           <iframe
-            src="https://player.vimeo.com/video/970453993?autoplay=1&loop=1&muted=1&background=1"
+            src="https://player.vimeo.com/video/970453993?autoplay=1&loop=1&muted=1#t=4s"
             allow="autoplay; fullscreen; picture-in-picture"
             allowFullScreen
             title="In Vivo Vimeo Video"

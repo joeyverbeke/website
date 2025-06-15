@@ -40,6 +40,7 @@ const about = [
 ];
 
 export default function MockupMobile() {
+  
   return (
     <>
     <video

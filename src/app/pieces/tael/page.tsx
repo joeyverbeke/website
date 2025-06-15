@@ -111,7 +111,7 @@ export default function TaelPage() {
 
         
         <div className={styles.videoWrapper}><iframe
-        src="https://player.vimeo.com/video/1012261817?autoplay=1&loop=1&muted=1&background=1"
+        src="https://player.vimeo.com/video/1012261817?autoplay=1&loop=1&muted=1#t=3s"
         allow="autoplay; fullscreen; picture-in-picture"
         allowFullScreen
         title="In Vivo Vimeo Video"
