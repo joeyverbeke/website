@@ -17,7 +17,7 @@ const text = {
     { type: 'presentation', title: 'Anomalistic Interactions, SIGGRAPH Asia (2024)' },
   ],
   right: [
-    { type: 'hello', text: '0：k0j0' },
+    { type: 'hello', text: 'k0j0' },
     { type: 'desc', text: 'We tell phantasmagoric stories about unconscious friction.' },
     { type: 'desc', text: 'Koi Ren and Joey Verbeke (k0j0) are a New Media Art duo creating subversive and frictional “intrafaces”–artifacts that reveal the power, politics, and posthuman subjectivities embedded within systemic interactions. Their research-based practice pulls from their backgrounds in human-computer interaction, artificial intelligence, media studies, and speculative design.' },
     { type: 'desc', text: 'Through the defamiliarization of seductive seamlessness and tacit expectations, k0j0 provokes moments of epistemological rupture, inviting viewers into intimate proximity with the unfamiliar and the emergent dynamics shaping our futures.' },
