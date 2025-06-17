@@ -35,8 +35,9 @@ const presentations = [
 ];
 
 const about = [
-  { first: 'Koi Ren and Joey Verbeke are a New Media Art duo that employ a research-based methodology using a palette composed of emerging technologies, artificial intelligence, and speculation to create intentionally subversive and frictional interactive artifacts and critical writing. Their intention is to provoke critical curiosity through unexpected moments of retrospective defamiliarization, affording viewers alternative narratives of non-binary futures which foreground otherness. ' },
-  { second: 'Their work has been shown at venues and events such as, Sundance Film Festival, ACM SIGGRAPH, TEDAI, MUTEK, Gray Area, Heckscher Museum, Ming Contemporary Art Museum, Diego Rivera Gallery, and Denver International Airport.  the intersection of technology, art, and culture, with a focus on creating immersive experiences that challenge perceptions of reality. ' },
+  { first: 'Koi Ren and Joey Verbeke (k0j0) are a New Media Art duo creating subversive and frictional “intrafaces”–artifacts that reveal the power, politics, and posthuman subjectivities embedded within systemic interactions. Their research-based practice pulls from their backgrounds in human-computer interaction, artificial intelligence, media studies, and speculative design. ' },
+  { second: 'Through the defamiliarization of seductive seamlessness and tacit expectations, k0j0 provokes moments of epistemological rupture, inviting viewers into intimate proximity with the unfamiliar and the emergent dynamics shaping our futures.' },
+  { third: 'Their work has been shown at venues and events such as, Ars Electronica, ACM SIGGRAPH, TEDAI, MUTEK, Gray Area, Heckscher Museum, Ming Contemporary Art Museum, Diego Rivera Gallery, Angels Gate Cultural Center, Sundance Film Festival, and Denver International Airport.' },
 ];
 
 export default function MockupMobile() {
@@ -129,6 +130,15 @@ export default function MockupMobile() {
           {about.map((about, index) => (
             <div key={index} className={styles.aboutTitle}>
               {about.second}
+            </div>
+          ))}
+        </div>
+        <br />
+              <div className={styles.spacesmall}> </div>
+        <br /><div className={styles.items}>
+          {about.map((about, index) => (
+            <div key={index} className={styles.aboutTitle}>
+              {about.third}
             </div>
           ))}
         </div>

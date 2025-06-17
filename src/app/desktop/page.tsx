@@ -17,11 +17,11 @@ const text = {
     { type: 'presentation', title: 'Anomalistic Interactions, SIGGRAPH Asia (2024)' },
   ],
   right: [
-    { type: 'hello', text: 'hello world' },
+    { type: 'hello', text: '0：k0j0' },
     { type: 'desc', text: 'We tell phantasmagoric stories about unconscious friction.' },
-    { type: 'desc', text: 'Koi Ren and Joey Verbeke are a New Media Art duo that employ a research-based methodology using a palette composed of emerging technologies, artificial intelligence, and speculation to create intentionally subversive and frictional interactive artifacts and critical writing.' },
-    { type: 'desc', text: 'Their intention is to provoke critical curiosity through unexpected moments of retrospective defamiliarization, affording viewers alternative narratives of non-binary futures which foreground otherness.' },
-    { type: 'desc', text: 'Their work has been shown at venues and events such as, Sundance Film Festival, ACM SIGGRAPH, TEDAI, MUTEK, Gray Area, Heckscher Museum, Ming Contemporary Art Museum, Diego Rivera Gallery, and Denver International Airport.' },
+    { type: 'desc', text: 'Koi Ren and Joey Verbeke (k0j0) are a New Media Art duo creating subversive and frictional “intrafaces”–artifacts that reveal the power, politics, and posthuman subjectivities embedded within systemic interactions. Their research-based practice pulls from their backgrounds in human-computer interaction, artificial intelligence, media studies, and speculative design.' },
+    { type: 'desc', text: 'Through the defamiliarization of seductive seamlessness and tacit expectations, k0j0 provokes moments of epistemological rupture, inviting viewers into intimate proximity with the unfamiliar and the emergent dynamics shaping our futures.' },
+    { type: 'desc', text: 'Their work has been shown at venues and events such as, Ars Electronica, ACM SIGGRAPH, TEDAI, MUTEK, Gray Area, Heckscher Museum, Ming Contemporary Art Museum, Diego Rivera Gallery, Angels Gate Cultural Center, Sundance Film Festival, and Denver International Airport.' },
   ],
 };
 
@@ -168,10 +168,6 @@ export default function Mockup2() {
         <div className={styles.hello}>{text.right[0].text}</div>
         <div className={styles.workTitle}>&nbsp;</div>
         <div className={styles.workTitle}>&nbsp;</div>
-        <div className={styles.workTitle}>&nbsp;</div>
-        <div className={styles.workTitle}>&nbsp;</div>
-
-
 
         <div className={`${styles.faded} ${styles.rightDesc}`}>{text.right[1].text}</div>
         <div className={styles.workTitle}>&nbsp;</div>
@@ -180,17 +176,16 @@ export default function Mockup2() {
         <div className={`${styles.rightDesc}`}>
           <span className={styles.highlight}>Koi Ren and Joey Verbeke</span> <span className={styles.faded}>are a </span>
           <span className={styles.highlight}>New Media Art duo</span>
-          <span className={styles.faded}>
-            {' '}that employ a research-based methodology using a palette composed of{' '}
-          </span>
-          <span className={styles.highlight}>emerging technologies, artificial intelligence</span>
-          <span className={styles.faded}>
-            , and speculation to create intentionally subversive and frictional{' '}
-          </span>
-          <span className={styles.highlight}>interactive artifacts</span>
-          <span className={styles.faded}>
-            {' '}and critical writing.
-          </span>
+          <span className={styles.faded}> creating </span>
+          <span className={styles.highlight}>subversive and frictional</span>
+          <span className={styles.faded}>“intrafaces” –</span>
+          <span className={styles.highlight}>artifacts </span>
+          <span className={styles.faded}>that reveal the power, politics, and posthuman subjectivities embedded within systemic interactions. Their </span>
+          <span className={styles.highlight}>research-based practice </span>
+          <span className={styles.faded}>pulls from their backgrounds in</span>
+          <span className={styles.highlight}> human-computer interaction, artificial intelligence,</span>
+          <span className={styles.faded}> media studies, and speculative design.</span>
+
         </div>
         <div className={styles.workTitle}>&nbsp;</div>
         <div className={styles.workTitle}>&nbsp;</div>
