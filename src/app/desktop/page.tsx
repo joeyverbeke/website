@@ -177,8 +177,8 @@ export default function Mockup2() {
           <span className={styles.highlight}>Koi Ren and Joey Verbeke</span> <span className={styles.faded}>are a </span>
           <span className={styles.highlight}>New Media Art duo</span>
           <span className={styles.faded}> creating </span>
-          <span className={styles.highlight}>subversive and frictional</span>
-          <span className={styles.faded}>“intrafaces” –</span>
+          <span className={styles.highlight}>subversive and frictional </span>
+          <span className={styles.faded}>“intrafaces” – </span>
           <span className={styles.highlight}>artifacts </span>
           <span className={styles.faded}>that reveal the power, politics, and posthuman subjectivities embedded within systemic interactions. Their </span>
           <span className={styles.highlight}>research-based practice </span>
