@@ -12,8 +12,9 @@ const text = {
     { type: 'work', title: 'Gradi Vox (2025)', subtitle: 'Symbiotic//parasitic wearable', slug: 'gradi-vox', hero: 'gradi_loop.mp4' },
     { type: 'work', title: 'Porous (2025)', subtitle: 'Subliminal hallucinatory earworms', slug: 'porous', hero: 'porous_loop.mp4' },
     { type: 'section', text: 'writings' },
-    { type: 'writing', title: 'Friction as Medium: Epistemic Rupture through Imperceptible Interaction (2025)' },
+    { type: 'writing', title: 'Friction as Medium: Epistemic Rupture through Imperceptible Interaction, Ars Electronica (2025)', url: 'https://drive.google.com/file/d/1T48YM6ALixgX8DTFkc0tLdT1Ed4Gesco/view?usp=sharing'},
     { type: 'section', text: 'presentations' },
+    { type: 'presentation', title: 'Friction as Medium, Ars Electronica (2025)', url: 'https://www.youtube.com/live/qRW1MRnby14?si=2Ufme0nk6ktJrGCt&t=1246' },
     { type: 'presentation', title: 'Anomalistic Interactions, SIGGRAPH Asia (2024)' },
   ],
   right: [
@@ -148,7 +149,15 @@ export default function Mockup2() {
         <div className={`${styles.section} ${styles.sectionSpacing}`}>{text.left[6].text}</div>
         <div className={styles.workTitle}>&nbsp;</div>
 
-        <div className={styles.writingTitle} style={{ marginBottom: '0vw' }}>{text.left[7].title}</div>
+        <div className={styles.writingTitle} style={{ marginBottom: '0vw' }}>
+          {text.left[7].url ? (
+            <a href={text.left[7].url} target="_blank" rel="noopener noreferrer">
+              {text.left[7].title}
+            </a>
+          ) : (
+            text.left[7].title
+          )}
+        </div>
         <div className={styles.workTitle}>&nbsp;</div>
         <div className={styles.workTitle}>&nbsp;</div>
 
@@ -156,7 +165,26 @@ export default function Mockup2() {
         <div className={`${styles.section} ${styles.sectionSpacing}`}>{text.left[8].text}</div>
         <div className={styles.workTitle}>&nbsp;</div>
 
-        <div className={styles.presentationTitle}>{text.left[9].title}</div>
+        <div className={styles.presentationTitle}>
+          {text.left[9].url ? (
+            <a href={text.left[9].url} target="_blank" rel="noopener noreferrer" className={styles.presentationLink}>
+              {text.left[9].title}
+            </a>
+          ) : (
+            text.left[9].title
+          )}
+        </div>
+        <div className={styles.workTitle}>&nbsp;</div>
+
+        <div className={styles.presentationTitle}>
+          {text.left[10].url ? (
+            <a href={text.left[10].url} target="_blank" rel="noopener noreferrer" className={styles.presentationLink}>
+              {text.left[10].title}
+            </a>
+          ) : (
+            text.left[10].title
+          )}
+        </div>
 
 
       </div>

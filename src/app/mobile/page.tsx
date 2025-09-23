@@ -27,10 +27,11 @@ const works = [
 ];
 
 const writings = [
-  { title: 'Friction as Medium: Epistemic Rupture through Imperceptible Interaction (2025)' },
+  { title: 'Friction as Medium: Epistemic Rupture through Imperceptible Interaction, Ars Electronica (2025)', url: 'https://drive.google.com/file/d/1T48YM6ALixgX8DTFkc0tLdT1Ed4Gesco/view?usp=sharing' },
 ];
 
 const presentations = [
+  { title: 'Friction as Medium, Ars Electronica (2025)', url: 'https://www.youtube.com/live/qRW1MRnby14?si=2Ufme0nk6ktJrGCt&t=1246' },
   { title: 'Anomalistic Interactions, SIGGRAPH Asia (2024)' },
 ];
 
@@ -92,7 +93,13 @@ export default function MockupMobile() {
         <br /><div className={styles.items}>
           {writings.map((writing, index) => (
             <span key={index} className={styles.writingTitle}>
-              {writing.title}
+              {writing.url ? (
+                <a href={writing.url} target="_blank" rel="noopener noreferrer">
+                  {writing.title}
+                </a>
+              ) : (
+                writing.title
+              )}
             </span>
           ))}
         </div>
@@ -103,10 +110,20 @@ export default function MockupMobile() {
         <br /><h2 className={styles.sectionTitle}>presentations</h2>
         <br />
               <div className={styles.spacesmall}> </div>
-        <br /><div className={styles.items}>
+        <br />        <div className={styles.items}>
           {presentations.map((presentation, index) => (
-            <div key={index} className={styles.presentationTitle}>
-              {presentation.title}
+            <div key={index} className={styles.presentationItem}>
+              <div className={styles.spacesmall}> </div>
+              <br />
+              {presentation.url ? (
+                <a href={presentation.url} target="_blank" rel="noopener noreferrer" className={styles.presentationLink}>
+                  {presentation.title}
+                </a>
+              ) : (
+                <div className={styles.presentationTitle}>
+                  {presentation.title}
+                </div>
+              )}
             </div>
           ))}
         </div>

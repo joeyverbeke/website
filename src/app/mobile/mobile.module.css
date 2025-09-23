@@ -84,6 +84,13 @@ margin-top:0.35em;
   line-height: 1;
 }
 
+.presentationItem {
+  display: inline-block;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+}
+
 .workLink {
   color: #000000;
   text-decoration: none;
@@ -99,6 +106,23 @@ margin-top:0.35em;
 .workLink:hover {
   text-decoration: underline;
 }
+
+.presentationLink {
+  color: #000000;
+  text-decoration: none;
+  font-weight: 400;
+  display: inline;
+  padding: 0.05em 0.2em;
+  background: #FFFFFF;
+  mix-blend-mode: exclusion;
+  font-size: 0.8em;
+  letter-spacing: 0.15em;
+}
+
+.presentationLink:hover {
+  text-decoration: underline;
+}
+
 
 .workSubtitle {
   color: #000000;

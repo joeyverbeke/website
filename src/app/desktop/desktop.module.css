@@ -94,6 +94,13 @@
   font-size: 0.9em;
 }
 
+.writingTitle:hover,
+.presentationTitle:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+
 .hello {
   font-weight: 700;
   font-size: 0.9em;
