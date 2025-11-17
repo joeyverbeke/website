@@ -12,7 +12,7 @@ const text = {
     { type: 'work', title: 'Gradi Vox (2025)', subtitle: 'Symbiotic//parasitic wearable', slug: 'gradi-vox', hero: 'gradi_loop.mp4' },
     { type: 'work', title: 'Porous (2025)', subtitle: 'Subliminal hallucinatory earworms', slug: 'porous', hero: 'porous_loop.mp4' },
     { type: 'section', text: 'writings' },
-    { type: 'writing', title: 'Friction as Medium: Epistemic Rupture through Imperceptible Interaction, Ars Electronica (2025)', url: 'https://drive.google.com/file/d/1T48YM6ALixgX8DTFkc0tLdT1Ed4Gesco/view?usp=sharing'},
+    { type: 'writing', title: 'Friction as Medium: Epistemic Rupture through Imperceptible Interaction, Ars Electronica (2025)', url: 'https://dl.acm.org/doi/10.1145/3749893.3749969'},
     { type: 'section', text: 'presentations' },
     { type: 'presentation', title: 'Friction as Medium, Ars Electronica (2025)', url: 'https://www.youtube.com/live/qRW1MRnby14?si=2Ufme0nk6ktJrGCt&t=1246' },
     { type: 'presentation', title: 'Anomalistic Interactions, SIGGRAPH Asia (2024)' },

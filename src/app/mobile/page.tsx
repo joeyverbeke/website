@@ -27,7 +27,7 @@ const works = [
 ];
 
 const writings = [
-  { title: 'Friction as Medium: Epistemic Rupture through Imperceptible Interaction, Ars Electronica (2025)', url: 'https://drive.google.com/file/d/1T48YM6ALixgX8DTFkc0tLdT1Ed4Gesco/view?usp=sharing' },
+  { title: 'Friction as Medium: Epistemic Rupture through Imperceptible Interaction, Ars Electronica (2025)', url: 'https://dl.acm.org/doi/10.1145/3749893.3749969' },
 ];
 
 const presentations = [
