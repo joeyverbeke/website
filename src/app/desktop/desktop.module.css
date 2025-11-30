@@ -33,6 +33,8 @@
   padding: 3vw 2.5vw 0 0;
   text-align: right;
   mix-blend-mode: hard-light;
+  position: relative;
+  z-index: 1;
 }
 
 /* Selection state classes */
@@ -94,12 +96,11 @@
   font-size: 0.9em;
 }
 
-.writingTitle:hover,
-.presentationTitle:hover {
+.writingLink:hover,
+.presentationLink:hover {
   text-decoration: underline;
   cursor: pointer;
 }
-
 
 .hello {
   font-weight: 700;
@@ -156,6 +157,27 @@
   pointer-events: none;
 }
 
-.mockupRoot:not(:hover) .backgroundVideo {
+.backgroundVisible {
+  opacity: 1;
+}
+
+.backgroundHidden {
   opacity: 0;
+}
+
+.selectionBar {
+  position: absolute;
+  top: 3vw;
+  right: 2.5vw;
+  width: 0.5vw;
+  bottom: 0;
+  background: #ffffff;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.selectionBarVisible {
+  opacity: 1;
 }

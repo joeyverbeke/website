@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useCallback, useEffect, useState, useRef } from 'react';
 import styles from './desktop.module.css';
 import Cursor from '@/components/Cursor';
 
@@ -41,6 +41,22 @@ export default function Mockup2() {
   const [cursorVisible, setCursorVisible] = useState(true);
   const [hasTextSelection, setHasTextSelection] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
+  const persistSelectionRef = useRef(false);
+  const allowClearSelectionRef = useRef(false);
+  const restoringSelectionRef = useRef(false);
+
+  const selectAllText = useCallback(() => {
+    if (!rootRef.current) return;
+    const range = document.createRange();
+    range.selectNodeContents(rootRef.current);
+    const sel = window.getSelection();
+    if (!sel) return;
+    restoringSelectionRef.current = true;
+    sel.removeAllRanges();
+    sel.addRange(range);
+    setHasTextSelection(true);
+    restoringSelectionRef.current = false;
+  }, []);
   
   useEffect(() => {
     setShortcut(getShortcutText());
@@ -48,17 +64,10 @@ export default function Mockup2() {
     const discovered = localStorage.getItem('mockup2_discovered');
     if (discovered === 'true') {
       setShowShortcut(false);
+      persistSelectionRef.current = true;
       // Auto-select all text in .mockupRoot
       setTimeout(() => {
-        if (rootRef.current) {
-          const range = document.createRange();
-          range.selectNodeContents(rootRef.current);
-          const sel = window.getSelection();
-          if (sel) {
-            sel.removeAllRanges();
-            sel.addRange(range);
-          }
-        }
+        selectAllText();
       }, 0);
     }
     function handleKeyDown(e: KeyboardEvent) {
@@ -69,6 +78,10 @@ export default function Mockup2() {
       ) {
         setShowShortcut(false);
         localStorage.setItem('mockup2_discovered', 'true');
+        persistSelectionRef.current = true;
+        setTimeout(() => {
+          selectAllText();
+        }, 0);
       }
     }
     window.addEventListener('keydown', handleKeyDown);
@@ -84,34 +97,51 @@ export default function Mockup2() {
 
   // Handle text selection detection
   useEffect(() => {
+    const handlePointerDown = (e: PointerEvent) => {
+      const target = e.target as Element | null;
+      const isLink = Boolean(target && target.closest('a'));
+      allowClearSelectionRef.current = !isLink;
+    };
+
     const handleSelectionChange = () => {
       const selection = window.getSelection();
       const hasSelection = Boolean(selection && selection.toString().length > 0);
-      setHasTextSelection(hasSelection);
+      if (hasSelection) {
+        setHasTextSelection(true);
+        allowClearSelectionRef.current = false;
+        return;
+      }
+
+      if (persistSelectionRef.current && !allowClearSelectionRef.current && !restoringSelectionRef.current) {
+        selectAllText();
+        return;
+      }
+
+      setHasTextSelection(false);
+      allowClearSelectionRef.current = false;
     };
 
+    document.addEventListener('pointerdown', handlePointerDown, true);
     document.addEventListener('selectionchange', handleSelectionChange);
     
     return () => {
+      document.removeEventListener('pointerdown', handlePointerDown, true);
       document.removeEventListener('selectionchange', handleSelectionChange);
     };
-  }, []);
+  }, [selectAllText]);
 
   return (
     <div className={styles.mockupRoot} ref={rootRef}>
       <Cursor revealed={!cursorVisible} />
       {/* Background video layer */}
-      {bgVideo && (
-        <video
-          key={bgVideo}
-          className={styles.backgroundVideo}
-          src={`/videos/${bgVideo}`} // Video in public/videos folder
-          autoPlay
-          muted
-          loop
-          playsInline
-        />
-      )}
+      <video
+        className={`${styles.backgroundVideo} ${bgVideo ? styles.backgroundVisible : styles.backgroundHidden}`}
+        src={bgVideo ? `/videos/${bgVideo}` : undefined} // Video in public/videos folder
+        autoPlay
+        muted
+        loop
+        playsInline
+      />
       {/* Left column */}
       <div className={`${styles.leftCol} ${hasTextSelection ? styles.textSelected : ''}`}>
         <div className={styles.header}>{text.left[0].text}</div>
@@ -151,7 +181,7 @@ export default function Mockup2() {
 
         <div className={styles.writingTitle} style={{ marginBottom: '0vw' }}>
           {text.left[7].url ? (
-            <a href={text.left[7].url} target="_blank" rel="noopener noreferrer">
+            <a href={text.left[7].url} target="_blank" rel="noopener noreferrer" className={styles.writingLink}>
               {text.left[7].title}
             </a>
           ) : (
@@ -193,6 +223,7 @@ export default function Mockup2() {
       )}
       {/* Right column */}
       <div className={`${styles.rightCol} ${hasTextSelection ? styles.textSelected : ''}`}>
+        <div className={`${styles.selectionBar} ${hasTextSelection ? styles.selectionBarVisible : ''}`} />
         <div className={styles.hello}>{text.right[0].text}</div>
         <div className={styles.workTitle}>&nbsp;</div>
         <div className={styles.workTitle}>&nbsp;</div>
