@@ -155,6 +155,7 @@ export default function InVivoPage() {
       faceLandmarkerRef.current = null;
     }
     setIsBlinking(false);
+    setIsActive(false);
   }, []);
 
   const handleEyeClick = async () => {
@@ -196,7 +197,7 @@ export default function InVivoPage() {
 
   return (
     <div className={styles.container}>
-      <HomeButton />
+      <HomeButton onClick={stopFaceDetection} />
       <video
         ref={videoRef}
         className={styles.hidden}

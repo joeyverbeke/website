@@ -45,9 +45,10 @@ export default function GradiVoxPage() {
 
   const stopVAD = () => {
     if (vadRef.current) {
-      vadRef.current.pause();
+      vadRef.current.destroy();
       vadRef.current = null;
     }
+    setIsListening(false);
     setIsSpeaking(false);
     if (audioRef.current) {
       audioRef.current.pause();
@@ -66,9 +67,7 @@ export default function GradiVoxPage() {
 
   useEffect(() => {
     return () => {
-      if (vadRef.current) {
-        vadRef.current.pause();
-      }
+      stopVAD();
     };
   }, []);
 
@@ -80,7 +79,7 @@ export default function GradiVoxPage() {
 
   return (
     <div className={styles.container}>
-      <HomeButton />
+      <HomeButton onClick={stopVAD} />
       <audio
         ref={audioRef}
         src="/audio/gradi-vox.mp3"
