@@ -41,7 +41,6 @@ const metaParagraphs = [
   'Year: 2025',
   'Project creation & production supported by ACC',
   'Material: Custom software and firmware; open-weight AI models; embedded microcontrollers; microphones; speakers and audio amplifiers; IMU; proximity and mmWave presence sensor; micro-blower and valve; 3D-printed resin; synchronized eight-channel 9:16 video',
-  <br />,
   'Gradi is a suite of speculative wearable intrafaces that exposes the seams in AI\'s promise of effortless interaction. Wendy Chun reminds us, "software is ideology;" smoothness is a decision about power made at the intraface, the seam where bodies, models, and institutions negotiate passage. The work lives in that encounter, treating AI as both medium and subject.',
   'Each device examines a dominant logic shaping AI culture: calibration, compression, prediction, mediation. Calibration holds you in permanent beta, a choreography that never finishes. Compression lets a proxy speak through the body, offloading the effort of interaction. Prediction leans ahead of the mouth, adjusting the sayable so it fits the rail. Mediation polishes speech into identityless fluency, so you are everywhere and recognized nowhere.',
   'Through interactive subversive artifacts and videos of strange use cases, Gradi misaligns tacit expectations with quiet perversion, trading frictionless and phantom integration for situated misalignments. A permanent rehearsal. It keeps noise and friction alive and felt, so what is usually optimized away can be heard again.',
@@ -71,14 +70,18 @@ export default function GradiPage() {
         </div>
 
         <div className={styles.bodyText}>
-          {metaParagraphs.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
+          {metaParagraphs.slice(0, 3).map((paragraph, index) => (
+            <p key={`meta-${index}`}>{paragraph}</p>
+          ))}
+          <div className={styles.metaSpacer} aria-hidden="true" />
+          {metaParagraphs.slice(3).map((paragraph, index) => (
+            <p key={`meta-rest-${index}`}>{paragraph}</p>
           ))}
         </div>
 
         <div className={styles.divider} />
 
-        {sections.map((section, idx) => (
+        {sections.map((section) => (
           <div key={section.title}>
             <div className={styles.section}>
               <div className={styles.sectionTitle}>{section.title}</div>

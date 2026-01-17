@@ -71,6 +71,10 @@
   font-size: 0.7em;
 }
 
+.metaSpacer {
+  height: 0.75rem;
+}
+
 .divider {
   margin: 2rem 0 2.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.35);
