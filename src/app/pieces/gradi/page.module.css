@@ -98,6 +98,11 @@
   font-size: 0.7em;
 }
 
+.bodyText a {
+  color: inherit;
+  text-decoration: underline;
+}
+
 .mediaFrame {
   width: 100%;
   background: black;

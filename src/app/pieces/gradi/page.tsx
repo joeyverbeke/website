@@ -37,9 +37,23 @@ const sections = [
   },
 ];
 
-const metaParagraphs = [
+type MetaParagraph =
+  | string
+  | {
+      type: 'link';
+      text: string;
+      label: string;
+      href: string;
+    };
+
+const metaParagraphs: MetaParagraph[] = [
   'Year: 2025',
-  'Project creation & production supported by ACC',
+  {
+    type: 'link',
+    text: 'Project creation & production supported by ',
+    label: 'ACC',
+    href: 'https://www.acc.go.kr/en/residencyNew.do?PID=080602&action=intro&RI_KEYNO=RI_0000000004',
+  },
   'Material: Custom software and firmware; open-weight AI models; embedded microcontrollers; microphones; speakers and audio amplifiers; IMU; proximity and mmWave presence sensor; micro-blower and valve; 3D-printed resin; synchronized eight-channel 9:16 video',
   'Gradi is a suite of speculative wearable intrafaces that exposes the seams in AI\'s promise of effortless interaction. Wendy Chun reminds us, "software is ideology;" smoothness is a decision about power made at the intraface, the seam where bodies, models, and institutions negotiate passage. The work lives in that encounter, treating AI as both medium and subject.',
   'Each device examines a dominant logic shaping AI culture: calibration, compression, prediction, mediation. Calibration holds you in permanent beta, a choreography that never finishes. Compression lets a proxy speak through the body, offloading the effort of interaction. Prediction leans ahead of the mouth, adjusting the sayable so it fits the rail. Mediation polishes speech into identityless fluency, so you are everywhere and recognized nowhere.',
@@ -71,11 +85,28 @@ export default function GradiPage() {
 
         <div className={styles.bodyText}>
           {metaParagraphs.slice(0, 3).map((paragraph, index) => (
-            <p key={`meta-${index}`}>{paragraph}</p>
+            <p key={`meta-${index}`}>
+              {typeof paragraph === 'string' ? (
+                paragraph
+              ) : (
+                <>
+                  {paragraph.text}
+                  <a
+                    href={paragraph.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {paragraph.label}
+                  </a>
+                </>
+              )}
+            </p>
           ))}
           <div className={styles.metaSpacer} aria-hidden="true" />
           {metaParagraphs.slice(3).map((paragraph, index) => (
-            <p key={`meta-rest-${index}`}>{paragraph}</p>
+            <p key={`meta-rest-${index}`}>
+              {typeof paragraph === 'string' ? paragraph : paragraph.label}
+            </p>
           ))}
         </div>
 
