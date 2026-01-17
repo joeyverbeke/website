@@ -8,6 +8,7 @@ import styles from './page.module.css';
 // Art piece names for lookup
 const artPieces = [
   { slug: "gradi-vox", title: "Gradi Vox" },
+  { slug: "gradi", title: "Gradi" },
   { slug: "porous", title: "Porous" },
   { slug: "t.a.e.l.", title: "T.A.E.L." },
   { slug: "in-vivo-in-vitro-trial-1.4", title: "In Vivo / In Vitro - Trial 1.4" }

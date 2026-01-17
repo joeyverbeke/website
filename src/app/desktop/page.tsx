@@ -3,28 +3,33 @@ import React, { useCallback, useEffect, useState, useRef } from 'react';
 import styles from './desktop.module.css';
 import Cursor from '@/components/Cursor';
 
-const text = {
-  left: [
-    { type: 'header', text: 'Koi Ren & Joey Verbeke' },
-    { type: 'section', text: 'works' },
-    { type: 'work', title: 'In Vivo / In Vitro, Trial 1.4 (2024)', subtitle: 'Blink triggered imperceptibility', slug: 'in-vivo', hero: 'inVivo_loop.mp4' },
-    { type: 'work', title: 'T.A.E.L. (Tail Assisted Environmental Learning) (2024)', subtitle: 'Cannibalistic folklore machine', slug: 'tael', hero: 'tael_loop.mp4' },
-    { type: 'work', title: 'Gradi Vox (2025)', subtitle: 'Symbiotic//parasitic wearable', slug: 'gradi-vox', hero: 'gradi_loop.mp4' },
-    { type: 'work', title: 'Porous (2025)', subtitle: 'Subliminal hallucinatory earworms', slug: 'porous', hero: 'porous_loop.mp4' },
-    { type: 'section', text: 'writings' },
-    { type: 'writing', title: 'Friction as Medium: Epistemic Rupture through Imperceptible Interaction, Ars Electronica (2025)', url: 'https://dl.acm.org/doi/10.1145/3749893.3749969'},
-    { type: 'section', text: 'presentations' },
-    { type: 'presentation', title: 'Friction as Medium, Ars Electronica (2025)', url: 'https://www.youtube.com/live/qRW1MRnby14?si=2Ufme0nk6ktJrGCt&t=1246' },
-    { type: 'presentation', title: 'Anomalistic Interactions, SIGGRAPH Asia (2024)' },
-  ],
-  right: [
-    { type: 'hello', text: 'k0j0' },
-    { type: 'desc', text: 'We tell phantasmagoric stories about unconscious friction.' },
-    { type: 'desc', text: 'Koi Ren and Joey Verbeke (k0j0) are a New Media Art duo creating subversive and frictional “intrafaces”–artifacts that reveal the power, politics, and posthuman subjectivities embedded within systemic interactions. Their research-based practice pulls from their backgrounds in human-computer interaction, artificial intelligence, media studies, and speculative design.' },
-    { type: 'desc', text: 'Through the defamiliarization of seductive seamlessness and tacit expectations, k0j0 provokes moments of epistemological rupture, inviting viewers into intimate proximity with the unfamiliar and the emergent dynamics shaping our futures.' },
-    { type: 'desc', text: 'Their work has been shown at venues and events such as, Ars Electronica, ACM SIGGRAPH, TEDAI, MUTEK, Gray Area, Heckscher Museum, Ming Contemporary Art Museum, Diego Rivera Gallery, Angels Gate Cultural Center, Sundance Film Festival, and Denver International Airport.' },
-  ],
+const leftHeader = { text: 'Koi Ren & Joey Verbeke' };
+const leftSections = {
+  works: 'works',
+  writings: 'writings',
+  presentations: 'presentations',
 };
+const works = [
+  { type: 'work', title: 'Gradi (2025)', subtitle: 'Speculative wearable intrafaces', slug: 'gradi', hero: 'gradi_idle-loop.webm' },
+  { type: 'work', title: 'In Vivo / In Vitro, Trial 1.4 (2024)', subtitle: 'Blink triggered imperceptibility', slug: 'in-vivo', hero: 'inVivo_loop.webm' },
+  { type: 'work', title: 'T.A.E.L. (Tail Assisted Environmental Learning) (2024)', subtitle: 'Cannibalistic folklore machine', slug: 'tael', hero: 'tael_loop.webm' },
+  { type: 'work', title: 'Gradi Vox (2025)', subtitle: 'Symbiotic//parasitic wearable', slug: 'gradi-vox', hero: 'gradi_loop.webm' },
+  { type: 'work', title: 'Porous (2025)', subtitle: 'Subliminal hallucinatory earworms', slug: 'porous', hero: 'porous_loop.webm' },
+];
+const writings = [
+  { type: 'writing', title: 'Friction as Medium: Epistemic Rupture through Imperceptible Interaction, Ars Electronica (2025)', url: 'https://dl.acm.org/doi/10.1145/3749893.3749969' },
+];
+const presentations = [
+  { type: 'presentation', title: 'Friction as Medium, Ars Electronica (2025)', url: 'https://www.youtube.com/live/qRW1MRnby14?si=2Ufme0nk6ktJrGCt&t=1246' },
+  { type: 'presentation', title: 'Anomalistic Interactions, SIGGRAPH Asia (2024)' },
+];
+const rightText = [
+  { type: 'hello', text: 'k0j0' },
+  { type: 'desc', text: 'We tell phantasmagoric stories about unconscious friction.' },
+  { type: 'desc', text: 'Koi Ren and Joey Verbeke (k0j0) are a New Media Art duo creating subversive and frictional “intrafaces”–artifacts that reveal the power, politics, and posthuman subjectivities embedded within systemic interactions. Their research-based practice pulls from their backgrounds in human-computer interaction, artificial intelligence, media studies, and speculative design.' },
+  { type: 'desc', text: 'Through the defamiliarization of seductive seamlessness and tacit expectations, k0j0 provokes moments of epistemological rupture, inviting viewers into intimate proximity with the unfamiliar and the emergent dynamics shaping our futures.' },
+  { type: 'desc', text: 'Their work has been shown at venues and events such as, Ars Electronica, ACM SIGGRAPH, TEDAI, MUTEK, Gray Area, Heckscher Museum, Ming Contemporary Art Museum, Diego Rivera Gallery, Angels Gate Cultural Center, Sundance Film Festival, and Denver International Airport.' },
+];
 
 function getShortcutText() {
   if (typeof window !== 'undefined') {
@@ -228,7 +233,7 @@ export default function Mockup2() {
       <Cursor revealed={!cursorVisible} />
       {/* Background video layer */}
       <video
-        className={`${styles.backgroundVideo} ${bgVideo ? styles.backgroundVisible : styles.backgroundHidden}`}
+        className={`${styles.backgroundVideo} ${bgVideo ? styles.backgroundVisible : styles.backgroundHidden} ${bgVideo?.includes('gradi_idle-loop.webm') ? styles.backgroundConstrainWidth : ''}`}
         src={bgVideo ? `/videos/${bgVideo}` : undefined} // Video in public/videos folder
         autoPlay
         muted
@@ -237,15 +242,13 @@ export default function Mockup2() {
       />
       {/* Left column */}
       <div className={`${styles.leftCol} ${hasTextSelection ? styles.textSelected : ''}`}>
-        <div className={styles.header}>{text.left[0].text}</div>
+        <div className={styles.header}>{leftHeader.text}</div>
         <div className={styles.workTitle}>&nbsp;</div>
-
-        <div className={styles.workTitle}>&nbsp;</div>
-        <div className={styles.section}>{text.left[1].text}</div>
-        <div className={styles.workTitle}>&nbsp;</div>
+        <div className={styles.section}>{leftSections.works}</div>
+        <div className={`${styles.workTitle} ${styles.sectionSpacing}`}>&nbsp;</div>
 
         {/* Works */}
-        {text.left.slice(2, 6).map((work) => (
+        {works.map((work) => (
           <div key={work.title} className={styles.work}>
             <a
               className={styles.workLink}
@@ -260,72 +263,56 @@ export default function Mockup2() {
             <br />
             <span className={styles.workSubtitle}>{work.subtitle}</span>
             <div className={styles.workTitle}>&nbsp;</div>
-            
-
-
           </div>
         ))}
-        <div className={styles.workTitle}>&nbsp;</div>
-        <div className={`${styles.section} ${styles.sectionSpacing}`}>{text.left[6].text}</div>
+        <div className={`${styles.section} ${styles.sectionSpacing}`}>{leftSections.writings}</div>
+        <div className={`${styles.workTitle} ${styles.betweenSections}`}>&nbsp;</div>
+
+        {writings.map((item) => (
+          <div key={item.title} className={styles.writingTitle} style={{ marginBottom: '0vw' }}>
+            {item.url ? (
+              <a
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.writingLink}
+                onPointerEnter={handleLinkEnter}
+                onPointerLeave={handleLinkLeave}
+              >
+                {item.title}
+              </a>
+            ) : (
+              item.title
+            )}
+          </div>
+        ))}
+        <div className={`${styles.workTitle} ${styles.sectionSpacing}`}>&nbsp;</div>
+
+
+        <div className={`${styles.section} ${styles.sectionSpacing}`}>{leftSections.presentations}</div>
         <div className={styles.workTitle}>&nbsp;</div>
 
-        <div className={styles.writingTitle} style={{ marginBottom: '0vw' }}>
-          {text.left[7].url ? (
-            <a
-              href={text.left[7].url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.writingLink}
-              onPointerEnter={handleLinkEnter}
-              onPointerLeave={handleLinkLeave}
-            >
-              {text.left[7].title}
-            </a>
-          ) : (
-            text.left[7].title
-          )}
-        </div>
-        <div className={styles.workTitle}>&nbsp;</div>
-        <div className={styles.workTitle}>&nbsp;</div>
-
-
-        <div className={`${styles.section} ${styles.sectionSpacing}`}>{text.left[8].text}</div>
-        <div className={styles.workTitle}>&nbsp;</div>
-
-        <div className={styles.presentationTitle}>
-          {text.left[9].url ? (
-            <a
-              href={text.left[9].url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.presentationLink}
-              onPointerEnter={handleLinkEnter}
-              onPointerLeave={handleLinkLeave}
-            >
-              {text.left[9].title}
-            </a>
-          ) : (
-            text.left[9].title
-          )}
-        </div>
-        <div className={styles.workTitle}>&nbsp;</div>
-
-        <div className={styles.presentationTitle}>
-          {text.left[10].url ? (
-            <a
-              href={text.left[10].url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.presentationLink}
-              onPointerEnter={handleLinkEnter}
-              onPointerLeave={handleLinkLeave}
-            >
-              {text.left[10].title}
-            </a>
-          ) : (
-            text.left[10].title
-          )}
-        </div>
+        {presentations.map((item) => (
+          <React.Fragment key={item.title}>
+            <div className={styles.presentationTitle}>
+              {item.url ? (
+                <a
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.presentationLink}
+                  onPointerEnter={handleLinkEnter}
+                  onPointerLeave={handleLinkLeave}
+                >
+                  {item.title}
+                </a>
+              ) : (
+                item.title
+              )}
+            </div>
+            <div className={styles.workTitle}>&nbsp;</div>
+          </React.Fragment>
+        ))}
 
 
       </div>
@@ -335,11 +322,11 @@ export default function Mockup2() {
       {/* Right column */}
       <div className={`${styles.rightCol} ${hasTextSelection ? styles.textSelected : ''}`}>
         <div className={`${styles.selectionBar} ${hasTextSelection ? styles.selectionBarVisible : ''}`} />
-        <div className={styles.hello}>{text.right[0].text}</div>
+        <div className={styles.hello}>{rightText[0].text}</div>
         <div className={styles.workTitle}>&nbsp;</div>
         <div className={styles.workTitle}>&nbsp;</div>
 
-        <div className={`${styles.faded} ${styles.rightDesc}`}>{text.right[1].text}</div>
+        <div className={`${styles.faded} ${styles.rightDesc}`}>{rightText[1].text}</div>
         <div className={styles.workTitle}>&nbsp;</div>
         <div className={styles.workTitle}>&nbsp;</div>
 
@@ -360,11 +347,11 @@ export default function Mockup2() {
         <div className={styles.workTitle}>&nbsp;</div>
         <div className={styles.workTitle}>&nbsp;</div>
 
-        <div className={`${styles.faded} ${styles.rightDescBottom}`}>{text.right[3].text}</div>
+        <div className={`${styles.faded} ${styles.rightDescBottom}`}>{rightText[3].text}</div>
         <div className={styles.workTitle}>&nbsp;</div>
         <div className={styles.workTitle}>&nbsp;</div>
 
-        <div className={`${styles.highlight} ${styles.rightDescBottom}`}>{text.right[4].text}</div>
+        <div className={`${styles.highlight} ${styles.rightDescBottom}`}>{rightText[4].text}</div>
       </div>
     </div>
   );

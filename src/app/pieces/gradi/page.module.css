@@ -1,0 +1,141 @@
+.container {
+  height: calc(var(--vh, 1vh) * 100);
+  width: 100%;
+  overflow-x: hidden;
+  background: black;
+  color: white;
+  padding: 2rem;
+  font-family: 'DM Mono', Menlo, Monaco, monospace;
+  letter-spacing: 0.15em;
+  font-size: calc(0.85vw + 0.85vh);
+  display: flex;
+  justify-content: center;
+}
+
+.content {
+  width: 100%;
+  max-width: 1200px;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.5em;
+  font-weight: 800;
+  text-align: center;
+}
+
+.subtitle {
+  text-align: center;
+  margin-top: 0.4rem;
+  margin-bottom: 2rem;
+  font-size: 0.7em;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.heroRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+}
+
+.heroItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.heroMedia {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  background: black;
+}
+
+.caption {
+  font-size: 0.65em;
+  color: #e04040;
+}
+
+.bodyText {
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.bodyText p {
+  margin: 0;
+  font-size: 0.7em;
+}
+
+.divider {
+  margin: 2rem 0 2.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.sectionTitle {
+  font-size: 1.1em;
+  font-weight: 700;
+}
+
+.sectionBody {
+  margin: 0;
+  line-height: 1.6;
+  font-size: 0.7em;
+}
+
+.mediaFrame {
+  width: 100%;
+  background: black;
+}
+
+.media {
+  width: 100%;
+  display: block;
+  height: auto;
+  object-fit: cover;
+}
+
+.stills {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.stillsCredit {
+  margin-top: 1rem;
+  font-size: 0.5em;
+  line-height: 1.6;
+  letter-spacing: 0.15em;
+}
+
+@media (max-width: 768px) {
+  .container {
+    font-size: 1.1em;
+  }
+
+  .title {
+    font-size: 1.5em;
+  }
+
+  .heroRow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+
+  .heroMedia {
+    aspect-ratio: 9 / 16;
+    height: auto;
+  }
+}

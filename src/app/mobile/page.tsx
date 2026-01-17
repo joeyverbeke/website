@@ -5,6 +5,11 @@ import Link from 'next/link';
 
 const works = [
   { 
+    title: 'Gradi (2025)', 
+    subtitle: 'Speculative wearable intrafaces',
+    slug: 'gradi' 
+  },
+  { 
     title: 'In Vivo / In Vitro, Trial 1.4 (2024)', 
     subtitle: 'Blink triggered imperceptibility',
     slug: 'in-vivo' 
