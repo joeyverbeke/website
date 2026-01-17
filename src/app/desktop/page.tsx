@@ -49,6 +49,7 @@ export default function Mockup2() {
   const autoSelectingRef = useRef(false);
   const allowClearSelectionRef = useRef(false);
   const restoringSelectionRef = useRef(false);
+  const linkHoverRef = useRef(false);
 
   const selectAllText = useCallback(() => {
     if (!rootRef.current) return;
@@ -78,12 +79,36 @@ export default function Mockup2() {
   }, [selectAllText]);
 
   const clearTransientSelection = useCallback(() => {
+    if (linkHoverRef.current) return;
     if (persistSelectionRef.current) return;
     const sel = window.getSelection();
     sel?.removeAllRanges();
     setHasTextSelection(false);
     autoSelectingRef.current = false;
   }, []);
+
+  const scheduleTransientClear = useCallback(
+    (delay = 120) => {
+      if (clearMoveTimeoutRef.current) {
+        window.clearTimeout(clearMoveTimeoutRef.current);
+      }
+      clearMoveTimeoutRef.current = window.setTimeout(() => {
+        clearTransientSelection();
+      }, delay);
+    },
+    [clearTransientSelection]
+  );
+
+  const handleLinkEnter = useCallback(() => {
+    linkHoverRef.current = true;
+  }, []);
+
+  const handleLinkLeave = useCallback(() => {
+    linkHoverRef.current = false;
+    if (!pointerDownRef.current && !suppressAutoSelectRef.current) {
+      scheduleTransientClear();
+    }
+  }, [scheduleTransientClear]);
   
   useEffect(() => {
     hasTextSelectionRef.current = hasTextSelection;
@@ -105,19 +130,17 @@ export default function Mockup2() {
         activateSelection(true, true);
       }
     }
-    function handlePointerMove() {
+    function handlePointerMove(e: PointerEvent) {
+      const target = e.target as Element | null;
+      const isLink = Boolean(target && target.closest('a'));
+      linkHoverRef.current = isLink;
       if (pointerDownRef.current || suppressAutoSelectRef.current) {
         return;
       }
       if (!persistSelectionRef.current || !hasTextSelectionRef.current) {
         activateSelection(false, false);
       }
-      if (clearMoveTimeoutRef.current) {
-        window.clearTimeout(clearMoveTimeoutRef.current);
-      }
-      clearMoveTimeoutRef.current = window.setTimeout(() => {
-        clearTransientSelection();
-      }, 120);
+      scheduleTransientClear();
     }
     function handlePointerUp() {
       pointerDownRef.current = false;
@@ -138,7 +161,7 @@ export default function Mockup2() {
         window.clearTimeout(clearMoveTimeoutRef.current);
       }
     };
-  }, [activateSelection, clearTransientSelection]);
+  }, [activateSelection, clearTransientSelection, scheduleTransientClear]);
 
   // Ensure cursor is visible on page load
   useEffect(() => {
@@ -224,19 +247,16 @@ export default function Mockup2() {
         {/* Works */}
         {text.left.slice(2, 6).map((work) => (
           <div key={work.title} className={styles.work}>
-            {showShortcut ? (
-              <span className={styles.workTitle}>{work.title}</span>
-            ) : (
-              <a
-                className={styles.workLink}
-                href={`/pieces/${work.slug}`}
-                onMouseEnter={() => setBgVideo(`${work.slug}/${work.hero}`)} // Ensure work.heroVideo points to the correct video file
-                onMouseLeave={() => setBgVideo(null)}
-
-              >
-                {work.title}
-              </a>
-            )}
+            <a
+              className={styles.workLink}
+              href={`/pieces/${work.slug}`}
+              onMouseEnter={() => setBgVideo(`${work.slug}/${work.hero}`)} // Ensure work.heroVideo points to the correct video file
+              onMouseLeave={() => setBgVideo(null)}
+              onPointerEnter={handleLinkEnter}
+              onPointerLeave={handleLinkLeave}
+            >
+              {work.title}
+            </a>
             <br />
             <span className={styles.workSubtitle}>{work.subtitle}</span>
             <div className={styles.workTitle}>&nbsp;</div>
@@ -251,7 +271,14 @@ export default function Mockup2() {
 
         <div className={styles.writingTitle} style={{ marginBottom: '0vw' }}>
           {text.left[7].url ? (
-            <a href={text.left[7].url} target="_blank" rel="noopener noreferrer" className={styles.writingLink}>
+            <a
+              href={text.left[7].url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.writingLink}
+              onPointerEnter={handleLinkEnter}
+              onPointerLeave={handleLinkLeave}
+            >
               {text.left[7].title}
             </a>
           ) : (
@@ -267,7 +294,14 @@ export default function Mockup2() {
 
         <div className={styles.presentationTitle}>
           {text.left[9].url ? (
-            <a href={text.left[9].url} target="_blank" rel="noopener noreferrer" className={styles.presentationLink}>
+            <a
+              href={text.left[9].url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.presentationLink}
+              onPointerEnter={handleLinkEnter}
+              onPointerLeave={handleLinkLeave}
+            >
               {text.left[9].title}
             </a>
           ) : (
@@ -278,7 +312,14 @@ export default function Mockup2() {
 
         <div className={styles.presentationTitle}>
           {text.left[10].url ? (
-            <a href={text.left[10].url} target="_blank" rel="noopener noreferrer" className={styles.presentationLink}>
+            <a
+              href={text.left[10].url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.presentationLink}
+              onPointerEnter={handleLinkEnter}
+              onPointerLeave={handleLinkLeave}
+            >
               {text.left[10].title}
             </a>
           ) : (
