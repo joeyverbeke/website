@@ -42,6 +42,11 @@ export default function Mockup2() {
   const [hasTextSelection, setHasTextSelection] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const persistSelectionRef = useRef(false);
+  const hasTextSelectionRef = useRef(false);
+  const clearMoveTimeoutRef = useRef<number | null>(null);
+  const pointerDownRef = useRef(false);
+  const suppressAutoSelectRef = useRef(false);
+  const autoSelectingRef = useRef(false);
   const allowClearSelectionRef = useRef(false);
   const restoringSelectionRef = useRef(false);
 
@@ -57,18 +62,39 @@ export default function Mockup2() {
     setHasTextSelection(true);
     restoringSelectionRef.current = false;
   }, []);
+
+  const activateSelection = useCallback((persist = false, hideShortcut = false) => {
+    autoSelectingRef.current = !persist;
+    if (persist || hideShortcut) {
+      setShowShortcut(false);
+    }
+    if (persist) {
+      localStorage.setItem('mockup2_discovered', 'true');
+      persistSelectionRef.current = true;
+    }
+    setTimeout(() => {
+      selectAllText();
+    }, 0);
+  }, [selectAllText]);
+
+  const clearTransientSelection = useCallback(() => {
+    if (persistSelectionRef.current) return;
+    const sel = window.getSelection();
+    sel?.removeAllRanges();
+    setHasTextSelection(false);
+    autoSelectingRef.current = false;
+  }, []);
+  
+  useEffect(() => {
+    hasTextSelectionRef.current = hasTextSelection;
+  }, [hasTextSelection]);
   
   useEffect(() => {
     setShortcut(getShortcutText());
     // Check if user has already discovered the interaction
     const discovered = localStorage.getItem('mockup2_discovered');
     if (discovered === 'true') {
-      setShowShortcut(false);
-      persistSelectionRef.current = true;
-      // Auto-select all text in .mockupRoot
-      setTimeout(() => {
-        selectAllText();
-      }, 0);
+      activateSelection(true, true);
     }
     function handleKeyDown(e: KeyboardEvent) {
       const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
@@ -76,19 +102,43 @@ export default function Mockup2() {
         (isMac && e.metaKey && e.key.toLowerCase() === 'a') ||
         (!isMac && e.ctrlKey && e.key.toLowerCase() === 'a')
       ) {
-        setShowShortcut(false);
-        localStorage.setItem('mockup2_discovered', 'true');
-        persistSelectionRef.current = true;
-        setTimeout(() => {
-          selectAllText();
-        }, 0);
+        activateSelection(true, true);
+      }
+    }
+    function handlePointerMove() {
+      if (pointerDownRef.current || suppressAutoSelectRef.current) {
+        return;
+      }
+      if (!persistSelectionRef.current || !hasTextSelectionRef.current) {
+        activateSelection(false, false);
+      }
+      if (clearMoveTimeoutRef.current) {
+        window.clearTimeout(clearMoveTimeoutRef.current);
+      }
+      clearMoveTimeoutRef.current = window.setTimeout(() => {
+        clearTransientSelection();
+      }, 120);
+    }
+    function handlePointerUp() {
+      pointerDownRef.current = false;
+      const selection = window.getSelection();
+      const hasSelection = Boolean(selection && selection.toString().length > 0);
+      if (!hasSelection && !persistSelectionRef.current) {
+        suppressAutoSelectRef.current = false;
       }
     }
     window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('pointermove', handlePointerMove);
+    window.addEventListener('pointerup', handlePointerUp);
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('pointermove', handlePointerMove);
+      window.removeEventListener('pointerup', handlePointerUp);
+      if (clearMoveTimeoutRef.current) {
+        window.clearTimeout(clearMoveTimeoutRef.current);
+      }
     };
-  }, []);
+  }, [activateSelection, clearTransientSelection]);
 
   // Ensure cursor is visible on page load
   useEffect(() => {
@@ -100,7 +150,17 @@ export default function Mockup2() {
     const handlePointerDown = (e: PointerEvent) => {
       const target = e.target as Element | null;
       const isLink = Boolean(target && target.closest('a'));
+      pointerDownRef.current = true;
+      suppressAutoSelectRef.current = true;
       allowClearSelectionRef.current = !isLink;
+      if (!isLink) {
+        persistSelectionRef.current = false;
+        setShowShortcut(true);
+        clearTransientSelection();
+        if (clearMoveTimeoutRef.current) {
+          window.clearTimeout(clearMoveTimeoutRef.current);
+        }
+      }
     };
 
     const handleSelectionChange = () => {
@@ -109,6 +169,12 @@ export default function Mockup2() {
       if (hasSelection) {
         setHasTextSelection(true);
         allowClearSelectionRef.current = false;
+        if (autoSelectingRef.current) {
+          suppressAutoSelectRef.current = false;
+          autoSelectingRef.current = false;
+        } else if (!persistSelectionRef.current) {
+          suppressAutoSelectRef.current = true;
+        }
         return;
       }
 
@@ -119,6 +185,10 @@ export default function Mockup2() {
 
       setHasTextSelection(false);
       allowClearSelectionRef.current = false;
+      if (!persistSelectionRef.current) {
+        suppressAutoSelectRef.current = false;
+        autoSelectingRef.current = false;
+      }
     };
 
     document.addEventListener('pointerdown', handlePointerDown, true);
@@ -128,7 +198,7 @@ export default function Mockup2() {
       document.removeEventListener('pointerdown', handlePointerDown, true);
       document.removeEventListener('selectionchange', handleSelectionChange);
     };
-  }, [selectAllText]);
+  }, [selectAllText, clearTransientSelection]);
 
   return (
     <div className={styles.mockupRoot} ref={rootRef}>
