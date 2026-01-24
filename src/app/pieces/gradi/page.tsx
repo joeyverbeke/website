@@ -155,9 +155,6 @@ export default function GradiPage() {
           <div key={section.title}>
             <div className={styles.section}>
               <div className={styles.sectionTitle}>{section.title}</div>
-              <div className={styles.mediaFrame}>
-                <img src={section.media} alt={section.title} className={styles.media} />
-              </div>
               <div className={styles.videoWrapper}>
                 <iframe
                   ref={(node) => {
@@ -174,6 +171,14 @@ export default function GradiPage() {
             <div className={styles.divider} />
           </div>
         ))}
+
+        <div className={styles.sectionImages}>
+          {sections.map((section) => (
+            <div key={`${section.title}-image`} className={styles.mediaFrame}>
+              <img src={section.media} alt={section.title} className={styles.media} />
+            </div>
+          ))}
+        </div>
 
         <div className={styles.stills}>
           <img

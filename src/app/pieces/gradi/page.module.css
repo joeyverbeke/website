@@ -140,6 +140,13 @@
   margin-top: 1.5rem;
 }
 
+.sectionImages {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
 .stillsCredit {
   margin-top: 1rem;
   font-size: 0.5em;
