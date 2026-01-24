@@ -73,8 +73,12 @@ export default function GradiPage() {
     if (iframes.length === 0) return;
 
     const postPlayerMessage = (iframe: HTMLIFrameElement, method: 'play' | 'pause') => {
-      iframe.contentWindow?.postMessage({ method }, '*');
+      const message = JSON.stringify({ method });
+      iframe.contentWindow?.postMessage(message, 'https://player.vimeo.com');
     };
+
+    // Keep all players paused until they become visible
+    iframes.forEach((iframe) => postPlayerMessage(iframe, 'pause'));
 
     if (!('IntersectionObserver' in window)) {
       iframes.forEach((iframe) => postPlayerMessage(iframe, 'play'));
@@ -159,7 +163,7 @@ export default function GradiPage() {
                   ref={(node) => {
                     iframeRefs.current[index] = node;
                   }}
-                  src={`${section.video}?autoplay=1&loop=1&muted=1&autopause=0&playsinline=1`}
+                  src={`${section.video}?loop=1&muted=1&autopause=0&playsinline=1`}
                   allow="autoplay; fullscreen; picture-in-picture"
                   allowFullScreen
                   title={`${section.title} video`}
