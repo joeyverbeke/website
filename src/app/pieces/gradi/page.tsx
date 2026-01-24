@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
 import HomeButton from '@/components/HomeButton';
 import styles from './page.module.css';
 
@@ -16,24 +17,28 @@ const sections = [
     body: 'Gradi Compress senses your blinks and drives tiny air pulses to choreograph new ones, turning your eyelids into a signaling channel while a proxy system composes and decodes messages on your behalf. It imagines a near future where proxies handle most of our talking, searching, and social presence, while our bodies serve as animated carriers for their decisions. As your proxy grows more capable, how might the boundary between you and your simulation shift, and what could it mean to let that line move on purpose?',
     media: '/videos/gradi/compress_1.PNG',
     label: 'compress_1.PNG',
+    video: 'https://player.vimeo.com/video/1157845883',
   },
   {
     title: 'Gradi Mediate',
     body: 'Gradi Mediate listens to your speech and returns a more fluent version, smoothing accent and grammar while quietly hallucinating normalized extensions. It flattens the texture of identity into a standardized voice that travels easily through platforms and institutions. As your stories are continually tuned for maximum acceptance, what other versions of you might be waiting just outside what can be said?',
     media: '/videos/gradi/mediate_1.PNG',
     label: 'mediate_1.PNG',
+    video: 'https://player.vimeo.com/video/1157845851',
   },
   {
     title: 'Gradi Predict',
     body: 'Gradi Predict monitors your speech in real time and, as you approach certain topics or phrases, feeds your own voice back into your ears just late enough to fracture your fluency. It stages prediction as preemptive moderation, where hidden criteria quietly sculpt the border of the sayable. When fluency itself can be switched on and off by an unseen model, what new forms of speaking or refusing to speak might emerge?',
     media: '/videos/gradi/predict_1.PNG',
     label: 'predict_1.PNG',
+    video: 'https://player.vimeo.com/video/1157845596',
   },
   {
     title: 'Gradi Calibrate',
     body: 'Calibration holds you in permanent beta, a choreography of adjustment that never finishes. It keeps you close to the rail, inching toward the expected while never quite arriving. If calibration is always running, whose standards are being rehearsed, and what room is left to move on purpose?',
     media: '/videos/gradi/calibrate_1.PNG',
     label: 'calibrate_1.PNG',
+    video: 'https://player.vimeo.com/video/1157843748',
   },
 ];
 
@@ -61,6 +66,36 @@ const metaParagraphs: MetaParagraph[] = [
 ];
 
 export default function GradiPage() {
+  const iframeRefs = useRef<Array<HTMLIFrameElement | null>>([]);
+
+  useEffect(() => {
+    const iframes = iframeRefs.current.filter(Boolean) as HTMLIFrameElement[];
+    if (iframes.length === 0) return;
+
+    const postPlayerMessage = (iframe: HTMLIFrameElement, method: 'play' | 'pause') => {
+      iframe.contentWindow?.postMessage({ method }, '*');
+    };
+
+    if (!('IntersectionObserver' in window)) {
+      iframes.forEach((iframe) => postPlayerMessage(iframe, 'play'));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const iframe = entry.target as HTMLIFrameElement;
+          postPlayerMessage(iframe, entry.isIntersecting ? 'play' : 'pause');
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    iframes.forEach((iframe) => observer.observe(iframe));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className={styles.container}>
       <HomeButton />
@@ -112,12 +147,23 @@ export default function GradiPage() {
 
         <div className={styles.divider} />
 
-        {sections.map((section) => (
+        {sections.map((section, index) => (
           <div key={section.title}>
             <div className={styles.section}>
               <div className={styles.sectionTitle}>{section.title}</div>
               <div className={styles.mediaFrame}>
                 <img src={section.media} alt={section.title} className={styles.media} />
+              </div>
+              <div className={styles.videoWrapper}>
+                <iframe
+                  ref={(node) => {
+                    iframeRefs.current[index] = node;
+                  }}
+                  src={`${section.video}?autoplay=1&loop=1&muted=1&autopause=0&playsinline=1`}
+                  allow="autoplay; fullscreen; picture-in-picture"
+                  allowFullScreen
+                  title={`${section.title} video`}
+                />
               </div>
               <p className={styles.sectionBody}>{section.body}</p>
             </div>
