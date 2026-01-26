@@ -13,18 +13,18 @@ const heroLoops = [
 
 const sections = [
   {
-    title: 'Gradi Compress',
-    body: 'Gradi Compress senses your blinks and drives tiny air pulses to choreograph new ones, turning your eyelids into a signaling channel while a proxy system composes and decodes messages on your behalf. It imagines a near future where proxies handle most of our talking, searching, and social presence, while our bodies serve as animated carriers for their decisions. As your proxy grows more capable, how might the boundary between you and your simulation shift, and what could it mean to let that line move on purpose?',
-    media: '/videos/gradi/compress_1.PNG',
-    label: 'compress_1.PNG',
-    video: 'https://player.vimeo.com/video/1157845883',
-  },
-  {
     title: 'Gradi Mediate',
     body: 'Gradi Mediate listens to your speech and returns a more fluent version, smoothing accent and grammar while quietly hallucinating normalized extensions. It flattens the texture of identity into a standardized voice that travels easily through platforms and institutions. As your stories are continually tuned for maximum acceptance, what other versions of you might be waiting just outside what can be said?',
     media: '/videos/gradi/mediate_1.PNG',
     label: 'mediate_1.PNG',
     video: 'https://player.vimeo.com/video/1157845851',
+  },
+  {
+    title: 'Gradi Compress',
+    body: 'Gradi Compress senses your blinks and drives tiny air pulses to choreograph new ones, turning your eyelids into a signaling channel while a proxy system composes and decodes messages on your behalf. It imagines a near future where proxies handle most of our talking, searching, and social presence, while our bodies serve as animated carriers for their decisions. As your proxy grows more capable, how might the boundary between you and your simulation shift, and what could it mean to let that line move on purpose?',
+    media: '/videos/gradi/compress_1.PNG',
+    label: 'compress_1.PNG',
+    video: 'https://player.vimeo.com/video/1157845883',
   },
   {
     title: 'Gradi Predict',
@@ -61,7 +61,7 @@ const metaParagraphs: MetaParagraph[] = [
   },
   'Material: Custom software and firmware; open-weight AI models; embedded microcontrollers; microphones; speakers and audio amplifiers; IMU; proximity and mmWave presence sensor; micro-blower and valve; 3D-printed resin; synchronized eight-channel 9:16 video',
   'Gradi is a suite of speculative wearable intrafaces that exposes the seams in AI\'s promise of effortless interaction. Wendy Chun reminds us, "software is ideology;" smoothness is a decision about power made at the intraface, the seam where bodies, models, and institutions negotiate passage. The work lives in that encounter, treating AI as both medium and subject.',
-  'Each device examines a dominant logic shaping AI culture: calibration, compression, prediction, mediation. Calibration holds you in permanent beta, a choreography that never finishes. Compression lets a proxy speak through the body, offloading the effort of interaction. Prediction leans ahead of the mouth, adjusting the sayable so it fits the rail. Mediation polishes speech into identityless fluency, so you are everywhere and recognized nowhere.',
+  'Each device examines a dominant logic shaping AI culture: calibration, compression, prediction, mediation. Calibration holds you in permanent beta, a choreography that never finishes. Compression lets a proxy speak through the body, offloading the effort of interaction. Prediction leans ahead of the mouth, adjusting the sayable so it fits the rail. Mediation polishes speech into identityless fluency, so you are understood everywhere and recognized nowhere.',
   'Through interactive subversive artifacts and videos of strange use cases, Gradi misaligns tacit expectations with quiet perversion, trading frictionless and phantom integration for situated misalignments. A permanent rehearsal. It keeps noise and friction alive and felt, so what is usually optimized away can be heard again.',
 ];
 
@@ -122,6 +122,21 @@ export default function GradiPage() {
           ))}
         </div>
 
+        <div className={styles.sectionImages}>
+          {sections.map((section) => (
+            <div
+              key={`${section.title}-image`}
+              className={`${styles.mediaFrame} ${styles.sectionImageFrame}`}
+            >
+              <img
+                src={section.media}
+                alt={section.title}
+                className={`${styles.media} ${styles.sectionImage}`}
+              />
+            </div>
+          ))}
+        </div>
+
         <div className={styles.bodyText}>
           {metaParagraphs.slice(0, 3).map((paragraph, index) => (
             <p key={`meta-${index}`}>
@@ -171,14 +186,6 @@ export default function GradiPage() {
             <div className={styles.divider} />
           </div>
         ))}
-
-        <div className={styles.sectionImages}>
-          {sections.map((section) => (
-            <div key={`${section.title}-image`} className={styles.mediaFrame}>
-              <img src={section.media} alt={section.title} className={styles.media} />
-            </div>
-          ))}
-        </div>
 
         <div className={styles.stills}>
           <img
