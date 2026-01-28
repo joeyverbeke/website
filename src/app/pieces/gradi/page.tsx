@@ -13,21 +13,27 @@ const heroLoops = [
 
 const sections = [
   {
-    title: 'Gradi Mediate',
-    body: 'Gradi Mediate listens to your speech and returns a more fluent version, smoothing accent and grammar while quietly hallucinating normalized extensions. It flattens the texture of identity into a standardized voice that travels easily through platforms and institutions. As your stories are continually tuned for maximum acceptance, what other versions of you might be waiting just outside what can be said?',
-    media: '/videos/gradi/mediate_1.PNG',
-    label: 'mediate_1.PNG',
-    video: 'https://player.vimeo.com/video/1157845851',
-  },
-  {
     title: 'Gradi Compress',
+    blurb:
+      'A near-eye wearable that encodes your AI proxy’s messages into your blinks through programmatic air puffs, turning you into an embodied communication channel.',
     body: 'Gradi Compress senses your blinks and drives tiny air pulses to choreograph new ones, turning your eyelids into a signaling channel while a proxy system composes and decodes messages on your behalf. It imagines a near future where proxies handle most of our talking, searching, and social presence, while our bodies serve as animated carriers for their decisions. As your proxy grows more capable, how might the boundary between you and your simulation shift, and what could it mean to let that line move on purpose?',
     media: '/videos/gradi/compress_1.PNG',
     label: 'compress_1.PNG',
     video: 'https://player.vimeo.com/video/1157845883',
   },
   {
+    title: 'Gradi Mediate',
+    blurb:
+      'A mouth-worn wearable that outputs the perfect version of your speech, scrubbing accent and identity for universal understandability; with some fabricated memories injected.',
+    body: 'Gradi Mediate listens to your speech and returns a more fluent version, smoothing accent and grammar while quietly hallucinating normalized extensions. It flattens the texture of identity into a standardized voice that travels easily through platforms and institutions. As your stories are continually tuned for maximum acceptance, what other versions of you might be waiting just outside what can be said?',
+    media: '/videos/gradi/mediate_1.PNG',
+    label: 'mediate_1.PNG',
+    video: 'https://player.vimeo.com/video/1157845851',
+  },
+  {
     title: 'Gradi Predict',
+    blurb:
+      'A head-worn wearable that predicts your next words and triggers delayed auditory feedback to fracture fluency when you approach the predefined edge of the sayable.',
     body: 'Gradi Predict monitors your speech in real time and, as you approach certain topics or phrases, feeds your own voice back into your ears just late enough to fracture your fluency. It stages prediction as preemptive moderation, where hidden criteria quietly sculpt the border of the sayable. When fluency itself can be switched on and off by an unseen model, what new forms of speaking or refusing to speak might emerge?',
     media: '/videos/gradi/predict_1.PNG',
     label: 'predict_1.PNG',
@@ -35,7 +41,9 @@ const sections = [
   },
   {
     title: 'Gradi Calibrate',
-    body: 'Calibration holds you in permanent beta, a choreography of adjustment that never finishes. It keeps you close to the rail, inching toward the expected while never quite arriving. If calibration is always running, whose standards are being rehearsed, and what room is left to move on purpose?',
+    blurb:
+      'An arm-worn wearable that choreographs you through an endless calibration; a permanent beta; our infinite entanglement and becoming.',
+    body: 'Gradi Calibrate holds you in permanent beta, a choreography of adjustment that never finishes. It keeps you close to the rail, inching toward the expected while never quite arriving. If calibration is always running, whose standards are being rehearsed, and what room is left to move on purpose?',
     media: '/videos/gradi/calibrate_1.PNG',
     label: 'calibrate_1.PNG',
     video: 'https://player.vimeo.com/video/1157843748',
@@ -181,6 +189,9 @@ export default function GradiPage() {
                   title={`${section.title} video`}
                 />
               </div>
+              <p className={styles.sectionBlurb}>
+                <span className={styles.sectionBlurbText}>{section.blurb}</span>
+              </p>
               <p className={styles.sectionBody}>{section.body}</p>
             </div>
             <div className={styles.divider} />
