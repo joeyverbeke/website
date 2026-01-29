@@ -124,14 +124,20 @@
 }
 
 @media (max-width: 768px) {
-  .title {
-    font-size: 1.5em; /* or 1.3em, adjust as needed */
-  }
-  .paragraph {
-    font-size: 1.2em; /* or 1.1em, adjust as needed */
+  .videoWrapper {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
   }
 
-  .footer {
-    font-size: 1.1em; /* or 0.9em, adjust as needed */
+  .container {
+    overflow-x: visible;
+    font-size: 1.1em;
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 1.5em;
   }
 }

@@ -68,6 +68,19 @@
   border: none;
 }
 
+@media (max-width: 768px) {
+  .videoWrapper {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+  }
+
+  .container {
+    overflow-x: visible;
+    font-size: 1.1em;
+  }
+}
+
 .videoImage {
   margin-top:2em;
   margin-bottom:3em;
@@ -79,13 +92,6 @@
 
 @media (max-width: 768px) {
   .title {
-    font-size: 1.5em; /* or 1.3em, adjust as needed */
-  }
-  .paragraph {
-    font-size: 1.2em; /* or 1.1em, adjust as needed */
-  }
-
-  .footer {
-    font-size: 1.1em; /* or 0.9em, adjust as needed */
+    font-size: 1.5em;
   }
 }
