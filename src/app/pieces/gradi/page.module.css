@@ -7,14 +7,10 @@
   padding: 2rem;
   font-family: 'DM Mono', Menlo, Monaco, monospace;
   letter-spacing: 0.15em;
-  font-size: calc(0.85vw + 0.85vh);
+  font-size: clamp(var(--pieces-font-min, 15px), calc(var(--pieces-font-fluid, 1.25vw + 0.5vh)), var(--pieces-font-max, 21px));
   display: flex;
-  justify-content: center;
-}
-
-.content {
-  width: 100%;
-  max-width: 1200px;
+  flex-direction: column;
+  align-items: center;
 }
 
 .title {
@@ -30,6 +26,13 @@
   margin-bottom: 2rem;
   font-size: 0.7em;
   color: rgba(255, 255, 255, 0.8);
+}
+
+.heroFull {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  
 }
 
 .heroRow {
@@ -96,6 +99,7 @@
   margin: 0.4rem 0 0;
   line-height: 1.6;
   font-size: 0.7em;
+  width: 50%;
 }
 
 .sectionBlurbText {
@@ -188,6 +192,10 @@
 @media (max-width: 768px) {
   .container {
     font-size: 1.1em;
+  }
+
+  .sectionBlurb {
+    width: 100%;
   }
 
   .title {

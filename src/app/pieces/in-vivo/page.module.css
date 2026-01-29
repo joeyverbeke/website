@@ -10,7 +10,7 @@
   padding: 2rem;
   font-family:'DM Mono', Menlo, Monaco, monospace;
   letter-spacing: 0.15em;
-  font-size: calc(0.85vw + 0.85vh);
+  font-size: clamp(var(--pieces-font-min, 15px), calc(var(--pieces-font-fluid, 1.25vw + 0.5vh)), var(--pieces-font-max, 21px));
 }
 
 .hidden {
@@ -20,11 +20,15 @@
 .content {
   opacity: 1;
   transition: opacity 0.1s ease-in-out;
-  max-width: 1000px;
-  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .content {
+    width: min(75vw, var(--pieces-max-width, 1440px));
+  }
 }
 
 .contentBlinking {

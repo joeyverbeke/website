@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
+import PieceLayout from '@/components/PieceLayout';
 import styles from './page.module.css';
 
 // Art piece names for lookup
@@ -36,9 +37,9 @@ export default function ArtPiecePage() {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>{artPiece.title}</h1>
-      <div className={styles.content}>
+      <PieceLayout className={styles.content}>
         <p>Detailed information about this art piece will go here.</p>
-      </div>
+      </PieceLayout>
       <Link href="/" className={styles.backLink}>Return to Gallery</Link>
     </div>
   );

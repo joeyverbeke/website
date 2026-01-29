@@ -3,6 +3,10 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --pieces-max-width: 1920px;
+  --pieces-font-min: 15px;
+  --pieces-font-fluid: 1.25vw + 0.5vh;
+  --pieces-font-max: 26px;
 }
 
 @theme inline {

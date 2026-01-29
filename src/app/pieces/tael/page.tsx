@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import HomeButton from '@/components/HomeButton';
+import PieceLayout from '@/components/PieceLayout';
 import styles from './page.module.css';
 
 const DEGRADED_VERSIONS = [
@@ -97,7 +98,7 @@ export default function TaelPage() {
   return (
     <div ref={containerRef} className={styles.container}>
       
-        <div className={styles.content}>
+        <PieceLayout className={styles.content}>
         <div className={styles.headerRow}>
         <HomeButton />
         <h1 className={styles.title}>T.A.E.L. (Tail Assisted Environmental Learning)</h1>
@@ -131,8 +132,7 @@ export default function TaelPage() {
 
         
 
-      </div>
+      </PieceLayout>
     </div>
   );
 } 
-

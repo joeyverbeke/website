@@ -4,6 +4,7 @@
 
 import { useEffect, useRef, useState, useCallback } from 'react';
 import HomeButton from '@/components/HomeButton';
+import PieceLayout from '@/components/PieceLayout';
 import { Eye, EyeClosed } from 'lucide-react';
 import styles from './page.module.css';
 
@@ -207,7 +208,7 @@ export default function InVivoPage() {
         autoPlay
       />
 
-      <div className={`${styles.content} ${isBlinking ? styles.contentBlinking : ''}`}>
+      <PieceLayout className={`${styles.content} ${isBlinking ? styles.contentBlinking : ''}`}>
         <div className={styles.header}>
           <h1 className={styles.title}>
             In Vivo / In Vitro - Trial 1.4
@@ -256,7 +257,7 @@ export default function InVivoPage() {
         <div className={styles.footer}>
           <p className={styles.footerText}>Exhibition: Dethrone, Gray Area, San Francisco, CA; Activation, Pebblebed, San Francisco, CA; NotYetArt, New York, NY; Scalable HCI, Shenzhen, CN; Siggraph Asia Art Gallery, Tokyo, Japan; BCNM Conference, Platform Art Space, Berkeley, CA; Convivium, Bombay Beach, CA</p>
         </div>
-      </div>
+      </PieceLayout>
     </div>
   );
 } 

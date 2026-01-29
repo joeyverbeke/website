@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import HomeButton from '@/components/HomeButton';
+import PieceLayout from '@/components/PieceLayout';
 import styles from './page.module.css';
 
 const heroLoops = [
@@ -111,25 +112,26 @@ export default function GradiPage() {
   return (
     <div className={styles.container}>
       <HomeButton />
-      <div className={styles.content}>
+      <PieceLayout>
         <h1 className={styles.title}>Gradi</h1>
         <div className={styles.subtitle}>speculative wearable intrafaces</div>
 
-        <div className={styles.heroRow}>
-          {heroLoops.map((item) => (
-            <div key={item.label} className={styles.heroItem}>
-              <video
-                className={styles.heroMedia}
-                src={item.src}
-                autoPlay
-                loop
-                muted
-                playsInline
-              />
-            </div>
-          ))}
+        <div className={styles.heroFull}>
+          <div className={styles.heroRow}>
+            {heroLoops.map((item) => (
+              <div key={item.label} className={styles.heroItem}>
+                <video
+                  className={styles.heroMedia}
+                  src={item.src}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                />
+              </div>
+            ))}
+          </div>
         </div>
-
         <div className={styles.sectionImages}>
           {sections.map((section) => (
             <div
@@ -210,7 +212,7 @@ export default function GradiPage() {
           <div>Courtesy of ACC</div>
           <div>Additional photos by Kim Sarah, Lee Yong Shin</div>
         </div>
-      </div>
+      </PieceLayout>
     </div>
   );
 }

@@ -7,13 +7,8 @@
   padding: 2rem;
   font-family:'DM Mono', Menlo, Monaco, monospace;
   letter-spacing: 0.15em;
-  font-size: calc(0.85vw + 0.85vh);
+  font-size: clamp(var(--pieces-font-min, 15px), calc(var(--pieces-font-fluid, 1.25vw + 0.5vh)), var(--pieces-font-max, 21px));
   display: flex;
-}
-
-.content {
-  max-width: 1000px;
-  margin: 0 auto;
 }
 
 .title {

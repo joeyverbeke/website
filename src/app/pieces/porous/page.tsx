@@ -1,6 +1,7 @@
 'use client';
 
 import HomeButton from '@/components/HomeButton';
+import PieceLayout from '@/components/PieceLayout';
 import styles from './page.module.css';
 
 const ORIGINAL_TEXT = `Quietly inhabiting spaces we barely notice, Porous is part of a broader guerrilla ecology: viral anomalies discreetly embedded into objects across the urban landscape, murmuring beneath perception. Activated only when the surrounding environment swells into noise, the object softly emits hallucinatory fragments—absurd, surreal earworms that slip imperceptibly beneath conscious attention, embedding themselves in the listener's subconscious.\n
@@ -12,7 +13,7 @@ export default function PorousPage() {
   return (
     <div className={styles.container}>
       <HomeButton/>
-      <div className={styles.content}>
+      <PieceLayout>
         
         <h1 className={styles.title}>Porous</h1>
         
@@ -49,7 +50,7 @@ export default function PorousPage() {
           <p className={styles.footerText}>Exhibition: Mars Electronica, Mars, CA; Convivium, Bombay Beach, CA</p>
         </div>
 
-      </div>
+      </PieceLayout>
     </div>
   );
 } 

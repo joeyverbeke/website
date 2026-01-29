@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Mic, MicOff } from 'lucide-react';
 import * as vad from '@ricky0123/vad-web';
 import HomeButton from '@/components/HomeButton';
+import PieceLayout from '@/components/PieceLayout';
 import styles from './page.module.css';
 
 export default function GradiVoxPage() {
@@ -86,7 +87,7 @@ export default function GradiVoxPage() {
         className={styles.hidden}
       />
       
-      <div className={styles.content}>
+      <PieceLayout className={styles.content}>
         <h1 className={styles.title}>
           Gradi Vox
         </h1>
@@ -125,7 +126,7 @@ export default function GradiVoxPage() {
         <div className={styles.footer}>
           <p className={styles.footerText}>Exhibition: Mars Electronica, Mars, CA; Convivium, Bombay Beach, CA</p>
         </div>
-      </div>
+      </PieceLayout>
     </div>
   );
 } 
