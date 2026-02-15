@@ -47,7 +47,7 @@ export default function PorousPage() {
         </div>
 
         <div className={styles.footer}>
-          <p className={styles.footerText}>Exhibition: Mars Electronica, Mars, CA; Convivium, Bombay Beach, CA</p>
+          <p className={styles.footerText}>Exhibition: TBA</p>
         </div>
 
       </PieceLayout>
