@@ -200,6 +200,20 @@ export default function GradiPage() {
           </div>
         ))}
 
+        <div className={styles.section}>
+          <div className={styles.sectionTitle}>ACC Creators Interview</div>
+          <div className={styles.videoWrapper}>
+            <iframe
+              src="https://www.youtube.com/embed/PTGGmCObjnQ"
+              title="ACC Creators Interview"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            />
+          </div>
+        </div>
+        <div className={styles.divider} />
+
         <div className={styles.stills}>
           <img
             src="/videos/gradi/stills.png"

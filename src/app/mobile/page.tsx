@@ -35,9 +35,9 @@ const writings = [
   { title: 'Friction as Medium: Epistemic Rupture through Imperceptible Interaction, Ars Electronica (2025)', url: 'https://dl.acm.org/doi/10.1145/3749893.3749969' },
 ];
 
-const presentations = [
+const talks = [
+  { title: 'ACC CREATORS Interview (2025)', url: 'https://www.youtube.com/watch?v=PTGGmCObjnQ' },
   { title: 'Friction as Medium, Ars Electronica (2025)', url: 'https://www.youtube.com/live/qRW1MRnby14?si=2Ufme0nk6ktJrGCt&t=1246' },
-  { title: 'Anomalistic Interactions, SIGGRAPH Asia (2024)' },
 ];
 
 const about = [
@@ -112,11 +112,11 @@ export default function MockupMobile() {
 
       <section className={styles.section}>
         <div className={styles.spacebig}> </div>
-        <br /><h2 className={styles.sectionTitle}>presentations</h2>
+        <br /><h2 className={styles.sectionTitle}>talks</h2>
         <br />
               <div className={styles.spacesmall}> </div>
         <br />        <div className={styles.items}>
-          {presentations.map((presentation, index) => (
+          {talks.map((presentation, index) => (
             <div key={index} className={styles.presentationItem}>
               <div className={styles.spacesmall}> </div>
               <br />

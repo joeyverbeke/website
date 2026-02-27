@@ -7,7 +7,7 @@ const leftHeader = { text: 'Koi Ren & Joey Verbeke' };
 const leftSections = {
   works: 'works',
   writings: 'writings',
-  presentations: 'presentations',
+  talks: 'talks',
 };
 const works = [
   { type: 'work', title: 'Gradi (2025)', subtitle: 'Speculative wearable intrafaces', slug: 'gradi', hero: 'gradi_idle-loop.webm' },
@@ -19,9 +19,9 @@ const works = [
 const writings = [
   { type: 'writing', title: 'Friction as Medium: Epistemic Rupture through Imperceptible Interaction, Ars Electronica (2025)', url: 'https://dl.acm.org/doi/10.1145/3749893.3749969' },
 ];
-const presentations = [
+const talks = [
+  { type: 'presentation', title: 'ACC CREATORS Interview (2025)', url: 'https://www.youtube.com/watch?v=PTGGmCObjnQ' },
   { type: 'presentation', title: 'Friction as Medium, Ars Electronica (2025)', url: 'https://www.youtube.com/live/qRW1MRnby14?si=2Ufme0nk6ktJrGCt&t=1246' },
-  { type: 'presentation', title: 'Anomalistic Interactions, SIGGRAPH Asia (2024)' },
 ];
 const rightText = [
   { type: 'hello', text: 'k0j0' },
@@ -289,10 +289,10 @@ export default function Mockup2() {
         <div className={`${styles.workTitle} ${styles.sectionSpacing}`}>&nbsp;</div>
 
 
-        <div className={`${styles.section} ${styles.sectionSpacing}`}>{leftSections.presentations}</div>
+        <div className={`${styles.section} ${styles.sectionSpacing}`}>{leftSections.talks}</div>
         <div className={styles.workTitle}>&nbsp;</div>
 
-        {presentations.map((item) => (
+        {talks.map((item) => (
           <React.Fragment key={item.title}>
             <div className={styles.presentationTitle}>
               {item.url ? (
