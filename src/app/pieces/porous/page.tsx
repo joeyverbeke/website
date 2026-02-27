@@ -23,6 +23,11 @@ export default function PorousPage() {
           alt="Porous Image"
           className={styles.videoImage}
         />
+        <img
+          src="/videos/porous/masking.jpeg"
+          alt="Porous Masking Image"
+          className={styles.videoImage}
+        />
         </div>
 
 
