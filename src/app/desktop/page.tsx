@@ -3,7 +3,6 @@ import React, { useCallback, useEffect, useState, useRef } from 'react';
 import styles from './desktop.module.css';
 import Cursor from '@/components/Cursor';
 
-const leftHeader = { text: 'Koi Ren & Joey Verbeke' };
 const leftSections = {
   works: 'works',
   writings: 'writings',
@@ -26,9 +25,9 @@ const talks = [
 const rightText = [
   { type: 'hello', text: 'k0j0' },
   { type: 'desc', text: 'We tell phantasmagoric stories about unconscious friction.' },
-  { type: 'desc', text: 'Koi Ren and Joey Verbeke (k0j0) are a New Media Art duo creating subversive and frictional “intrafaces”–artifacts that reveal the power, politics, and posthuman subjectivities embedded within systemic interactions. Their research-based practice pulls from their backgrounds in human-computer interaction, artificial intelligence, media studies, and speculative design.' },
+  { type: 'desc', text: 'k0j0 (Koi Ren and Joey Verbeke) is a New Media Art duo creating subversive and frictional “intrafaces”–artifacts that reveal the power, politics, and posthuman subjectivities embedded within systemic interactions. Their research-based practice pulls from their backgrounds in human-computer interaction, artificial intelligence, media studies, and speculative design.' },
   { type: 'desc', text: 'Through the defamiliarization of seductive seamlessness and tacit expectations, k0j0 provokes moments of epistemological rupture, inviting viewers into intimate proximity with the unfamiliar and the emergent dynamics shaping our futures.' },
-  { type: 'desc', text: 'Their work has been shown at venues and events such as, Ars Electronica, ACM SIGGRAPH, TEDAI, MUTEK, Gray Area, Heckscher Museum, Ming Contemporary Art Museum, Diego Rivera Gallery, Angels Gate Cultural Center, Sundance Film Festival, and Denver International Airport.' },
+  { type: 'desc', text: 'Their work has been shown at venues and events such as Ars Electronica, National Asian Culture Center, ACM SIGGRAPH, TEDAI, MUTEK, Gray Area, Heckscher Museum, Ming Contemporary Art Museum, Diego Rivera Gallery, Angels Gate Cultural Center, Sundance Film Festival, and Denver International Airport.' },
 ];
 
 function getShortcutText() {
@@ -45,6 +44,7 @@ export default function Mockup2() {
   const [bgVideo, setBgVideo] = useState<string | null>(null);
   const [cursorVisible, setCursorVisible] = useState(true);
   const [hasTextSelection, setHasTextSelection] = useState(false);
+  const [showInstagramLinks, setShowInstagramLinks] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const persistSelectionRef = useRef(false);
   const hasTextSelectionRef = useRef(false);
@@ -137,9 +137,12 @@ export default function Mockup2() {
     }
     function handlePointerMove(e: PointerEvent) {
       const target = e.target as Element | null;
-      const isLink = Boolean(target && target.closest('a'));
-      linkHoverRef.current = isLink;
+      const isInteractive = Boolean(target && target.closest('a, button'));
+      linkHoverRef.current = isInteractive;
       if (pointerDownRef.current || suppressAutoSelectRef.current) {
+        return;
+      }
+      if (isInteractive) {
         return;
       }
       if (!persistSelectionRef.current || !hasTextSelectionRef.current) {
@@ -177,17 +180,19 @@ export default function Mockup2() {
   useEffect(() => {
     const handlePointerDown = (e: PointerEvent) => {
       const target = e.target as Element | null;
-      const isLink = Boolean(target && target.closest('a'));
+      const isInteractive = Boolean(target && target.closest('a, button'));
       pointerDownRef.current = true;
+      if (isInteractive) {
+        linkHoverRef.current = true;
+        return;
+      }
       suppressAutoSelectRef.current = true;
-      allowClearSelectionRef.current = !isLink;
-      if (!isLink) {
-        persistSelectionRef.current = false;
-        setShowShortcut(true);
-        clearTransientSelection();
-        if (clearMoveTimeoutRef.current) {
-          window.clearTimeout(clearMoveTimeoutRef.current);
-        }
+      allowClearSelectionRef.current = true;
+      persistSelectionRef.current = false;
+      setShowShortcut(true);
+      clearTransientSelection();
+      if (clearMoveTimeoutRef.current) {
+        window.clearTimeout(clearMoveTimeoutRef.current);
       }
     };
 
@@ -242,8 +247,7 @@ export default function Mockup2() {
       />
       {/* Left column */}
       <div className={`${styles.leftCol} ${hasTextSelection ? styles.textSelected : ''}`}>
-        <div className={styles.header}>{leftHeader.text}</div>
-        <div className={styles.workTitle}>&nbsp;</div>
+        <div className={styles.headerSpacer} aria-hidden="true" />
         <div className={styles.section}>{leftSections.works}</div>
         <div className={`${styles.workTitle} ${styles.sectionSpacing}`}>&nbsp;</div>
 
@@ -321,37 +325,76 @@ export default function Mockup2() {
       )}
       {/* Right column */}
       <div className={`${styles.rightCol} ${hasTextSelection ? styles.textSelected : ''}`}>
-        <div className={`${styles.selectionBar} ${hasTextSelection ? styles.selectionBarVisible : ''}`} />
-        <div className={styles.hello}>{rightText[0].text}</div>
-        <div className={styles.workTitle}>&nbsp;</div>
-        <div className={styles.workTitle}>&nbsp;</div>
+        <div className={styles.rightContent}>
+          <div className={styles.hello}>{rightText[0].text}</div>
+          <div className={styles.workTitle}>&nbsp;</div>
+          <div className={styles.workTitle}>&nbsp;</div>
 
-        <div className={`${styles.faded} ${styles.rightDesc}`}>{rightText[1].text}</div>
-        <div className={styles.workTitle}>&nbsp;</div>
-        <div className={styles.workTitle}>&nbsp;</div>
+          <div className={`${styles.faded} ${styles.rightDesc}`}>{rightText[1].text}</div>
+          <div className={styles.workTitle}>&nbsp;</div>
+          <div className={styles.workTitle}>&nbsp;</div>
 
-        <div className={`${styles.rightDesc}`}>
-          <span className={styles.highlight}>Koi Ren and Joey Verbeke</span> <span className={styles.faded}>are a </span>
-          <span className={styles.highlight}>New Media Art duo</span>
-          <span className={styles.faded}> creating </span>
-          <span className={styles.highlight}>subversive and frictional </span>
-          <span className={styles.faded}>“intrafaces” – </span>
-          <span className={styles.highlight}>artifacts </span>
-          <span className={styles.faded}>that reveal the power, politics, and posthuman subjectivities embedded within systemic interactions. Their </span>
-          <span className={styles.highlight}>research-based practice </span>
-          <span className={styles.faded}>pulls from their backgrounds in</span>
-          <span className={styles.highlight}> human-computer interaction, artificial intelligence,</span>
-          <span className={styles.faded}> media studies, and speculative design.</span>
+          <div className={`${styles.rightDesc}`}>
+            <span className={styles.highlight}>Koi Ren and Joey Verbeke</span> <span className={styles.faded}>are a </span>
+            <span className={styles.highlight}>New Media Art duo</span>
+            <span className={styles.faded}> creating </span>
+            <span className={styles.highlight}>subversive and frictional </span>
+            <span className={styles.faded}>“intrafaces” – </span>
+            <span className={styles.highlight}>artifacts </span>
+            <span className={styles.faded}>that reveal the power, politics, and posthuman subjectivities embedded within systemic interactions. Their </span>
+            <span className={styles.highlight}>research-based practice </span>
+            <span className={styles.faded}>pulls from their backgrounds in</span>
+            <span className={styles.highlight}> human-computer interaction, artificial intelligence,</span>
+            <span className={styles.faded}> media studies, and speculative design.</span>
+          </div>
+          <div className={styles.workTitle}>&nbsp;</div>
+          <div className={styles.workTitle}>&nbsp;</div>
 
+          <div className={`${styles.faded} ${styles.rightDescBottom}`}>{rightText[3].text}</div>
+          <div className={styles.workTitle}>&nbsp;</div>
+          <div className={styles.workTitle}>&nbsp;</div>
+
+          <div className={`${styles.highlight} ${styles.rightDescBottom}`}>{rightText[4].text}</div>
         </div>
-        <div className={styles.workTitle}>&nbsp;</div>
-        <div className={styles.workTitle}>&nbsp;</div>
-
-        <div className={`${styles.faded} ${styles.rightDescBottom}`}>{rightText[3].text}</div>
-        <div className={styles.workTitle}>&nbsp;</div>
-        <div className={styles.workTitle}>&nbsp;</div>
-
-        <div className={`${styles.highlight} ${styles.rightDescBottom}`}>{rightText[4].text}</div>
+        <div className={styles.instagramDock}>
+          <button
+            type="button"
+            className={styles.instagramButton}
+            onClick={() => setShowInstagramLinks((prev) => !prev)}
+            aria-label="Open Instagram links"
+            aria-expanded={showInstagramLinks}
+          >
+            <img
+              src="/instagram.svg"
+              alt="Instagram"
+              className={styles.instagramIcon}
+            />
+          </button>
+          {showInstagramLinks && (
+            <div className={styles.instagramMenu}>
+              <a
+                href="https://instagram.com/koi_xuanthefish"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.instagramLink}
+                onPointerEnter={handleLinkEnter}
+                onPointerLeave={handleLinkLeave}
+              >
+                @koi_xuanthefish
+              </a>
+              <a
+                href="https://instagram.com/joey.verbeke"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.instagramLink}
+                onPointerEnter={handleLinkEnter}
+                onPointerLeave={handleLinkLeave}
+              >
+                @joey.verbeke
+              </a>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

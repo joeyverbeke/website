@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './mobile.module.css';
 import Link from 'next/link';
 
@@ -41,13 +41,14 @@ const talks = [
 ];
 
 const about = [
-  { first: 'Koi Ren and Joey Verbeke (k0j0) are a New Media Art duo creating subversive and frictional “intrafaces”–artifacts that reveal the power, politics, and posthuman subjectivities embedded within systemic interactions. Their research-based practice pulls from their backgrounds in human-computer interaction, artificial intelligence, media studies, and speculative design. ' },
+  { first: 'k0j0 (Koi Ren and Joey Verbeke) is a New Media Art duo creating subversive and frictional “intrafaces”–artifacts that reveal the power, politics, and posthuman subjectivities embedded within systemic interactions. Their research-based practice pulls from their backgrounds in human-computer interaction, artificial intelligence, media studies, and speculative design. ' },
   { second: 'Through the defamiliarization of seductive seamlessness and tacit expectations, k0j0 provokes moments of epistemological rupture, inviting viewers into intimate proximity with the unfamiliar and the emergent dynamics shaping our futures.' },
-  { third: 'Their work has been shown at venues and events such as, Ars Electronica, ACM SIGGRAPH, TEDAI, MUTEK, Gray Area, Heckscher Museum, Ming Contemporary Art Museum, Diego Rivera Gallery, Angels Gate Cultural Center, Sundance Film Festival, and Denver International Airport.' },
+  { third: 'Their work has been shown at venues and events such as Ars Electronica, National Asian Culture Center, ACM SIGGRAPH, TEDAI, MUTEK, Gray Area, Heckscher Museum, Ming Contemporary Art Museum, Diego Rivera Gallery, Angels Gate Cultural Center, Sundance Film Festival, and Denver International Airport.' },
 ];
 
 export default function MockupMobile() {
-  
+  const [showInstagramLinks, setShowInstagramLinks] = useState(false);
+
   return (
     <>
     <video
@@ -60,7 +61,7 @@ export default function MockupMobile() {
   />
     <div className={styles.container}>
       <div className={styles.header}>
-        <div>Koi Ren & Joey Verbeke</div>
+        <div>k0j0</div>
       </div>
       
       <section>
@@ -165,7 +166,41 @@ export default function MockupMobile() {
           ))}
         </div>
       </section>
-
+      <div className={styles.instagramDock}>
+        <button
+          type="button"
+          className={styles.instagramButton}
+          onClick={() => setShowInstagramLinks((prev) => !prev)}
+          aria-label="Open Instagram links"
+          aria-expanded={showInstagramLinks}
+        >
+          <img
+            src="/instagram.svg"
+            alt="Instagram"
+            className={styles.instagramIcon}
+          />
+        </button>
+        {showInstagramLinks && (
+          <div className={styles.instagramMenu}>
+            <a
+              href="https://instagram.com/koi_xuanthefish"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.instagramLink}
+            >
+              @koi_xuanthefish
+            </a>
+            <a
+              href="https://instagram.com/joey.verbeke"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.instagramLink}
+            >
+              @joey.verbeke
+            </a>
+          </div>
+        )}
+      </div>
     </div>
     </>
   );

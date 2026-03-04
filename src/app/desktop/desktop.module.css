@@ -53,6 +53,10 @@
   color: #000000;
 }
 
+.headerSpacer {
+  height: 2.6em;
+}
+
 .section {
   font-weight: 700;
   font-size: 1em;
@@ -118,9 +122,11 @@
 
 .hello {
   font-weight: 700;
-  font-size: 0.9em;
+  font-size: 1.3em;
   color: #ffffff;
   letter-spacing: 0.15em;
+  position: relative;
+  right: var(--hello-right-trim);
 }
 
 .faded {
@@ -141,6 +147,12 @@
 .rightDescBottom {
   letter-spacing: 0.15em;
   font-size: 0.9em;
+}
+
+.rightContent {
+  position: relative;
+  /* Tune this to control how far only the k0j0 highlight reaches right */
+  --hello-right-trim: 0.23em;
 }
 
 .centeredShortcut {
@@ -183,19 +195,53 @@
   opacity: 0;
 }
 
-.selectionBar {
-  position: absolute;
-  top: 3vw;
-  right: 2.5vw;
-  width: 0.5vw;
-  bottom: 0;
-  background: #ffffff;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  pointer-events: none;
-  z-index: -1;
+.instagramDock {
+  margin-top: 0.8em;
+  margin-right: -1vw;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+  mix-blend-mode: hard-light;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
-.selectionBarVisible {
-  opacity: 1;
+.instagramButton {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  line-height: 0;
+}
+
+.instagramIcon {
+  width: clamp(20px, 1.7vw, 34px);
+  height: auto;
+  display: block;
+}
+
+.instagramMenu {
+  position: absolute;
+  right: calc(100% + 0.5em);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.55em;
+  white-space: nowrap;
+}
+
+.instagramLink {
+  color: #ffffff;
+  text-decoration: none;
+  letter-spacing: 0.15em;
+  font-size: 0.65em;
+  text-transform: lowercase;
+}
+
+.instagramLink:hover {
+  text-decoration: underline;
 }
