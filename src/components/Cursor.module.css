@@ -6,8 +6,23 @@
   pointer-events: none;
   transform: translate(-50%, -50%);
   animation: pulseGreen 2s infinite;
-  z-index: 0;
+  z-index: 1;
   mix-blend-mode: hard-light;
+  border-radius: 2px;
+  transition: width 120ms ease, height 120ms ease, border-radius 120ms ease;
+}
+
+.cursorPressed {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.cursorLinkHover {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  animation: pulseGreen 0.8s infinite ease-in-out, hoverCircleSize 0.8s infinite ease-in-out;
 }
 
 @keyframes pulseGreen {
@@ -20,4 +35,16 @@
   100% {
     opacity: 0.8;
   }
-} 
+}
+
+@keyframes hoverCircleSize {
+  0%,
+  100% {
+    width: 12px;
+    height: 12px;
+  }
+  50% {
+    width: 16px;
+    height: 16px;
+  }
+}

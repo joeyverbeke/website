@@ -9,16 +9,41 @@ interface CursorProps {
 
 export default function Cursor({ revealed }: CursorProps) {
   const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isPressed, setIsPressed] = useState(false);
+  const [isInteractiveHover, setIsInteractiveHover] = useState(false);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
+      const target = document.elementFromPoint(e.clientX, e.clientY);
+      setIsInteractiveHover(Boolean(target && target.closest('a, button')));
+    };
+
+    const handlePointerDown = () => {
+      setIsPressed(true);
+    };
+
+    const handlePointerUp = () => {
+      setIsPressed(false);
+    };
+
+    const handleWindowBlur = () => {
+      setIsPressed(false);
+      setIsInteractiveHover(false);
     };
 
     window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('pointerdown', handlePointerDown);
+    window.addEventListener('pointerup', handlePointerUp);
+    window.addEventListener('pointercancel', handlePointerUp);
+    window.addEventListener('blur', handleWindowBlur);
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('pointerdown', handlePointerDown);
+      window.removeEventListener('pointerup', handlePointerUp);
+      window.removeEventListener('pointercancel', handlePointerUp);
+      window.removeEventListener('blur', handleWindowBlur);
     };
   }, []);
 
@@ -45,7 +70,7 @@ export default function Cursor({ revealed }: CursorProps) {
 
   return (
     <div 
-      className={styles.cursor} 
+      className={`${styles.cursor} ${isPressed ? styles.cursorPressed : ''} ${isInteractiveHover && !isPressed ? styles.cursorLinkHover : ''}`} 
       style={{ 
         left: `${position.x}px`, 
         top: `${position.y}px` 

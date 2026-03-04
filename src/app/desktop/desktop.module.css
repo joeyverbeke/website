@@ -26,6 +26,8 @@
   width: 52vw;
   padding: 2vw 0 0 2.5vw;
   mix-blend-mode: hard-light;
+  position: relative;
+  z-index: 2;
 }
 
 .rightCol {
@@ -34,7 +36,7 @@
   text-align: right;
   mix-blend-mode: hard-light;
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 /* Selection state classes */
@@ -244,4 +246,11 @@
 
 .instagramLink:hover {
   text-decoration: underline;
+}
+
+.mockupRoot a,
+.mockupRoot a:hover,
+.mockupRoot button,
+.mockupRoot button:hover {
+  cursor: none;
 }
