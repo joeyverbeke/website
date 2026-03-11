@@ -48,6 +48,34 @@ const about = [
 
 export default function MockupMobile() {
   const [showInstagramLinks, setShowInstagramLinks] = useState(false);
+  const [showEmailAddress, setShowEmailAddress] = useState(false);
+
+  const copyEmailAddress = async () => {
+    const emailAddress = 'k0j0.is.not.real@gmail.com';
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(emailAddress);
+      return;
+    }
+
+    const textarea = document.createElement('textarea');
+    textarea.value = emailAddress;
+    textarea.setAttribute('readonly', '');
+    textarea.style.position = 'absolute';
+    textarea.style.left = '-9999px';
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+  };
+
+  const handleEmailClick = async () => {
+    setShowEmailAddress((prev) => !prev);
+    try {
+      await copyEmailAddress();
+    } catch {
+      // Ignore clipboard failures and still reveal the address.
+    }
+  };
 
   return (
     <>
@@ -166,7 +194,31 @@ export default function MockupMobile() {
           ))}
         </div>
       </section>
-      <div className={styles.instagramDock}>
+      <div className={styles.socialDock}>
+        <div className={styles.emailDock}>
+          <button
+            type="button"
+            className={styles.emailButton}
+            onClick={handleEmailClick}
+            aria-label="Copy email address"
+            aria-expanded={showEmailAddress}
+          >
+            <img
+              src="/email.svg"
+              alt="Email"
+              className={styles.socialIcon}
+            />
+          </button>
+          {showEmailAddress && (
+            <a
+              href="mailto:k0j0.is.not.real@gmail.com"
+              className={styles.emailAddress}
+              aria-label="Email k0j0"
+            >
+              k0j0.is.not.real@gmail.com
+            </a>
+          )}
+        </div>
         <button
           type="button"
           className={styles.instagramButton}
@@ -177,7 +229,7 @@ export default function MockupMobile() {
           <img
             src="/instagram.svg"
             alt="Instagram"
-            className={styles.instagramIcon}
+            className={styles.socialIcon}
           />
         </button>
         {showInstagramLinks && (

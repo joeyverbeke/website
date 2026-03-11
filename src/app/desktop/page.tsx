@@ -45,6 +45,7 @@ export default function Mockup2() {
   const [cursorVisible, setCursorVisible] = useState(true);
   const [hasTextSelection, setHasTextSelection] = useState(false);
   const [showInstagramLinks, setShowInstagramLinks] = useState(false);
+  const [showEmailAddress, setShowEmailAddress] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const persistSelectionRef = useRef(false);
   const hasTextSelectionRef = useRef(false);
@@ -114,7 +115,34 @@ export default function Mockup2() {
       scheduleTransientClear();
     }
   }, [scheduleTransientClear]);
-  
+
+  const copyEmailAddress = useCallback(async () => {
+    const emailAddress = 'k0j0.is.not.real@gmail.com';
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(emailAddress);
+      return;
+    }
+
+    const textarea = document.createElement('textarea');
+    textarea.value = emailAddress;
+    textarea.setAttribute('readonly', '');
+    textarea.style.position = 'absolute';
+    textarea.style.left = '-9999px';
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+  }, []);
+
+  const handleEmailClick = useCallback(async () => {
+    setShowEmailAddress((prev) => !prev);
+    try {
+      await copyEmailAddress();
+    } catch {
+      // Ignore clipboard failures and still reveal the address.
+    }
+  }, [copyEmailAddress]);
+
   useEffect(() => {
     hasTextSelectionRef.current = hasTextSelection;
   }, [hasTextSelection]);
@@ -335,17 +363,20 @@ export default function Mockup2() {
           <div className={styles.workTitle}>&nbsp;</div>
 
           <div className={`${styles.rightDesc}`}>
-            <span className={styles.highlight}>Koi Ren and Joey Verbeke</span> <span className={styles.faded}>are a </span>
+            <span className={styles.faded}>k0j0 </span> 
+            <span className={styles.highlight}>(Koi Ren and Joey Verbeke)</span>
+            <span className={styles.faded}> is a </span> 
             <span className={styles.highlight}>New Media Art duo</span>
             <span className={styles.faded}> creating </span>
             <span className={styles.highlight}>subversive and frictional </span>
-            <span className={styles.faded}>“intrafaces” – </span>
+            <span className={styles.faded}>“intrafaces”, </span>
             <span className={styles.highlight}>artifacts </span>
             <span className={styles.faded}>that reveal the power, politics, and posthuman subjectivities embedded within systemic interactions. Their </span>
             <span className={styles.highlight}>research-based practice </span>
-            <span className={styles.faded}>pulls from their backgrounds in</span>
+            <span className={styles.faded}>pulls from backgrounds in</span>
             <span className={styles.highlight}> human-computer interaction, artificial intelligence,</span>
-            <span className={styles.faded}> media studies, and speculative design.</span>
+            <span className={styles.faded}> media studies, and speculative </span>
+            <span className={styles.highlight}>design.</span>
           </div>
           <div className={styles.workTitle}>&nbsp;</div>
           <div className={styles.workTitle}>&nbsp;</div>
@@ -356,7 +387,7 @@ export default function Mockup2() {
 
           <div className={`${styles.highlight} ${styles.rightDescBottom}`}>{rightText[4].text}</div>
         </div>
-        <div className={styles.instagramDock}>
+        <div className={styles.socialDock}>
           <button
             type="button"
             className={styles.instagramButton}
@@ -367,9 +398,33 @@ export default function Mockup2() {
             <img
               src="/instagram.svg"
               alt="Instagram"
-              className={styles.instagramIcon}
+              className={styles.socialIcon}
             />
           </button>
+          <div className={styles.emailDock}>
+            <button
+              type="button"
+              className={styles.emailButton}
+              onClick={handleEmailClick}
+              aria-label="Copy email address"
+              aria-expanded={showEmailAddress}
+            >
+              <img
+                src="/email.svg"
+                alt="Email"
+                className={styles.socialIcon}
+              />
+            </button>
+            {showEmailAddress && (
+              <a
+                href="mailto:k0j0.is.not.real@gmail.com"
+                className={styles.emailAddress}
+                aria-label="Email k0j0"
+              >
+                k0j0.is.not.real@gmail.com
+              </a>
+            )}
+          </div>
           {showInstagramLinks && (
             <div className={styles.instagramMenu}>
               <a

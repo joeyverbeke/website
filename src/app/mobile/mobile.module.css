@@ -188,7 +188,7 @@ margin-top:0.35em;
   z-index: 1;
 }
 
-.instagramDock {
+.socialDock {
   margin-top: 1.2em;
   margin-inline: auto;
   width: fit-content;
@@ -199,6 +199,14 @@ margin-top:0.35em;
   gap: 0.45em;
 }
 
+.emailDock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35em;
+}
+
+.emailButton,
 .instagramButton {
   border: 0;
   background: transparent;
@@ -209,10 +217,28 @@ margin-top:0.35em;
   mix-blend-mode: exclusion;
 }
 
-.instagramIcon {
+.socialIcon {
   width: clamp(42px, 11vw, 62px);
   height: auto;
   display: block;
+}
+
+.emailAddress {
+  border: 0;
+  background: #ffffff;
+  color: #000000;
+  mix-blend-mode: exclusion;
+  text-decoration: none;
+  letter-spacing: 0.12em;
+  font-size: 0.8em;
+  padding: 0.05em 0.2em;
+  text-transform: lowercase;
+  text-align: center;
+  cursor: pointer;
+}
+
+.emailAddress:hover {
+  text-decoration: underline;
 }
 
 .instagramMenu {
