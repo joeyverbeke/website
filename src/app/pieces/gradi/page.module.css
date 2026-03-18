@@ -98,7 +98,7 @@
   margin: 0.4rem 0 0;
   line-height: 1.6;
   font-size: 0.7em;
-  width: 50%;
+  width: 100%;
 }
 
 .sectionBlurbText {
@@ -116,7 +116,21 @@
   margin: 0;
   line-height: 1.6;
   font-size: 0.7em;
-  margin-top: 0.9rem;
+}
+
+.sectionTextLayout {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sectionPosterFrame {
+  width: 100%;
+}
+
+.sectionPoster {
+  width: 100%;
+  height: auto;
 }
 
 .bodyText a {
@@ -200,13 +214,39 @@
   letter-spacing: 0.15em;
 }
 
-@media (max-width: 768px) {
-  .container {
-    font-size: 1.1em;
+@media (min-width: 769px) {
+  .sectionTextLayout {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 1.5rem;
+    row-gap: 1.25rem;
+    align-items: start;
   }
 
   .sectionBlurb {
-    width: 100%;
+    grid-column: 1 / -1;
+    grid-row: 1;
+    width: 75%;
+    margin: 0.4rem auto 0;
+    text-align: center;
+  }
+
+  .sectionPosterFrame {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: center;
+  }
+
+  .sectionBody {
+    grid-column: 1;
+    grid-row: 2;
+    align-self: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    font-size: 1.1em;
   }
 
   .title {

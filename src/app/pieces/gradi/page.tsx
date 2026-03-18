@@ -23,6 +23,11 @@ const sections = [
       '/videos/gradi/compress_1-768.webp 768w, /videos/gradi/compress_1-1536.webp 1536w, /videos/gradi/compress_1.webp 2947w',
     mediaWidth: 2947,
     mediaHeight: 1658,
+    poster: '/videos/gradi/compress-poster.webp',
+    posterSrcSet:
+      '/videos/gradi/compress-poster-768.webp 768w, /videos/gradi/compress-poster-1536.webp 1536w, /videos/gradi/compress-poster.webp 1831w',
+    posterWidth: 1831,
+    posterHeight: 1831,
     label: 'compress_1.webp',
     video: 'https://player.vimeo.com/video/1157845883',
   },
@@ -36,6 +41,11 @@ const sections = [
       '/videos/gradi/mediate_1-768.webp 768w, /videos/gradi/mediate_1-1536.webp 1536w, /videos/gradi/mediate_1.webp 2579w',
     mediaWidth: 2579,
     mediaHeight: 1450,
+    poster: '/videos/gradi/mediate-poster.webp',
+    posterSrcSet:
+      '/videos/gradi/mediate-poster-768.webp 768w, /videos/gradi/mediate-poster-1536.webp 1536w, /videos/gradi/mediate-poster.webp 1831w',
+    posterWidth: 1831,
+    posterHeight: 1831,
     label: 'mediate_1.webp',
     video: 'https://player.vimeo.com/video/1157845851',
   },
@@ -49,6 +59,11 @@ const sections = [
       '/videos/gradi/predict_1-768.webp 768w, /videos/gradi/predict_1-1536.webp 1536w, /videos/gradi/predict_1.webp 2911w',
     mediaWidth: 2911,
     mediaHeight: 1637,
+    poster: '/videos/gradi/predict-poster.webp',
+    posterSrcSet:
+      '/videos/gradi/predict-poster-768.webp 768w, /videos/gradi/predict-poster-1536.webp 1536w, /videos/gradi/predict-poster.webp 1831w',
+    posterWidth: 1831,
+    posterHeight: 1831,
     label: 'predict_1.webp',
     video: 'https://player.vimeo.com/video/1157845596',
   },
@@ -62,6 +77,11 @@ const sections = [
       '/videos/gradi/calibrate_1-768.webp 768w, /videos/gradi/calibrate_1-1536.webp 1536w, /videos/gradi/calibrate_1.webp 3840w',
     mediaWidth: 3840,
     mediaHeight: 2159,
+    poster: '/videos/gradi/calibrate-poster.webp',
+    posterSrcSet:
+      '/videos/gradi/calibrate-poster-768.webp 768w, /videos/gradi/calibrate-poster-1536.webp 1536w, /videos/gradi/calibrate-poster.webp 1831w',
+    posterWidth: 1831,
+    posterHeight: 1831,
     label: 'calibrate_1.webp',
     video: 'https://player.vimeo.com/video/1157843748',
   },
@@ -75,6 +95,9 @@ const stillsImageSrcSet =
 
 const stillsImageSizes =
   '(max-width: 1023px) calc(100vw - 4rem), (max-width: 1920px) 75vw, 1440px';
+
+const posterImageSizes =
+  '(max-width: 1023px) calc(100vw - 4rem), (max-width: 1920px) calc((75vw - 1.5rem) / 2), 708px';
 
 type MetaParagraph =
   | string
@@ -221,10 +244,25 @@ export default function GradiPage() {
                   title={`${section.title} video`}
                 />
               </div>
-              <p className={styles.sectionBlurb}>
-                <span className={styles.sectionBlurbText}>{section.blurb}</span>
-              </p>
-              <p className={styles.sectionBody}>{section.body}</p>
+              <div className={styles.sectionTextLayout}>
+                <p className={styles.sectionBlurb}>
+                  <span className={styles.sectionBlurbText}>{section.blurb}</span>
+                </p>
+                <div className={`${styles.mediaFrame} ${styles.sectionPosterFrame}`}>
+                  <img
+                    src={section.poster}
+                    srcSet={section.posterSrcSet}
+                    sizes={posterImageSizes}
+                    alt={`${section.title} poster`}
+                    width={section.posterWidth}
+                    height={section.posterHeight}
+                    loading="lazy"
+                    decoding="async"
+                    className={`${styles.media} ${styles.sectionPoster}`}
+                  />
+                </div>
+                <p className={styles.sectionBody}>{section.body}</p>
+              </div>
             </div>
             <div className={styles.divider} />
           </div>
