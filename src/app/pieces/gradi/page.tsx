@@ -18,8 +18,12 @@ const sections = [
     blurb:
       'A near-eye wearable that encodes your AI proxy’s messages into your blinks through programmatic air puffs, turning you into an embodied communication channel.',
     body: 'Gradi Compress senses your blinks and drives tiny air pulses to choreograph new ones, turning your eyelids into a signaling channel while a proxy system composes and decodes messages on your behalf. It imagines a near future where proxies handle most of our talking, searching, and social presence, while our bodies serve as animated carriers for their decisions. As your proxy grows more capable, how might the boundary between you and your simulation shift, and what could it mean to let that line move on purpose?',
-    media: '/videos/gradi/compress_1.PNG',
-    label: 'compress_1.PNG',
+    media: '/videos/gradi/compress_1.webp',
+    mediaSrcSet:
+      '/videos/gradi/compress_1-768.webp 768w, /videos/gradi/compress_1-1536.webp 1536w, /videos/gradi/compress_1.webp 2947w',
+    mediaWidth: 2947,
+    mediaHeight: 1658,
+    label: 'compress_1.webp',
     video: 'https://player.vimeo.com/video/1157845883',
   },
   {
@@ -27,8 +31,12 @@ const sections = [
     blurb:
       'A mouth-worn wearable that outputs the perfect version of your speech, scrubbing accent and identity for universal understandability; with some fabricated memories injected.',
     body: 'Gradi Mediate listens to your speech and returns a more fluent version, smoothing accent and grammar while quietly hallucinating normalized extensions. It flattens the texture of identity into a standardized voice that travels easily through platforms and institutions. As your stories are continually tuned for maximum acceptance, what other versions of you might be waiting just outside what can be said?',
-    media: '/videos/gradi/mediate_1.PNG',
-    label: 'mediate_1.PNG',
+    media: '/videos/gradi/mediate_1.webp',
+    mediaSrcSet:
+      '/videos/gradi/mediate_1-768.webp 768w, /videos/gradi/mediate_1-1536.webp 1536w, /videos/gradi/mediate_1.webp 2579w',
+    mediaWidth: 2579,
+    mediaHeight: 1450,
+    label: 'mediate_1.webp',
     video: 'https://player.vimeo.com/video/1157845851',
   },
   {
@@ -36,8 +44,12 @@ const sections = [
     blurb:
       'A head-worn wearable that predicts your next words and triggers delayed auditory feedback to fracture fluency when you approach the predefined edge of the sayable.',
     body: 'Gradi Predict monitors your speech in real time and, as you approach certain topics or phrases, feeds your own voice back into your ears just late enough to fracture your fluency. It stages prediction as preemptive moderation, where hidden criteria quietly sculpt the border of the sayable. When fluency itself can be switched on and off by an unseen model, what new forms of speaking or refusing to speak might emerge?',
-    media: '/videos/gradi/predict_1.PNG',
-    label: 'predict_1.PNG',
+    media: '/videos/gradi/predict_1.webp',
+    mediaSrcSet:
+      '/videos/gradi/predict_1-768.webp 768w, /videos/gradi/predict_1-1536.webp 1536w, /videos/gradi/predict_1.webp 2911w',
+    mediaWidth: 2911,
+    mediaHeight: 1637,
+    label: 'predict_1.webp',
     video: 'https://player.vimeo.com/video/1157845596',
   },
   {
@@ -45,11 +57,24 @@ const sections = [
     blurb:
       'An arm-worn wearable that choreographs you through an endless calibration; a permanent beta; our infinite entanglement and becoming.',
     body: 'Gradi Calibrate holds you in permanent beta, a choreography of adjustment that never finishes. It keeps you close to the rail, inching toward the expected while never quite arriving. If calibration is always running, whose standards are being rehearsed, and what room is left to move on purpose?',
-    media: '/videos/gradi/calibrate_1.PNG',
-    label: 'calibrate_1.PNG',
+    media: '/videos/gradi/calibrate_1.webp',
+    mediaSrcSet:
+      '/videos/gradi/calibrate_1-768.webp 768w, /videos/gradi/calibrate_1-1536.webp 1536w, /videos/gradi/calibrate_1.webp 3840w',
+    mediaWidth: 3840,
+    mediaHeight: 2159,
+    label: 'calibrate_1.webp',
     video: 'https://player.vimeo.com/video/1157843748',
   },
 ];
+
+const sectionImageSizes =
+  '(max-width: 1023px) calc((100vw - 4.75rem) / 2), (max-width: 1920px) calc((75vw - 0.75rem) / 2), 714px';
+
+const stillsImageSrcSet =
+  '/videos/gradi/stills-1000.webp 1000w, /videos/gradi/stills-1600.webp 1600w, /videos/gradi/stills-2400.webp 2400w, /videos/gradi/stills.webp 3000w';
+
+const stillsImageSizes =
+  '(max-width: 1023px) calc(100vw - 4rem), (max-width: 1920px) 75vw, 1440px';
 
 type MetaParagraph =
   | string
@@ -140,7 +165,12 @@ export default function GradiPage() {
             >
               <img
                 src={section.media}
+                srcSet={section.mediaSrcSet}
+                sizes={sectionImageSizes}
                 alt={section.title}
+                width={section.mediaWidth}
+                height={section.mediaHeight}
+                decoding="async"
                 className={`${styles.media} ${styles.sectionImage}`}
               />
             </div>
@@ -216,8 +246,14 @@ export default function GradiPage() {
 
         <div className={styles.stills}>
           <img
-            src="/videos/gradi/stills.png"
+            src="/videos/gradi/stills.webp"
+            srcSet={stillsImageSrcSet}
+            sizes={stillsImageSizes}
             alt="Installation stills for Gradi"
+            width={3000}
+            height={6011}
+            loading="lazy"
+            decoding="async"
             className={styles.media}
           />
         </div>
