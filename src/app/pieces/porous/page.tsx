@@ -4,9 +4,9 @@ import HomeButton from '@/components/HomeButton';
 import PieceLayout from '@/components/PieceLayout';
 import styles from './page.module.css';
 
-const ORIGINAL_TEXT = `Quietly inhabiting spaces we barely notice, Porous is part of a broader guerrilla ecology: viral anomalies discreetly embedded into objects across the urban landscape, murmuring beneath perception. Activated only when the surrounding environment swells into noise, the object softly emits hallucinatory fragments—absurd, surreal earworms that slip imperceptibly beneath conscious attention, embedding themselves in the listener's subconscious.\n
-According to Cary Wolfe, posthumanism names "a historical moment in which the decentering of the human by its imbrication in technical, medical, informatics, and economic networks is increasingly impossible to ignore". Porous examines AI hallucination as a possibility of posthuman dissidence to decolonize the subconscious.\n
-In this interplay of subliminal whispers, hallucination becomes a method of infiltration—porous, unpredictable, subversively subjective. Each anomaly fractures the boundaries we trust between the conscious and unconscious, digital and physical, order and randomness. Refusing definition as either emancipatory or oppressive, Porous is a quiet provocation, inviting reflection on how subtle forms of influence, carried within the mundane, shape collective experience and distort the edges of our reality.`;
+const ORIGINAL_TEXT = `Porous is a distributed subliminal audio installation. Each kitsch rock-speaker contains a microphone, microcontroller, and speaker. The system listens for acoustic cover and, when ambient sound is loud enough, emits a short looped song just below conscious audibility.\n
+Operating at the edge of perception, Porous seeds a catchy earworm that may not register in the moment, but later resurfaces as humming, recognition, or social repetition without a clear source. The song’s lyrics are intentionally unambiguously moral, staging an ethical contradiction: messages about kindness, safety, and responsibility are delivered through covert manipulation rather than consent.\n
+Porous investigates subliminal influence, behavioral conditioning, unconscious friction, and the politics of persuasion embedded within contemporary systems. Rather than representing these dynamics, it makes them spatially and experientially felt through public encounter.`;
 
 export default function PorousPage() {
   
@@ -19,13 +19,8 @@ export default function PorousPage() {
         
         <div>
         <img
-          src="/videos/porous/Porous-Hero.jpeg"
-          alt="Porous Image"
-          className={styles.videoImage}
-        />
-        <img
-          src="/videos/porous/masking.jpeg"
-          alt="Porous Masking Image"
+          src="/videos/porous/Porous.webp"
+          alt="Porous installation image"
           className={styles.videoImage}
         />
         </div>
@@ -41,10 +36,10 @@ export default function PorousPage() {
 
         <div className={styles.description}>
           <p className={styles.paragraph}>
-          Year: 2025
+          Year: 2026
           </p>
           <p className={styles.paragraph}>
-          Material: Outlet, Thermoplastic, Spray Paint, Microelectronics, Artificial Intelligence Sound
+          Material: Custom firmware, embedded microcontrollers, microphones, speakers, 3D-printed PLA, spray paint, string, metal grille, three-channel audio
           </p>
           <div className={styles.paragraph}>
           {ORIGINAL_TEXT}
