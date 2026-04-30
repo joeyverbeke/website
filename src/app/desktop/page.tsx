@@ -24,7 +24,7 @@ const talks = [
 ];
 const rightText = [
   { type: 'hello', text: 'k0j0' },
-  { type: 'desc', text: 'We tell phantasmagoric stories about unconscious friction.' },
+  { type: 'desc', text: 'We expose the unconscious friction within phantasmagoric systems.' },
   { type: 'desc', text: 'k0j0 (Koi Ren and Joey Verbeke) is a New Media Art duo creating subversive and frictional “intrafaces”–artifacts that reveal the power, politics, and posthuman subjectivities embedded within systemic interactions. Their research-based practice pulls from their backgrounds in human-computer interaction, artificial intelligence, media studies, and speculative design.' },
   { type: 'desc', text: 'Through the defamiliarization of seductive seamlessness and tacit expectations, k0j0 provokes moments of epistemological rupture, inviting viewers into intimate proximity with the unfamiliar and the emergent dynamics shaping our futures.' },
   { type: 'desc', text: 'Their work has been shown at venues and events such as Ars Electronica, National Asian Culture Center, ACM SIGGRAPH, TEDAI, MUTEK, Gray Area, Heckscher Museum, Ming Contemporary Art Museum, Diego Rivera Gallery, Angels Gate Cultural Center, Sundance Film Festival, and Denver International Airport.' },

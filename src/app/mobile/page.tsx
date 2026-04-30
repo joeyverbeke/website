@@ -95,7 +95,7 @@ export default function MockupMobile() {
       <section>
       <div className={styles.spacesmall}> </div>
       <br /><div className={styles.tagline}>
-        We tell phantasmagoric stories about unconscious friction.
+        We expose the unconscious friction within phantasmagoric systems.
       </div>
       </section>
 
