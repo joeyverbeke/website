@@ -15,6 +15,11 @@ const works = [
     slug: 'in-vivo' 
   },
   { 
+    title: 'Porous (2026)', 
+    subtitle: 'Subliminal moral earworm',
+    slug: 'porous' 
+  },
+  { 
     title: 'T.A.E.L. (Tail Assisted Environmental Learning) (2024)', 
     subtitle: 'Cannibalistic folklore machine',
     slug: 'tael' 
@@ -23,11 +28,6 @@ const works = [
     title: 'Gradi Vox (2025)', 
     subtitle: 'Symbiotic//parasitic wearable',
     slug: 'gradi-vox' 
-  },
-  { 
-    title: 'Porous (2025)', 
-    subtitle: 'Subliminal hallucinatory earworms',
-    slug: 'porous' 
   },
 ];
 

@@ -11,9 +11,9 @@ const leftSections = {
 const works = [
   { type: 'work', title: 'Gradi (2025)', subtitle: 'Speculative wearable intrafaces', slug: 'gradi', hero: 'gradi_idle-loop.webm' },
   { type: 'work', title: 'In Vivo / In Vitro, Trial 1.4 (2024)', subtitle: 'Blink triggered imperceptibility', slug: 'in-vivo', hero: 'inVivo_loop.webm' },
+  { type: 'work', title: 'Porous (2026)', subtitle: 'Subliminal moral earworm', slug: 'porous', hero: 'porous_loop.webm' },
   { type: 'work', title: 'T.A.E.L. (Tail Assisted Environmental Learning) (2024)', subtitle: 'Cannibalistic folklore machine', slug: 'tael', hero: 'tael_loop.webm' },
   { type: 'work', title: 'Gradi Vox (2025)', subtitle: 'Symbiotic//parasitic wearable', slug: 'gradi-vox', hero: 'gradi_loop.webm' },
-  { type: 'work', title: 'Porous (2025)', subtitle: 'Subliminal hallucinatory earworms', slug: 'porous', hero: 'porous_loop.webm' },
 ];
 const writings = [
   { type: 'writing', title: 'Friction as Medium: Epistemic Rupture through Imperceptible Interaction, Ars Electronica (2025)', url: 'https://dl.acm.org/doi/10.1145/3749893.3749969' },
