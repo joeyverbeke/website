@@ -5,7 +5,7 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import HomeButton from '@/components/HomeButton';
 import PieceLayout from '@/components/PieceLayout';
-import { Eye, EyeClosed } from 'lucide-react';
+import { Eye, EyeClosed, Play } from 'lucide-react';
 import styles from './page.module.css';
 
 // Type definitions for MediaPipe, which will be loaded from a global var
@@ -50,6 +50,7 @@ export default function InVivoPage() {
   const [isBlinking, setIsBlinking] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [hasBeenClicked, setHasBeenClicked] = useState(false);
+  const [isTalkLoaded, setIsTalkLoaded] = useState(false);
   const [isMediaPipeLoading, setIsMediaPipeLoading] = useState(false);
   const faceLandmarkerRef = useRef<FaceLandmarker | null>(null);
   const visionRef = useRef<Vision | null>(null);
@@ -254,8 +255,141 @@ export default function InVivoPage() {
         </div>
         </div>
 
+        <div className={styles.divider} />
+
+        <section className={styles.paperSection}>
+          <div className={styles.paperIntro}>
+            <p>
+              -After creating this piece, we explored the concept of unconscious friction further. We synthesized these thoughts through the medium of an academic paper:
+            </p>
+            <div className={styles.paperMeta}>
+              <a
+                href="https://dl.acm.org/doi/10.1145/3749893.3749969"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.paperTitle}
+              >
+                Friction as Medium: Epistemic Rupture through Imperceptible Interaction
+              </a>
+              <div className={styles.paperVenue}>
+                <em>Ars Electronica, Expanded Conference 2025 - Awarded Best Art Paper</em>
+              </div>
+              <a
+                href="https://dl.acm.org/doi/10.1145/3749893.3749969"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.paperLink}
+              >
+                https://dl.acm.org/doi/10.1145/3749893.3749969
+              </a>
+            </div>
+          </div>
+
+          <div className={styles.talkSection}>
+            <p className={styles.sectionLabel}>-Our talk about the paper:</p>
+            <div className={styles.talkVideoWrapper}>
+              {isTalkLoaded ? (
+                <iframe
+                  src="https://www.youtube.com/embed/qRW1MRnby14?start=1248&autoplay=1"
+                  title="Friction as Medium paper talk"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                />
+              ) : (
+                <button
+                  type="button"
+                  className={styles.talkPosterButton}
+                  onClick={() => setIsTalkLoaded(true)}
+                  aria-label="Play Friction as Medium paper talk"
+                >
+                  <img
+                    src="/videos/in-vivo/expanded-talk.webp"
+                    srcSet="/videos/in-vivo/expanded-talk-768.webp 768w, /videos/in-vivo/expanded-talk-1536.webp 1536w, /videos/in-vivo/expanded-talk.webp 1800w"
+                    sizes="(max-width: 1023px) 100vw, (max-width: 1920px) 75vw, 1440px"
+                    alt=""
+                    width={1800}
+                    height={1013}
+                    decoding="async"
+                    className={styles.talkPoster}
+                  />
+                  <span className={styles.talkPlayIcon} aria-hidden="true">
+                    <Play size={36} fill="currentColor" />
+                  </span>
+                </button>
+              )}
+            </div>
+          </div>
+
+          <div className={styles.excerptsSection}>
+            <p className={styles.sectionLabel}>-Excerpts from the paper:</p>
+
+            <div className={styles.excerptGrid}>
+              <div className={`${styles.excerptText} ${styles.excerptTextOne}`}>
+                <p>
+                  Trial 1.4 reframes friction as latent interactivity, already underway, yet unrecognized. By embedding its engagement in a subconscious behavior and withholding immediate feedback, the work produces a form of <span className={styles.highlight}>unconscious friction</span>, where the viewer unknowingly triggers a system they do not realize exists. Only later, if at all, does the realization emerge: a moment of epistemic rupture in which perception catches up to interaction.
+                </p>
+              </div>
+
+              <video
+                className={`${styles.excerptVideo} ${styles.excerptVideoOne}`}
+                src="/videos/in-vivo/in-vivo_1.webm"
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="metadata"
+              />
+
+              <video
+                className={`${styles.excerptVideo} ${styles.excerptVideoTwo}`}
+                src="/videos/in-vivo/in-vivo_2.webm"
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="metadata"
+              />
+
+              <div className={`${styles.excerptText} ${styles.excerptTextTwo}`}>
+                <p>
+                  The artwork&apos;s medium is not a fixed material channel, but a <span className={styles.highlight}>transformation of cognitive state.</span>
+                </p>
+                <p>
+                  The medium is the seamlessness of perception, interrupted by cognitive discovery. By reconfiguring the medium as the viewer&apos;s state of attention, Trial 1.4 proposes a speculative form of media: one not built on material affordances but on the shaping of awareness.
+                </p>
+                <p>
+                  It shifts the critical target away from the artifact, and toward the phenomenological infrastructure of interaction. In doing so, it suggests that the deepest media today may be <span className={styles.highlight}>cognitive architectures</span>, assemblages of design, perception, and expectation that condition how subjects come to know systems, and know themselves within them.
+                </p>
+              </div>
+
+              <div className={`${styles.excerptText} ${styles.excerptTextThree}`}>
+                <p>
+                  This triadic formation-initiator, system, observer materializes a structural asymmetry in which perception is entangled with position.
+                </p>
+                <p>
+                  <span className={styles.highlight}>The one who acts cannot see, the one who sees cannot act, and the system binds them through an invisible transaction.</span> Here, the work enacts a microcosm of broader technological conditions, where unconscious behavior becomes computationally productive for audiences elsewhere, be they algorithmic, human, or institutional...
+                </p>
+                <p>
+                  By encoding this distributed logic into its aesthetic structure, the work challenges the ideal of the unified viewer or singular insight. It proposes instead that interactivity is a relational medium that emerges from entangled systems of attention, constraint, and access. What is seen depends on where one stands, who one stands with, and what remains unseen between them.
+                </p>
+              </div>
+
+              <video
+                className={`${styles.excerptVideo} ${styles.excerptVideoThree}`}
+                src="/videos/in-vivo/in-vivo_3.webm"
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="metadata"
+              />
+            </div>
+          </div>
+        </section>
+
         <div className={styles.footer}>
-          <p className={styles.footerText}>Exhibition: Dethrone, Gray Area, San Francisco, CA; Activation, Pebblebed, San Francisco, CA; NotYetArt, New York, NY; Scalable HCI, Shenzhen, CN; Siggraph Asia Art Gallery, Tokyo, Japan; BCNM Conference, Platform Art Space, Berkeley, CA; Convivium, Bombay Beach, CA</p>
+          <p className={styles.footerText}>Exhibition: Dethrone, Gray Area, San Francisco, CA; Activation, Pebblebed, San Francisco, CA; NotYetArt, New York, NY; Scalable HCI, Shenzhen, CN; Siggraph Asia Art Gallery, Tokyo, Japan; BCNM Conference, Platform Art Space, Berkeley, CA; Convivium, Bombay Beach, CA; 10th Bi-City Biennale of Urbanism\Architecture (UABB), Shenzhen, CN; Attention//Distraction, UAAD & The Blanc, NYC, NY;</p>
         </div>
       </PieceLayout>
     </div>
