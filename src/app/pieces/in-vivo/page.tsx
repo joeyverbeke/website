@@ -365,7 +365,7 @@ export default function InVivoPage() {
 
               <div className={`${styles.excerptText} ${styles.excerptTextThree}`}>
                 <p>
-                  This triadic formation-initiator, system, observer materializes a structural asymmetry in which perception is entangled with position.
+                  This triadic formation-initiator, system, observer—materializes a structural asymmetry in which perception is entangled with position.
                 </p>
                 <p>
                   <span className={styles.highlight}>The one who acts cannot see, the one who sees cannot act, and the system binds them through an invisible transaction.</span> Here, the work enacts a microcosm of broader technological conditions, where unconscious behavior becomes computationally productive for audiences elsewhere, be they algorithmic, human, or institutional...
