@@ -5,7 +5,7 @@
   color: white;
   padding: 2rem;
   font-family:'DM Mono', Menlo, Monaco, monospace;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.02em;
   font-size: clamp(var(--pieces-font-min, 15px), calc(var(--pieces-font-fluid, 1.25vw + 0.5vh)), var(--pieces-font-max, 21px));
 }
 
