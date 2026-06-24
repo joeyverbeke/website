@@ -17,22 +17,13 @@ export default function PorousPage() {
         
         <h1 className={styles.title}>Porous</h1>
         
-        <div>
-        <img
-          src="/videos/porous/Porous.webp"
-          alt="Porous installation image"
-          className={styles.videoImage}
-        />
-        </div>
-
-
-        {/* <div className={styles.videoWrapper}><iframe
-        src="https://player.vimeo.com/video/1012261817?autoplay=1&loop=1&muted=1#t=3s"
+        <div className={styles.videoWrapper}><iframe
+        src="https://player.vimeo.com/video/1204010414?autoplay=1&loop=1&muted=1"
         allow="autoplay; fullscreen; picture-in-picture"
         allowFullScreen
         title="Porous Video"
         />
-        </div> */}
+        </div>
 
         <div className={styles.description}>
           <p className={styles.paragraph}>
@@ -47,9 +38,9 @@ export default function PorousPage() {
         </div>
 
         <div className={styles.footer}>
-          <p className={styles.footerText}>Exhibition: TBA</p>
+          <p className={styles.footerText}>This project was supported, in part, by a Foundation for Contemporary Arts Emergency Grant.</p>
+          <p className={styles.footerText}>Exhibition: LINZ FMR 26, Linz, AT; Epistemologies of Slop, SF, USA</p>
         </div>
-
       </PieceLayout>
     </div>
   );

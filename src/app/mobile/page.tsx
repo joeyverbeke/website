@@ -38,6 +38,7 @@ const writings = [
 const talks = [
   { title: 'ACC CREATORS Interview (2025)', url: 'https://www.youtube.com/watch?v=PTGGmCObjnQ' },
   { title: 'Friction as Medium, Ars Electronica (2025)', url: 'https://www.youtube.com/live/qRW1MRnby14?si=2Ufme0nk6ktJrGCt&t=1246' },
+  { title: 'Gradi, tiat (2026)', url: 'https://youtu.be/wqW_yktrRmM?t=162' },
 ];
 
 const about = [
