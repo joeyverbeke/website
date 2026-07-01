@@ -19,16 +19,22 @@ const works = [
     subtitle: 'Subliminal moral earworm',
     slug: 'porous' 
   },
+  {
+    title: 'Thank You for Watching (2026)',
+    subtitle: 'Look or nude',
+    slug: 'thank-you-for-watching'
+  },
   { 
     title: 'T.A.E.L. (Tail Assisted Environmental Learning) (2024)', 
     subtitle: 'Cannibalistic folklore machine',
     slug: 'tael' 
   },
-  { 
-    title: 'Gradi Vox (2025)', 
+  {
+    title: 'Gradi Vox (2025)',
     subtitle: 'Symbiotic//parasitic wearable',
-    slug: 'gradi-vox' 
+    slug: 'gradi-vox'
   },
+
 ];
 
 const writings = [
@@ -36,7 +42,9 @@ const writings = [
 ];
 
 const talks = [
+  { type: 'presentation', title: 'Unconscious Friction, DatlabNYC & Zero Space (2026)', url: 'https://www.youtube.com/watch?v=eiHkSmo_slA&t=5116' },
   { title: 'ACC CREATORS Interview (2025)', url: 'https://www.youtube.com/watch?v=PTGGmCObjnQ' },
+  { type: 'presentation', title: 'Hatching Machines for the Future Workshop, AccentSisters (2026)', url: 'https://www.instagram.com/p/DZGtmCoFjJl/?img_index=1' },
   { title: 'Friction as Medium, Ars Electronica (2025)', url: 'https://www.youtube.com/live/qRW1MRnby14?si=2Ufme0nk6ktJrGCt&t=1246' },
   { title: 'Gradi, tiat (2026)', url: 'https://youtu.be/wqW_yktrRmM?t=162' },
 ];
@@ -142,7 +150,7 @@ export default function MockupMobile() {
 
       <section className={styles.section}>
         <div className={styles.spacebig}> </div>
-        <br /><h2 className={styles.sectionTitle}>talks</h2>
+        <br /><h2 className={styles.sectionTitle}>talks & workshops</h2>
         <br />
               <div className={styles.spacesmall}> </div>
         <br />        <div className={styles.items}>
@@ -196,6 +204,28 @@ export default function MockupMobile() {
         </div>
       </section>
       <div className={styles.socialDock}>
+        <a
+          href="https://drive.google.com/file/d/1hctdbAivyL5J-MoyZX27gCBoKZK4sSrE/view?usp=sharing"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.cvLink}
+          aria-label="Download CV"
+        >
+          cv
+        </a>
+        <button
+          type="button"
+          className={styles.instagramButton}
+          onClick={() => setShowInstagramLinks((prev) => !prev)}
+          aria-label="Open Instagram links"
+          aria-expanded={showInstagramLinks}
+        >
+          <img
+            src="/instagram.svg"
+            alt="Instagram"
+            className={styles.socialIcon}
+          />
+        </button>
         <div className={styles.emailDock}>
           <button
             type="button"
@@ -220,19 +250,6 @@ export default function MockupMobile() {
             </a>
           )}
         </div>
-        <button
-          type="button"
-          className={styles.instagramButton}
-          onClick={() => setShowInstagramLinks((prev) => !prev)}
-          aria-label="Open Instagram links"
-          aria-expanded={showInstagramLinks}
-        >
-          <img
-            src="/instagram.svg"
-            alt="Instagram"
-            className={styles.socialIcon}
-          />
-        </button>
         {showInstagramLinks && (
           <div className={styles.instagramMenu}>
             <a

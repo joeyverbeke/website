@@ -193,10 +193,24 @@ margin-top:0.35em;
   margin-inline: auto;
   width: fit-content;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;          /* ← horizontal layout */
   align-items: center;
   justify-content: center;
-  gap: 0.45em;
+  gap: 3em;                     /* ← space between cv / instagram / email */
+}
+
+.cvLink {
+  color: #ffffff;
+  text-decoration: none;
+  letter-spacing: 0.15em;
+  font-size: 1em;             /* ← cv text size */
+  text-transform: lowercase;
+  background: transparent;
+  mix-blend-mode: exclusion;
+}
+
+.cvLink:hover {
+  text-decoration: underline;
 }
 
 .emailDock {
@@ -218,7 +232,7 @@ margin-top:0.35em;
 }
 
 .socialIcon {
-  width: clamp(42px, 11vw, 62px);
+  width: clamp(30px, 8vw, 40px);
   height: auto;
   display: block;
 }

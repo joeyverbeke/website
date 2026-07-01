@@ -6,12 +6,13 @@ import Cursor from '@/components/Cursor';
 const leftSections = {
   works: 'works',
   writings: 'writings',
-  talks: 'talks',
+  talks: 'talks & workshops',
 };
 const works = [
   { type: 'work', title: 'Gradi (2025)', subtitle: 'Speculative wearable intrafaces', slug: 'gradi', hero: 'gradi_idle-loop.webm' },
   { type: 'work', title: 'In Vivo / In Vitro, Trial 1.4 (2024)', subtitle: 'Blink triggered imperceptibility', slug: 'in-vivo', hero: 'inVivo_loop.webm' },
   { type: 'work', title: 'Porous (2026)', subtitle: 'Subliminal moral earworm', slug: 'porous', hero: 'porous_loop.webm' },
+  { type: 'work', title: 'Thank You for Watching (2026)', subtitle: 'Look or nude', slug: 'tyfw', hero: 'tyfw_diagram.png', heroType: 'image' },
   { type: 'work', title: 'T.A.E.L. (Tail Assisted Environmental Learning) (2024)', subtitle: 'Cannibalistic folklore machine', slug: 'tael', hero: 'tael_loop.webm' },
   { type: 'work', title: 'Gradi Vox (2025)', subtitle: 'Symbiotic//parasitic wearable', slug: 'gradi-vox', hero: 'gradi_loop.webm' },
 ];
@@ -19,7 +20,9 @@ const writings = [
   { type: 'writing', title: 'Friction as Medium: Epistemic Rupture through Imperceptible Interaction, Ars Electronica (2025)', url: 'https://dl.acm.org/doi/10.1145/3749893.3749969' },
 ];
 const talks = [
+  { type: 'presentation', title: 'Unconscious Friction, DatlabNYC & Zero Space (2026)', url: 'https://www.youtube.com/watch?v=eiHkSmo_slA&t=5116' },
   { type: 'presentation', title: 'ACC CREATORS Interview (2025)', url: 'https://www.youtube.com/watch?v=PTGGmCObjnQ' },
+  { type: 'presentation', title: 'Hatching Machines for the Future Workshop, AccentSisters (2026)', url: 'https://www.instagram.com/p/DZGtmCoFjJl/?img_index=1' },
   { type: 'presentation', title: 'Friction as Medium, Ars Electronica (2025)', url: 'https://www.youtube.com/live/qRW1MRnby14?si=2Ufme0nk6ktJrGCt&t=1246' },
   { type: 'presentation', title: 'Gradi, tiat (2026)', url: 'https://youtu.be/wqW_yktrRmM?t=162' },
 ];
@@ -43,6 +46,7 @@ export default function Mockup2() {
   const [showShortcut, setShowShortcut] = useState(true);
   const [shortcut, setShortcut] = useState('⌘+A');
   const [bgVideo, setBgVideo] = useState<string | null>(null);
+  const [bgImage, setBgImage] = useState<string | null>(null);
   const [cursorVisible, setCursorVisible] = useState(true);
   const [hasTextSelection, setHasTextSelection] = useState(false);
   const [showInstagramLinks, setShowInstagramLinks] = useState(false);
@@ -274,6 +278,15 @@ export default function Mockup2() {
         loop
         playsInline
       />
+      {/* Background image layer */}
+      {bgImage && (
+        <img
+          className={styles.backgroundImage}
+          src={bgImage}
+          alt=""
+          aria-hidden="true"
+        />
+      )}
       {/* Left column */}
       <div className={`${styles.leftCol} ${hasTextSelection ? styles.textSelected : ''}`}>
         <div className={styles.headerSpacer} aria-hidden="true" />
@@ -286,8 +299,16 @@ export default function Mockup2() {
             <a
               className={styles.workLink}
               href={`/pieces/${work.slug}`}
-              onMouseEnter={() => setBgVideo(`${work.slug}/${work.hero}`)} // Ensure work.heroVideo points to the correct video file
-              onMouseLeave={() => setBgVideo(null)}
+              onMouseEnter={() => {
+                if ((work as any).heroType === 'image') {
+                  setBgImage(`/videos/${work.slug}/${work.hero}`);
+                  setBgVideo(null);
+                } else {
+                  setBgVideo(`${work.slug}/${work.hero}`);
+                  setBgImage(null);
+                }
+              }}
+              onMouseLeave={() => { setBgVideo(null); setBgImage(null); }}
               onPointerEnter={handleLinkEnter}
               onPointerLeave={handleLinkLeave}
             >
@@ -389,6 +410,17 @@ export default function Mockup2() {
           <div className={`${styles.highlight} ${styles.rightDescBottom}`}>{rightText[4].text}</div>
         </div>
         <div className={styles.socialDock}>
+          <a
+            href="https://drive.google.com/file/d/1hctdbAivyL5J-MoyZX27gCBoKZK4sSrE/view?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.cvLink}
+            onPointerEnter={handleLinkEnter}
+            onPointerLeave={handleLinkLeave}
+            aria-label="Download CV"
+          >
+            cv
+          </a>
           <button
             type="button"
             className={styles.instagramButton}
@@ -413,7 +445,7 @@ export default function Mockup2() {
               <img
                 src="/email.svg"
                 alt="Email"
-                className={styles.socialIcon}
+                className={styles.socialIconSmall}
               />
             </button>
             {showEmailAddress && (
@@ -428,6 +460,16 @@ export default function Mockup2() {
           </div>
           {showInstagramLinks && (
             <div className={styles.instagramMenu}>
+              <a
+                href="https://instagram.com/k0j0___"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.instagramLink}
+                onPointerEnter={handleLinkEnter}
+                onPointerLeave={handleLinkLeave}
+              >
+                @k0j0___
+              </a>
               <a
                 href="https://instagram.com/koi_xuanthefish"
                 target="_blank"

@@ -1,0 +1,82 @@
+.container {
+  width: 100%;
+  overflow-x: hidden;
+  background: black;
+  color: white;
+  padding: 2rem;
+  font-family:'DM Mono', Menlo, Monaco, monospace;
+  letter-spacing: 0.02em;
+  font-size: clamp(var(--pieces-font-min, 15px), calc(var(--pieces-font-fluid, 1.25vw + 0.5vh)), var(--pieces-font-max, 21px));
+  display: flex;
+}
+
+.title {
+  grid-column: 2;
+  color: #ffffff;
+  font-size: 1.5em;
+  font-weight: 800;
+  margin: 0;
+  text-align: center;
+}
+
+.description {
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.paragraph {
+  font-size: 0.7em;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  white-space: pre-line;
+}
+
+.footer {
+  border-top: 1px solid rgba(255,255,255,0.2);
+  padding-top: 2rem;
+  font-size: 0.6em;
+  color: rgba(255,255,255,0.7);
+  width: 100%;
+}
+
+.footerText {
+  margin-bottom: 0.5rem;
+}
+
+.footerLink {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.footerLink:hover {
+  color: #ffffff;
+}
+
+.imageWrapper {
+  width: 100%;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .imageWrapper {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+  }
+
+  .container {
+    overflow-x: visible;
+    font-size: 1.1em;
+  }
+
+  .title {
+    font-size: 1.5em;
+  }
+}

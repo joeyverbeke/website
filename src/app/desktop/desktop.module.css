@@ -1,5 +1,5 @@
 .mockupRoot {
-  min-height: 100vh;
+  height: 100vh;
   width: 100vw;
   background: #000000;
   color: #ffffff;
@@ -15,6 +15,7 @@
   line-height: 1.3;
   letter-spacing: 0.04em;
   z-index: 1;
+  overflow: hidden;
 }
 
 .mockupRoot ::selection{
@@ -24,19 +25,31 @@
 
 .leftCol {
   width: 52vw;
-  padding: 2vw 0 0 2.5vw;
+  height: 100vh;
+  padding: 2vw 0 2vw 2.5vw;
   mix-blend-mode: hard-light;
   position: relative;
   z-index: 2;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  scrollbar-width: none;
+}
+
+.leftCol::-webkit-scrollbar {
+  display: none;
 }
 
 .rightCol {
   width: 48vw;
+  height: 100vh;
   padding: 2vw 2.5vw 0 0;
   text-align: right;
   mix-blend-mode: hard-light;
   position: relative;
   z-index: 2;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 /* Selection state classes */
@@ -189,6 +202,17 @@
   object-fit: contain;
 }
 
+.backgroundImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
 .backgroundVisible {
   opacity: 1;
 }
@@ -203,11 +227,23 @@
   display: inline-flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 0.45em;
+  gap: 2em;        /* ← gap between items; increase to spread further apart */
   position: relative;
   mix-blend-mode: hard-light;
   user-select: none;
   -webkit-user-select: none;
+}
+
+.cvLink {
+  color: #ffffff;
+  text-decoration: none;
+  letter-spacing: 0.15em;
+  font-size: 1em;    /* ← cv font size; socialIcon icons are ~1.7vw tall for reference */
+  text-transform: lowercase;
+}
+
+.cvLink:hover {
+  text-decoration: underline;
 }
 
 .emailDock {
@@ -231,7 +267,13 @@
 
 .socialIcon {
   width: auto;
-  height: clamp(20px, 1.7vw, 34px);
+  height: clamp(20px, 1.7vw, 34px);  /* ← instagram icon size */
+  display: block;
+}
+
+.socialIconSmall {
+  width: auto;
+  height: clamp(16px, 1.3vw, 26px);  /* ← email icon size */
   display: block;
 }
 
