@@ -12,7 +12,7 @@ const works = [
   { type: 'work', title: 'Gradi (2025)', subtitle: 'Speculative wearable intrafaces', slug: 'gradi', hero: 'gradi_idle-loop.webm' },
   { type: 'work', title: 'In Vivo / In Vitro, Trial 1.4 (2024)', subtitle: 'Blink triggered imperceptibility', slug: 'in-vivo', hero: 'inVivo_loop.webm' },
   { type: 'work', title: 'Porous (2026)', subtitle: 'Subliminal moral earworm', slug: 'porous', hero: 'porous_loop.webm' },
-  { type: 'work', title: 'Thank You for Watching (2026)', subtitle: 'Look or nude', slug: 'tyfw', hero: 'tyfw_diagram.png', heroType: 'image' },
+  { type: 'work', title: 'Thank You for Watching (2026)', subtitle: 'Look or nude', slug: 'tyfw', hero: 'tyfw_diagram.webp', heroType: 'image' },
   { type: 'work', title: 'T.A.E.L. (Tail Assisted Environmental Learning) (2024)', subtitle: 'Cannibalistic folklore machine', slug: 'tael', hero: 'tael_loop.webm' },
   { type: 'work', title: 'Gradi Vox (2025)', subtitle: 'Symbiotic//parasitic wearable', slug: 'gradi-vox', hero: 'gradi_loop.webm' },
 ];

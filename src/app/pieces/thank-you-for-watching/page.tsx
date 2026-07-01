@@ -17,7 +17,7 @@ export default function ThankYouForWatchingPage() {
 
         <div className={styles.imageWrapper}>
           <img
-            src="/videos/tyfw/tyfw.png"
+            src="/videos/tyfw/tyfw.webp"
             alt="Thank You for Watching"
             className={styles.image}
           />
@@ -37,7 +37,7 @@ export default function ThankYouForWatchingPage() {
 
         <div className={styles.imageWrapper}>
           <img
-            src="/videos/tyfw/tyfw_diagram.png"
+            src="/videos/tyfw/tyfw_diagram.webp"
             alt="Thank You for Watching"
             className={styles.image}
           />
