@@ -20,7 +20,7 @@ const works = [
     slug: 'porous' 
   },
   {
-    title: 'Thank You for Watching (2026)',
+    title: 'Thank You for Watching! (2026)',
     subtitle: 'Look or nude',
     slug: 'tyfw'
   },
