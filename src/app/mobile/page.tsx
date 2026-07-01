@@ -22,7 +22,7 @@ const works = [
   {
     title: 'Thank You for Watching (2026)',
     subtitle: 'Look or nude',
-    slug: 'thank-you-for-watching'
+    slug: 'tyfw'
   },
   { 
     title: 'T.A.E.L. (Tail Assisted Environmental Learning) (2024)', 

@@ -8,11 +8,20 @@ const leftSections = {
   writings: 'writings',
   talks: 'talks & workshops',
 };
-const works = [
+
+type Work = {
+  type: 'work';
+  title: string;
+  subtitle: string;
+  slug: string;
+  hero: string;
+};
+
+const works: Work[] = [
   { type: 'work', title: 'Gradi (2025)', subtitle: 'Speculative wearable intrafaces', slug: 'gradi', hero: 'gradi_idle-loop.webm' },
   { type: 'work', title: 'In Vivo / In Vitro, Trial 1.4 (2024)', subtitle: 'Blink triggered imperceptibility', slug: 'in-vivo', hero: 'inVivo_loop.webm' },
   { type: 'work', title: 'Porous (2026)', subtitle: 'Subliminal moral earworm', slug: 'porous', hero: 'porous_loop.webm' },
-  { type: 'work', title: 'Thank You for Watching (2026)', subtitle: 'Look or nude', slug: 'tyfw', hero: 'tyfw_diagram.webp', heroType: 'image' },
+  { type: 'work', title: 'Thank You for Watching! (2026)', subtitle: 'Look or nude', slug: 'tyfw', hero: 'tyfw_diagram.webm' },
   { type: 'work', title: 'T.A.E.L. (Tail Assisted Environmental Learning) (2024)', subtitle: 'Cannibalistic folklore machine', slug: 'tael', hero: 'tael_loop.webm' },
   { type: 'work', title: 'Gradi Vox (2025)', subtitle: 'Symbiotic//parasitic wearable', slug: 'gradi-vox', hero: 'gradi_loop.webm' },
 ];
@@ -46,12 +55,13 @@ export default function Mockup2() {
   const [showShortcut, setShowShortcut] = useState(true);
   const [shortcut, setShortcut] = useState('⌘+A');
   const [bgVideo, setBgVideo] = useState<string | null>(null);
-  const [bgImage, setBgImage] = useState<string | null>(null);
   const [cursorVisible, setCursorVisible] = useState(true);
   const [hasTextSelection, setHasTextSelection] = useState(false);
   const [showInstagramLinks, setShowInstagramLinks] = useState(false);
   const [showEmailAddress, setShowEmailAddress] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
+  const leftColRef = useRef<HTMLDivElement>(null);
+  const rightColRef = useRef<HTMLDivElement>(null);
   const persistSelectionRef = useRef(false);
   const hasTextSelectionRef = useRef(false);
   const clearMoveTimeoutRef = useRef<number | null>(null);
@@ -63,9 +73,10 @@ export default function Mockup2() {
   const linkHoverRef = useRef(false);
 
   const selectAllText = useCallback(() => {
-    if (!rootRef.current) return;
+    if (!leftColRef.current || !rightColRef.current) return;
     const range = document.createRange();
-    range.selectNodeContents(rootRef.current);
+    range.setStartBefore(leftColRef.current);
+    range.setEndAfter(rightColRef.current);
     const sel = window.getSelection();
     if (!sel) return;
     restoringSelectionRef.current = true;
@@ -278,17 +289,8 @@ export default function Mockup2() {
         loop
         playsInline
       />
-      {/* Background image layer */}
-      {bgImage && (
-        <img
-          className={styles.backgroundImage}
-          src={bgImage}
-          alt=""
-          aria-hidden="true"
-        />
-      )}
       {/* Left column */}
-      <div className={`${styles.leftCol} ${hasTextSelection ? styles.textSelected : ''}`}>
+      <div ref={leftColRef} className={`${styles.leftCol} ${hasTextSelection ? styles.textSelected : ''}`}>
         <div className={styles.headerSpacer} aria-hidden="true" />
         <div className={styles.section}>{leftSections.works}</div>
         <div className={`${styles.workTitle} ${styles.sectionSpacing}`}>&nbsp;</div>
@@ -300,15 +302,9 @@ export default function Mockup2() {
               className={styles.workLink}
               href={`/pieces/${work.slug}`}
               onMouseEnter={() => {
-                if ((work as any).heroType === 'image') {
-                  setBgImage(`/videos/${work.slug}/${work.hero}`);
-                  setBgVideo(null);
-                } else {
-                  setBgVideo(`${work.slug}/${work.hero}`);
-                  setBgImage(null);
-                }
+                setBgVideo(`${work.slug}/${work.hero}`);
               }}
-              onMouseLeave={() => { setBgVideo(null); setBgImage(null); }}
+              onMouseLeave={() => { setBgVideo(null); }}
               onPointerEnter={handleLinkEnter}
               onPointerLeave={handleLinkLeave}
             >
@@ -374,7 +370,7 @@ export default function Mockup2() {
         <div className={styles.centeredShortcut}>{shortcut}</div>
       )}
       {/* Right column */}
-      <div className={`${styles.rightCol} ${hasTextSelection ? styles.textSelected : ''}`}>
+      <div ref={rightColRef} className={`${styles.rightCol} ${hasTextSelection ? styles.textSelected : ''}`}>
         <div className={styles.rightContent}>
           <div className={styles.hello}>{rightText[0].text}</div>
           <div className={styles.workTitle}>&nbsp;</div>

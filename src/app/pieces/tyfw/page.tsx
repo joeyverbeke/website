@@ -13,7 +13,7 @@ export default function ThankYouForWatchingPage() {
       <HomeButton />
       <PieceLayout>
 
-        <h1 className={styles.title}>Thank You for Watching</h1>
+        <h1 className={styles.title}>Thank You for Watching!</h1>
 
         <div className={styles.imageWrapper}>
           <img
@@ -38,13 +38,13 @@ export default function ThankYouForWatchingPage() {
         <div className={styles.imageWrapper}>
           <img
             src="/videos/tyfw/tyfw_diagram.webp"
-            alt="Thank You for Watching"
+            alt="Thank You for Watching!"
             className={styles.image}
           />
         </div>
 
         <div className={styles.footer}>
-          <p className={styles.footerText}>Exhibition: Pleasure engineered, Accentsisters, NYC, USA</p>
+          <p className={styles.footerText}>Exhibition: Pleasure Engineered, Accent Sisters, NYC, USA</p>
           <p className={styles.footerText}>
             Criticism:{' '}
             <a
